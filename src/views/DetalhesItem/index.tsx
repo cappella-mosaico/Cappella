@@ -1,6 +1,5 @@
 import React from 'react';
 
-import {AoVivo} from '../AoVivo';
 import {Eventos} from '../Eventos';
 import {Contribua} from '../Contribua';
 import {RouteProp} from '@react-navigation/core';
@@ -15,17 +14,15 @@ interface Props {
 }
 
 export const DetalhesItem = ({route}: Props) => {
-  const {titulo, id} = route.params;
+  const {id} = route.params;
 
   switch (id) {
-    case 'aoVivo':
-      return <AoVivo titulo={titulo} />;
     case 'contribua':
       return <Contribua />;
     case 'agenda':
       return <Agenda />;
     case 'eventos':
-      return <Eventos titulo={titulo} />;
+      return <Eventos />;
     case 'contato':
       return <Contato />;
     default:
