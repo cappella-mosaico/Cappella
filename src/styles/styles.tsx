@@ -30,6 +30,7 @@ export const JUMBO = '#717172';
 export const TITLE = '#1E98A8';
 export const LIGHTTITLE = '#78C1CA';
 export const COLORCOMUNIDADE = '#F3F5EC';
+export const WOODSMOKE = '#2F3436';
 
 // TIPOGRAFIA
 export const FONT_AVENIR_BLACK = 'AvenirLTStd-Black';
