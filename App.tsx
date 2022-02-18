@@ -8,7 +8,10 @@ import {
   InteractionManager,
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  StackNavigationProp,
+} from '@react-navigation/stack';
 
 const Meteor = require('@socialize/react-native-meteor');
 import NetInfo from '@react-native-community/netinfo';
@@ -23,12 +26,21 @@ import {Pastoral} from './src/views/Pastoral';
 
 import {COR_DE_FUNDO, TITLE} from './src/styles/styles';
 import AsyncStorage from '@react-native-community/async-storage';
+import {Evento} from './src/views/Eventos';
+import {EventoDesc} from './src/views/Eventos/eventoDesc';
 
 export type RootStackParamList = {
   Home: undefined;
-  DetalhesItem: {titulo: string; id: string};
+  Pastoral: {textoCard: string};
+  DetalhesItem: {id: string};
+  EventoDesc: {evento: Evento};
   Item: undefined;
 };
+
+export type ProfileScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Item'
+>;
 
 Meteor.configureOptionalDeps({
   InteractionManager,
@@ -83,6 +95,11 @@ export default function App() {
             <HomeStack.Screen
               name="Pastoral"
               component={Pastoral}
+              options={{headerShown: false}}
+            />
+            <HomeStack.Screen
+              name="EventoDesc"
+              component={EventoDesc}
               options={{headerShown: false}}
             />
           </HomeStack.Navigator>

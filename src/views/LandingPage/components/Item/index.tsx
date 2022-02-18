@@ -6,13 +6,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {GenericItem} from '../../../../components/GenericItem';
 import {SvgXml} from 'react-native-svg';
-import {RootStackParamList} from '../../../../../App';
-import {StackNavigationProp} from '@react-navigation/stack';
-
-type ProfileScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'Item'
->;
+import {ProfileScreenNavigationProp} from '../../../../../App';
 
 interface Props {
   imagem: string | JSX.Element;
@@ -40,7 +34,6 @@ export const Item = ({imagem, titulo, textoCard, id, url}: Props) => {
       height={hp('16.6%')}
       onNavigate={() =>
         navigation.push('DetalhesItem', {
-          titulo,
           id,
         })
       }

@@ -1,33 +1,27 @@
 import React from 'react';
-import {TouchableOpacity, StyleSheet, Text, View, Image} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {ProfileScreenNavigationProp} from '../../../App';
-import {Evento} from '.';
+import {StyleSheet, Text, View, Image} from 'react-native';
+import {RouteProp} from '@react-navigation/core';
 
 import {
-  LIGHTERGRAY,
   FONT_AVENIR_ROMAN,
   FONT_AVENIR_BLACK,
   WOODSMOKE,
 } from '../../styles/styles';
+import {RootStackParamList} from '../../../App';
+
+type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'EventoDesc'>;
 
 interface Props {
-  evento: Evento;
+  route: ProfileScreenRouteProp;
 }
 
-export const EventoItem = ({evento}: Props) => {
+export const EventoDesc = ({route}: Props) => {
+  const {evento} = route.params;
   const styles = getStyles();
   const imagem = require('../../assets/images/felizNatal.png');
-  const navigation: ProfileScreenNavigationProp = useNavigation();
 
   return (
-    <TouchableOpacity
-      style={[styles.card, styles.elevation]}
-      onPress={() =>
-        navigation.push('EventoDesc', {
-          evento,
-        })
-      }>
+    <View>
       <View style={styles.container}>
         <Image source={imagem} style={styles.imagem} resizeMode="contain" />
         <View style={styles.containerText}>
@@ -39,27 +33,12 @@ export const EventoItem = ({evento}: Props) => {
           </Text>
         </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
 const getStyles = () => {
   return StyleSheet.create({
-    card: {
-      height: 205,
-      width: 340,
-      backgroundColor: LIGHTERGRAY,
-      borderRadius: 8,
-      marginVertical: 10,
-      margin: 10,
-    },
-    elevation: {
-      elevation: 20,
-      shadowColor: '#52006A',
-      shadowOffset: {width: 0, height: 2},
-      shadowOpacity: 0.2,
-      shadowRadius: 3,
-    },
     container: {
       marginTop: 35,
       display: 'flex',
