@@ -1,13 +1,19 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, View, FlatList} from 'react-native';
+import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {ContainerPage} from '../../components/ContainerPage';
 import {EventoItem} from './eventoItem';
 import {SemEvento} from './semEvento';
 import {EVENTOS} from './data/Evento';
 export interface Evento {
-  evento: string;
-  data: string;
+  titulo: string;
+  dataInicial: Date;
+  dataFim?: Date;
   imagemURL: string;
+  sobre: string;
+  valor: string;
+  local: string;
+  endereco: string;
 }
 
 export const Eventos = () => {
@@ -16,10 +22,11 @@ export const Eventos = () => {
   const eventoList = (EVENTO: Evento[]) => {
     return (
       <FlatList
+        style={styles.containerList}
         numColumns={1}
         data={EVENTO}
         renderItem={({item}) => <EventoItem evento={item} />}
-        keyExtractor={(item) => item.evento}
+        keyExtractor={(item) => item.titulo}
       />
     );
   };
@@ -38,5 +45,8 @@ export const Eventos = () => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+  },
+  containerList: {
+    height: hp('80%'),
   },
 });

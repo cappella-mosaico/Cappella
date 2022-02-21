@@ -17,8 +17,19 @@ interface Props {
 
 export const EventoItem = ({evento}: Props) => {
   const styles = getStyles();
-  const imagem = require('../../assets/images/felizNatal.png');
   const navigation: ProfileScreenNavigationProp = useNavigation();
+  const {dataInicial, titulo, imagemURL} = evento;
+
+  const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  };
 
   return (
     <TouchableOpacity
@@ -29,13 +40,21 @@ export const EventoItem = ({evento}: Props) => {
         })
       }>
       <View style={styles.container}>
-        <Image source={imagem} style={styles.imagem} resizeMode="contain" />
+        <Image
+          source={{uri: imagemURL}}
+          style={styles.imagem}
+          resizeMode="contain"
+        />
         <View style={styles.containerText}>
           <Text allowFontScaling={false} style={styles.data}>
-            {evento.data}
+            {dataInicial.toLocaleDateString('pt-br', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
           </Text>
           <Text allowFontScaling={false} style={styles.evento}>
-            {evento.evento.toUpperCase()}
+            {titulo.toUpperCase()}
           </Text>
         </View>
       </View>

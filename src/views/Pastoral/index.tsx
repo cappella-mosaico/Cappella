@@ -74,7 +74,7 @@ const getHeight = (size: string) => {
     case 'xlarge':
     case 'xxlarge':
     case 'xxxlarge':
-      return hp('75%');
+      return hp('80%');
     default:
       break;
   }
