@@ -4,10 +4,7 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 import {MissaoItem} from './missaoItem';
-import {MissaoCollection} from '../../../imports/api/missao';
-import {ContainerServer} from '../../components/ContainerServer';
 import {FALLBACK} from './data/Missao';
-import {Aguarde} from '../../components/Aguarde';
 
 interface Missao {
   nome: string;
@@ -15,11 +12,7 @@ interface Missao {
   contato: string | undefined;
 }
 
-interface Props {
-  isConnected: boolean;
-}
-
-export const Missao = ({isConnected}: Props) => {
+export const Missao = () => {
   const styles = getStyles();
 
   const missaoList = (MISSAO: Missao[]) => {
@@ -39,17 +32,7 @@ export const Missao = ({isConnected}: Props) => {
     );
   };
 
-  return (
-    <View style={styles.containerPagina}>
-      {isConnected ? (
-        <ContainerServer collection={MissaoCollection}>
-          {(MISSAO: Missao[]) => (MISSAO ? missaoList(MISSAO) : <Aguarde />)}
-        </ContainerServer>
-      ) : (
-        missaoList(FALLBACK)
-      )}
-    </View>
-  );
+  return <View style={styles.containerPagina}>{missaoList(FALLBACK)}</View>;
 };
 
 const getStyles = () => {

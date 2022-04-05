@@ -30,11 +30,7 @@ import {
   RED,
 } from '../../styles/styles';
 import {getSize} from '../../utils/utils';
-import {ContribuaCollection} from '../../../imports/api/contribua';
 import {FALLBACK} from './data/Contribua';
-import {ContainerServer} from '../../components/ContainerServer';
-import {handleIsConnected} from '../../utils/handleIsConnected';
-import {Aguarde} from '../../components/Aguarde';
 
 const handlePress = async (url: string) => {
   const supported = await Linking.canOpenURL(url);
@@ -60,11 +56,6 @@ export const Contribua = () => {
   const [cnpjCopiado, setCnpjCopiado] = useState(false);
   const {height} = useWindowDimensions();
   const styles = getStyles(getSize(height));
-  const [isConnected, setIsConnected] = useState(false);
-
-  handleIsConnected().then((value) => {
-    setIsConnected(Boolean(value));
-  });
 
   const copyToClipboard = (cnpj: string) => {
     Clipboard.setString(cnpj);
@@ -146,17 +137,7 @@ export const Contribua = () => {
   return (
     <SafeAreaView style={styles.droidSafeArea}>
       <ContainerPage titulo={'CONTRIBUA'}>
-        {isConnected ? (
-          <ContainerServer collection={ContribuaCollection}>
-            {(collection) => {
-              const CONTRIBUA = collection[0];
-
-              return CONTRIBUA ? contribuaItems(CONTRIBUA) : <Aguarde />;
-            }}
-          </ContainerServer>
-        ) : (
-          contribuaItems(FALLBACK)
-        )}
+        {contribuaItems(FALLBACK)}
       </ContainerPage>
     </SafeAreaView>
   );
