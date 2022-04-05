@@ -273,7 +273,7 @@ PODS:
   - react-native-onesignal (4.2.0):
     - OneSignalXCFramework (= 3.5.3)
     - React (< 1.0.0, >= 0.13.0)
-  - react-native-safe-area-context (3.1.9):
+  - react-native-safe-area-context (3.4.0):
     - React-Core
   - react-native-splash-screen (3.2.0):
     - React
@@ -581,7 +581,7 @@ SPEC CHECKSUMS:
   React-jsinspector: cc614ec18a9ca96fd275100c16d74d62ee11f0ae
   react-native-netinfo: e849fc21ca2f4128a5726c801a82fc6f4a6db50d
   react-native-onesignal: a7e433eec906c928954de4f124b6886418386bb4
-  react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
+  react-native-safe-area-context: f4f7cc09d81ae2d39dfd13e764d718969af07080
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   React-perflogger: 25373e382fed75ce768a443822f07098a15ab737
   React-RCTActionSheet: af7796ba49ffe4ca92e7277a5d992d37203f7da5
