@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {SafeAreaView, SectionList, StyleSheet, Text, View} from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -9,10 +9,6 @@ import {AgendaItem} from './agendaItem';
 import {FONT_AVENIR_BLACK, BLUE} from '../../styles/styles';
 import {FALLBACK} from './data/Agenda';
 import {ContainerPage} from '../../components/ContainerPage';
-import {AgendasCollection} from '../../../imports/api/agendas';
-import {ContainerServer} from '../../components/ContainerServer';
-import {handleIsConnected} from '../../utils/handleIsConnected';
-import {Aguarde} from '../../components/Aguarde';
 
 interface data {
   atividade: string;
@@ -24,12 +20,6 @@ interface Agenda {
 }
 
 export const Agenda = () => {
-  const [isConnected, setIsConnected] = useState(false);
-
-  handleIsConnected().then((value) => {
-    setIsConnected(Boolean(value));
-  });
-
   const agendaList = (sections: Agenda[]) => (
     <SectionList
       style={styles.containerList}
@@ -45,17 +35,7 @@ export const Agenda = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ContainerPage titulo={'AGENDA'}>
-        <View style={styles.container}>
-          {isConnected ? (
-            <ContainerServer collection={AgendasCollection}>
-              {(AGENDA: Agenda[]) =>
-                AGENDA ? agendaList(AGENDA) : <Aguarde />
-              }
-            </ContainerServer>
-          ) : (
-            agendaList(FALLBACK)
-          )}
-        </View>
+        <View style={styles.container}>{agendaList(FALLBACK)}</View>
       </ContainerPage>
     </SafeAreaView>
   );

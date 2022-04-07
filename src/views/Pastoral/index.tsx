@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, useWindowDimensions, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {
@@ -16,9 +16,6 @@ import {
 import {getSize} from '../../utils/utils';
 import {FALLBACK} from './data/Pastoral';
 import {ContainerPage} from '../../components/ContainerPage';
-import {ContainerServer} from '../../components/ContainerServer';
-import {PastoralCollection} from '../../../imports/api/pastoral';
-import {handleIsConnected} from '../../utils/handleIsConnected';
 import {Aguarde} from '../../components/Aguarde';
 
 interface Pastoral {
@@ -28,36 +25,45 @@ interface Pastoral {
 }
 
 export const Pastoral = () => {
+  const [isLoading, setLoading] = useState(true);
+  const [pastoral, setPastoral] = useState<Pastoral>();
+  const [isFallback, setFallback] = useState(false);
   const {height} = useWindowDimensions();
   const styles = getStyles(getSize(height));
-  const [isConnected, setIsConnected] = useState(false);
 
-  handleIsConnected().then((value) => {
-    setIsConnected(Boolean(value));
-  });
+  useEffect(() => {
+    setFallback(false);
 
-  const pastoralItems = (PASTORAL: Pastoral) => (
-    <>
-      <Text style={styles.titulo}>{PASTORAL.titulo?.toUpperCase()}</Text>
-      <Text style={styles.autor}>{PASTORAL.autor}</Text>
-      <Text style={styles.descricao}>{PASTORAL.descricao}</Text>
-    </>
-  );
+    fetch('http://ipmosaico.duckdns.org:8888/pastorais/public/latest?amount=1')
+      .then((response) => response.json())
+      .then((json) => setPastoral(json[0]))
+      .catch((error) => {
+        console.error(error);
+        setFallback(true);
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  const pastoralItems = (PASTORAL: Pastoral) => {
+    return (
+      <>
+        <Text style={styles.titulo}>{PASTORAL.titulo?.toUpperCase()}</Text>
+        <Text style={styles.autor}>{PASTORAL.autor}</Text>
+        <Text style={styles.descricao}>{PASTORAL.descricao}</Text>
+      </>
+    );
+  };
 
   return (
     <ContainerPage>
       <View style={styles.containerPagina}>
         <ScrollView style={styles.container}>
-          {isConnected ? (
-            <ContainerServer collection={PastoralCollection}>
-              {(collection: Pastoral[]) => {
-                const PASTORAL = collection[0];
-
-                return PASTORAL ? pastoralItems(PASTORAL) : <Aguarde />;
-              }}
-            </ContainerServer>
-          ) : (
+          {isFallback ? (
             pastoralItems(FALLBACK)
+          ) : isLoading ? (
+            <Aguarde />
+          ) : (
+            pastoralItems(pastoral!)
           )}
         </ScrollView>
       </View>
