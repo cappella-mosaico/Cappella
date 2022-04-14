@@ -34,7 +34,7 @@ export const Pastoral = () => {
   useEffect(() => {
     setFallback(false);
 
-    fetch('http://ipmosaico.duckdns.org:8888/pastorais/public/latest?amount=1')
+    fetch('http://admin.ipmosaico.com:8888/pastorais/public/latest?amount=1')
       .then((response) => response.json())
       .then((json) => setPastoral(json[0]))
       .catch((error) => {
