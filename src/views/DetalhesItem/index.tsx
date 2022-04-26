@@ -1,11 +1,11 @@
 import React from 'react';
 
-import {Eventos} from '../Eventos';
 import {Contribua} from '../Contribua';
 import {RouteProp} from '@react-navigation/core';
 import {RootStackParamList} from '../../../App';
 import {Agenda} from '../Agenda';
 import {Contato} from '../Contato';
+import {Financas} from '../Financas';
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'DetalhesItem'>;
 
@@ -21,8 +21,8 @@ export const DetalhesItem = ({route}: Props) => {
       return <Contribua />;
     case 'agenda':
       return <Agenda />;
-    case 'eventos':
-      return <Eventos titulo={titulo} />;
+    case 'financas':
+      return <Financas titulo={titulo} />;
     case 'contato':
       return <Contato />;
     default:

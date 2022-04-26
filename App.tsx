@@ -18,7 +18,7 @@ export type RootStackParamList = {
 
 const HomeStack = createStackNavigator();
 
-export default function App() {
+const App = () => {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
@@ -51,7 +51,9 @@ export default function App() {
       </NavigationContainer>
     </>
   );
-}
+};
+
+export default App;
 
 const styles = StyleSheet.create({
   droidSafeArea: {
