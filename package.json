@@ -27,6 +27,7 @@
     "react-native-gesture-handler": "^1.10.2",
     "react-native-onesignal": "^4.2.0",
     "react-native-reanimated": "^2.2.0",
+    "react-native-responsive-linechart": "^5.7.1",
     "react-native-responsive-screen": "^1.4.2",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.17.1",
