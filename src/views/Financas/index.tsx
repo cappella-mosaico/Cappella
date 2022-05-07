@@ -59,27 +59,27 @@ export const Financas = ({titulo}: Props) => {
   ];
 
   useEffect(() => {
-    fetch('http://admin.ipmosaico.com:8889/financeiro/public/latest?amount=5')
-      .then((response) => response.json())
-      .then((json) => {
-        setFinanceiroList(json);
-        // setMes(json.length);
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally(() => setLoading(false));
+    // fetch('http://admin.ipmosaico.com:8889/financeiro/public/latest?amount=5')
+    //   .then((response) => response.json())
+    //   .then((json) => {
+    //     setFinanceiroList(json);
+    //     // setMes(json.length);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   })
+    //   .finally(() => setLoading(false));
 
-    // const json = [
-    //   {orcado: 54000, entradas: 32000, saidas: 1234, anoMes: [2022, 1]},
-    //   {orcado: 54000, entradas: 30000, saidas: 1234, anoMes: [2022, 2]},
-    //   {orcado: 54000, entradas: 45000, saidas: 1234, anoMes: [2022, 3]},
-    //   {orcado: 54000, entradas: 58000, saidas: 1234, anoMes: [2022, 4]},
-    // ];
+    const json = [
+      {orcado: 54000, entradas: 32000, saidas: 1234, anoMes: [2022, 1]},
+      {orcado: 54000, entradas: 30000, saidas: 1234, anoMes: [2022, 2]},
+      {orcado: 54000, entradas: 45000, saidas: 1234, anoMes: [2022, 3]},
+      {orcado: 54000, entradas: 58000, saidas: 1234, anoMes: [2022, 4]},
+    ];
 
-    // setFinanceiroList(json);
-    // setLoading(false);
-    // // setMes(json.length);
+    setFinanceiroList(json);
+    setLoading(false);
+    // setMes(json.length);
   }, []);
 
   const mapData = (financeiros: Financeiro[]): ChartDataPoint[] => {
@@ -96,132 +96,134 @@ export const Financas = ({titulo}: Props) => {
     }));
   };
 
-  // const kFormatter = (num: number) =>
-  //   Math.abs(num) > 999
-  //     ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + 'k'
-  //     : Math.sign(num) * Math.abs(num);
-
   const financeiroItems = (financeiros: Financeiro[]) => {
     return (
-      <View style={styles.container}>
-        {!financeiros ? (
-          <View style={styles.dados}>
-            <Text style={styles.item}>Orçamento ainda não cadastrado.</Text>
-          </View>
-        ) : (
-          <>
-            <View style={styles.containerAcumulado}>
-              <View style={styles.containerValores}>
-                <Text style={styles.valor}>orçado</Text>
-                <Text style={styles.valor}>
-                  {new Intl.NumberFormat('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  }).format(
-                    financeiros.reduce((a, b) => a + (b.orcado || 0), 0),
-                  )}
-                </Text>
-              </View>
-              <View style={styles.containerValores}>
-                <Text style={styles.valor}>receita</Text>
-                <Text style={styles.valor}>
-                  {new Intl.NumberFormat('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  }).format(
-                    financeiros.reduce((a, b) => a + (b.entradas || 0), 0),
-                  )}
-                </Text>
-              </View>
+      <>
+        <>
+          {!financeiros ? (
+            <View style={styles.dados}>
+              <Text style={styles.item}>
+                Sem orçamentos para apresentar no momento.
+              </Text>
             </View>
-            <View style={styles.viewChart}>
-              <Chart
-                style={styles.chart}
-                data={mapData(financeiros)}
-                padding={{left: 65, bottom: 15, right: 45, top: 50}}
-                xDomain={{min: 1, max: financeiros.length}}
-                yDomain={{
-                  min: 0,
-                  max: financeiros[0].orcado * (1 + 0.2),
-                }}>
-                <VerticalAxis
-                  tickValues={[
-                    financeiros[0].orcado * (1 + 0.2),
-                    financeiros[0].orcado,
-                    financeiros[0].orcado / 2,
-                  ]}
-                  theme={{
-                    labels: {
-                      label: {
-                        color: '#A3A3A3',
-                        dy: 0,
-                      },
-                      formatter: (v) =>
-                        `R$${(Math.floor(v) / 1000).toFixed(0)} mil`,
-                    },
-                  }}
-                />
-                <HorizontalAxis
-                  tickCount={financeiros.length}
-                  theme={{
-                    labels: {
-                      label: {
-                        color: '#A3A3A3',
-                        textAnchor: 'start',
-                      },
-                      formatter: (v) => (v ? `${months[v]}` : ''),
-                    },
-                  }}
-                />
-                <Area
-                  theme={{
-                    gradient: {
-                      from: {color: ORANGEBUTTON},
-                      to: {color: ORANGEBUTTON, opacity: 0.2},
-                    },
-                  }}
-                />
-                <Line
-                  tooltipComponent={
-                    <Tooltip
+          ) : (
+            <>
+              <Text style={styles.ano}>{financeiros[0].anoMes[0]}</Text>
+              <Text style={styles.acumulado}>Acumulado:</Text>
+              <View style={styles.container}>
+                <View style={styles.containerAcumulado}>
+                  <View style={styles.containerValores}>
+                    <Text style={styles.valor}>orçado</Text>
+                    <Text style={styles.valor}>
+                      {new Intl.NumberFormat('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      }).format(
+                        financeiros.reduce((a, b) => a + (b.orcado || 0), 0),
+                      )}
+                    </Text>
+                  </View>
+                  <View style={styles.containerValores}>
+                    <Text style={styles.valor}>receita</Text>
+                    <Text style={styles.valor}>
+                      {new Intl.NumberFormat('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      }).format(
+                        financeiros.reduce((a, b) => a + (b.entradas || 0), 0),
+                      )}
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.viewChart}>
+                  <Chart
+                    style={styles.chart}
+                    data={mapData(financeiros)}
+                    padding={{left: 65, bottom: 15, right: 45, top: 50}}
+                    xDomain={{min: 1, max: financeiros.length}}
+                    yDomain={{
+                      min: 0,
+                      max: financeiros[0].orcado * (1 + 0.2),
+                    }}>
+                    <VerticalAxis
+                      tickValues={[
+                        financeiros[0].orcado * (1 + 0.2),
+                        financeiros[0].orcado,
+                        financeiros[0].orcado / 2,
+                      ]}
                       theme={{
-                        shape: {
-                          color: PIPER,
-                          width: 60,
-                          rx: 10,
+                        labels: {
+                          label: {
+                            color: '#A3A3A3',
+                            dy: 0,
+                          },
+                          formatter: (v) =>
+                            `R$${(Math.floor(v) / 1000).toFixed(0)} mil`,
                         },
-                        formatter: ({y}) =>
-                          `R$${(Math.floor(y) / 1000).toFixed(0)} mil`,
+                        axis: {visible: false},
                       }}
-                      position={{x: 500, y: 250}}
                     />
-                  }
-                  // onTooltipSelect={(value: ChartDataPoint, _index: number) =>
-                  //   setMes(value.x)
-                  // }
-                  theme={{
-                    stroke: {color: ORANGEBUTTON, width: 5},
-                    // scatter: {
-                    //   default: {
-                    //     width: 8,
-                    //     height: 8,
-                    //     rx: 4,
-                    //     color: ACTIVE_GREEN,
-                    //   },
-                    //   selected: {color: 'red'},
-                    // },
-                  }}
-                />
-                <Line
-                  smoothing="cubic-spline"
-                  data={mapDataOrcado(financeiros)}
-                  theme={{stroke: {color: OTHERGRAY, width: 2}}}
-                />
-              </Chart>
-            </View>
-          </>
-        )}
-      </View>
+                    <HorizontalAxis
+                      tickCount={financeiros.length}
+                      theme={{
+                        labels: {
+                          label: {
+                            color: '#A3A3A3',
+                            textAnchor: 'start',
+                          },
+                          formatter: (v) => (v ? `${months[v]}` : ''),
+                        },
+                        grid: {visible: false},
+                      }}
+                    />
+                    <Area
+                      theme={{
+                        gradient: {
+                          from: {color: ORANGEBUTTON},
+                          to: {color: ORANGEBUTTON, opacity: 0.2},
+                        },
+                      }}
+                    />
+                    <Line
+                      tooltipComponent={
+                        <Tooltip
+                          theme={{
+                            shape: {
+                              color: PIPER,
+                              width: 60,
+                              rx: 10,
+                            },
+                            formatter: ({y}) =>
+                              `R$${(Math.floor(y) / 1000).toFixed(0)} mil`,
+                          }}
+                          position={{x: 500, y: 250}}
+                        />
+                      }
+                      theme={{
+                        stroke: {color: ORANGEBUTTON, width: 5},
+                      }}
+                    />
+                    <Line
+                      smoothing="cubic-spline"
+                      data={mapDataOrcado(financeiros)}
+                      theme={{stroke: {color: OTHERGRAY, width: 2}}}
+                    />
+                  </Chart>
+                </View>
+              </View>
+              <View style={styles.dados}>
+                <Text style={styles.item}>
+                  {`R$ ${(Math.floor(financeiros[0].orcado) / 1000).toFixed(
+                    0,
+                  )} mil`}{' '}
+                  mensais é a previsão para atender os compromissos assumidos
+                  pela igreja em {financeiros[0].anoMes[0]}
+                </Text>
+              </View>
+            </>
+          )}
+        </>
+      </>
     );
   };
 
@@ -244,7 +246,7 @@ const getStyles = () => {
       alignItems: 'center',
     },
     container: {
-      marginTop: hp('15%'),
+      marginTop: hp('7%'),
       alignItems: 'center',
       backgroundColor: '#f3f5ec',
       borderColor: '#B2C588',
@@ -268,10 +270,27 @@ const getStyles = () => {
       marginTop: hp('15%'),
     },
     item: {
-      color: PIPER,
-      fontSize: wp('5%'),
+      color: '#6C6C6D',
+      fontSize: 14,
       fontFamily: FONT_AVENIR_ROMAN,
       textAlign: 'center',
+      width: 260,
+    },
+    ano: {
+      color: '#6C6C6D',
+      fontSize: 16,
+      fontFamily: FONT_AVENIR_BLACK,
+      textAlign: 'center',
+      marginTop: 20,
+    },
+    acumulado: {
+      color: '#6C6C6D',
+      fontSize: 16,
+      fontFamily: FONT_AVENIR_ROMAN,
+      textAlign: 'auto',
+      marginTop: 30,
+      marginBottom: -10,
+      marginLeft: 43,
     },
     viewChart: {
       width: 420,
