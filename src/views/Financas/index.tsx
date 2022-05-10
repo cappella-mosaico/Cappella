@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {
   Area,
   Chart,
@@ -92,10 +92,17 @@ export const Financas = ({titulo}: Props) => {
       <>
         <>
           {!financeiros ? (
-            <View style={styles.dados}>
-              <Text style={styles.item}>
-                Sem orçamentos para apresentar no momento.
-              </Text>
+            <View style={styles.container}>
+              <View style={styles.containerSemOrcamentos}>
+                <Image
+                  source={require('../../assets/images/semEventos.png')}
+                  style={styles.imagem}
+                  resizeMode="contain"
+                />
+                <Text style={styles.semOrcamentos}>
+                  Sem orçamentos para apresentar no momento.
+                </Text>
+              </View>
             </View>
           ) : (
             <>
@@ -237,7 +244,7 @@ const getStyles = () => {
       alignItems: 'center',
     },
     container: {
-      marginTop: hp('6%'),
+      marginTop: hp('7%'),
       alignItems: 'center',
       backgroundColor: COLORCOMUNIDADE,
       borderColor: CAPER,
@@ -307,6 +314,19 @@ const getStyles = () => {
     },
     containerAcumulado: {
       marginTop: -hp('3.5%'),
+    },
+    imagem: {
+      height: hp('40%'),
+    },
+    semOrcamentos: {
+      color: PIPER,
+      fontSize: wp('5%'),
+      fontFamily: FONT_AVENIR_ROMAN,
+      textAlign: 'center',
+    },
+    containerSemOrcamentos: {
+      alignItems: 'center',
+      marginBottom: hp('4%'),
     },
   });
 };
