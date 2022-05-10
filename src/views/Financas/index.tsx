@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
+import 'intl';
+import 'intl/locale-data/jsonp/pt-BR';
 import {
   Area,
   Chart,
@@ -121,7 +123,7 @@ export const Financas = ({titulo}: Props) => {
                       )}
                     </Text>
                   </View>
-                  <View style={styles.containerValores}>
+                  <View style={styles.containerReceita}>
                     <Text style={styles.valor}>receita</Text>
                     <Text style={styles.valor}>
                       {new Intl.NumberFormat('pt-BR', {
@@ -293,7 +295,7 @@ const getStyles = () => {
       width: wp('105%'),
     },
     chart: {
-      height: hp('35%'),
+      height: hp('30%'),
     },
     containerValores: {
       display: 'flex',
@@ -301,6 +303,17 @@ const getStyles = () => {
       width: wp('80%'),
       height: hp('8%'),
       marginBottom: hp('1%'),
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      borderWidth: 1,
+      backgroundColor: WHITE,
+      borderColor: LIGHTGRAY,
+    },
+    containerReceita: {
+      display: 'flex',
+      flexDirection: 'row',
+      width: wp('80%'),
+      height: hp('8%'),
       justifyContent: 'space-around',
       alignItems: 'center',
       borderWidth: 1,
