@@ -23,6 +23,10 @@ import {
   WHITE,
   FONT_AVENIR_BLACK,
   OTHERGRAY,
+  COMET,
+  COLORCOMUNIDADE,
+  CAPER,
+  LIGHTGRAY,
 } from '../../styles/styles';
 
 interface Props {
@@ -40,7 +44,6 @@ export const Financas = ({titulo}: Props) => {
   const styles = getStyles();
   const [isLoading, setLoading] = useState(true);
   const [financeiroList, setFinanceiroList] = useState<Financeiro[]>();
-  // const [mes, setMes] = useState<number>(0);
 
   var months = [
     undefined,
@@ -59,27 +62,15 @@ export const Financas = ({titulo}: Props) => {
   ];
 
   useEffect(() => {
-    // fetch('http://admin.ipmosaico.com:8889/financeiro/public/latest?amount=5')
-    //   .then((response) => response.json())
-    //   .then((json) => {
-    //     setFinanceiroList(json);
-    //     // setMes(json.length);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   })
-    //   .finally(() => setLoading(false));
-
-    const json = [
-      {orcado: 54000, entradas: 32000, saidas: 1234, anoMes: [2022, 1]},
-      {orcado: 54000, entradas: 30000, saidas: 1234, anoMes: [2022, 2]},
-      {orcado: 54000, entradas: 45000, saidas: 1234, anoMes: [2022, 3]},
-      {orcado: 54000, entradas: 58000, saidas: 1234, anoMes: [2022, 4]},
-    ];
-
-    setFinanceiroList(json);
-    setLoading(false);
-    // setMes(json.length);
+    fetch('http://admin.ipmosaico.com:8889/financeiro/public/latest?amount=5')
+      .then((response) => response.json())
+      .then((json) => {
+        setFinanceiroList(json);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   const mapData = (financeiros: Financeiro[]): ChartDataPoint[] => {
@@ -246,10 +237,10 @@ const getStyles = () => {
       alignItems: 'center',
     },
     container: {
-      marginTop: hp('7%'),
+      marginTop: hp('6%'),
       alignItems: 'center',
-      backgroundColor: '#f3f5ec',
-      borderColor: '#B2C588',
+      backgroundColor: COLORCOMUNIDADE,
+      borderColor: CAPER,
       borderWidth: 1,
       borderRadius: 10,
       shadowOffset: {
@@ -270,53 +261,52 @@ const getStyles = () => {
       marginTop: hp('15%'),
     },
     item: {
-      color: '#6C6C6D',
-      fontSize: 14,
+      color: COMET,
+      fontSize: wp('4%'),
       fontFamily: FONT_AVENIR_ROMAN,
       textAlign: 'center',
-      width: 260,
+      width: wp('70%'),
     },
     ano: {
-      color: '#6C6C6D',
-      fontSize: 16,
+      color: COMET,
+      fontSize: wp('4%'),
       fontFamily: FONT_AVENIR_BLACK,
       textAlign: 'center',
-      marginTop: 20,
+      marginTop: hp('2.5%'),
     },
     acumulado: {
-      color: '#6C6C6D',
-      fontSize: 16,
+      color: COMET,
+      fontSize: wp('4%'),
       fontFamily: FONT_AVENIR_ROMAN,
       textAlign: 'auto',
-      marginTop: 30,
-      marginBottom: -10,
-      marginLeft: 43,
+      marginTop: hp('3.5%'),
+      marginLeft: wp('11%'),
     },
     viewChart: {
-      width: 420,
+      width: wp('105%'),
     },
     chart: {
-      height: 300,
+      height: hp('35%'),
     },
     containerValores: {
       display: 'flex',
       flexDirection: 'row',
-      width: 305,
-      height: 67,
+      width: wp('80%'),
+      height: hp('8%'),
       marginBottom: hp('1%'),
       justifyContent: 'space-around',
       alignItems: 'center',
       borderWidth: 1,
       backgroundColor: WHITE,
-      borderColor: '#D1D1D1',
+      borderColor: LIGHTGRAY,
     },
     valor: {
-      color: '#6C6C6D',
-      fontSize: 16,
+      color: COMET,
+      fontSize: wp('4%'),
       fontFamily: FONT_AVENIR_BLACK,
     },
     containerAcumulado: {
-      marginTop: -30,
+      marginTop: -hp('3.5%'),
     },
   });
 };
