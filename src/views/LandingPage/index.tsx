@@ -5,9 +5,9 @@ import {PastoralItem} from './components/PastoralItem';
 import {SIZE_X_LARGE} from '../../styles/styles';
 import {
   IconContribua,
-  IconComunidade,
   IconAgenda,
   IconIgreja,
+  IconFinancas,
 } from '../../assets/images/Icons';
 
 export const LandingPage = () => {
@@ -67,10 +67,10 @@ const DATA = [
     imagem: IconAgenda,
   },
   {
-    id: 'eventos',
-    textoCard: 'eventos',
-    titulo: 'EVENTOS',
-    imagem: IconComunidade,
+    id: 'financas',
+    textoCard: 'finanças',
+    titulo: 'FINANÇAS',
+    imagem: IconFinancas,
   },
   {
     id: 'contato',

@@ -36,11 +36,7 @@ import {
   faChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
 import {handlePress} from '../../utils/handlePress';
-import {ContatoCollection} from '../../../imports/api/contato';
-import {handleIsConnected} from '../../utils/handleIsConnected';
 import {FALLBACK} from './data/Contato';
-import {ContainerServer} from '../../components/ContainerServer';
-import {Aguarde} from '../../components/Aguarde';
 import {MosaicoOnline} from './mosaicoOnline';
 import {Missao} from './missao';
 
@@ -56,12 +52,7 @@ interface Contato {
 export const Contato = () => {
   const styles = getStyles();
   const logo = require('../../assets/images/mosaico.png');
-  const [isConnected, setIsConnected] = useState(false);
   const [collapsed, setCollapsed] = useState(true);
-
-  handleIsConnected().then((value) => {
-    setIsConnected(Boolean(value));
-  });
 
   const containerMissao = (missao: string) => {
     return (
@@ -130,7 +121,7 @@ export const Contato = () => {
         <Text allowFontScaling={false} style={styles.title}>
           Mosaico online
         </Text>
-        <MosaicoOnline isConnected={isConnected} />
+        <MosaicoOnline />
       </View>
     );
   };
@@ -150,7 +141,7 @@ export const Contato = () => {
           </View>
         </TouchableOpacity>
         <Collapsible collapsed={collapsed} align="center">
-          <Missao isConnected={isConnected} />
+          <Missao />
         </Collapsible>
         <Text style={styles.conselho}>
           Para acessar mais informações, favor contatar o conselho missionário
@@ -182,19 +173,7 @@ export const Contato = () => {
 
   return (
     <SafeAreaView style={styles.droidSafeArea}>
-      <ContainerPage>
-        {isConnected ? (
-          <ContainerServer collection={ContatoCollection}>
-            {(collection) => {
-              const CONTATO = collection[0];
-
-              return CONTATO ? contatoItems(CONTATO) : <Aguarde />;
-            }}
-          </ContainerServer>
-        ) : (
-          contatoItems(FALLBACK)
-        )}
-      </ContainerPage>
+      <ContainerPage>{contatoItems(FALLBACK)}</ContainerPage>
     </SafeAreaView>
   );
 };
