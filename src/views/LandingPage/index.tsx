@@ -8,6 +8,7 @@ import {
   IconAgenda,
   IconIgreja,
   IconFinancas,
+  IconComunidade,
 } from '../../assets/images/Icons';
 
 export const LandingPage = () => {
@@ -71,6 +72,12 @@ const DATA = [
     textoCard: 'finanças',
     titulo: 'FINANÇAS',
     imagem: IconFinancas,
+  },
+  {
+    id: 'eventos',
+    textoCard: 'eventos',
+    titulo: 'eventos',
+    imagem: IconComunidade,
   },
   {
     id: 'contato',

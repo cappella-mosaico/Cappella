@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const DetalhesItem = ({route}: Props) => {
-  const {id} = route.params;
+  const {titulo, id} = route.params;
 
   switch (id) {
     case 'contribua':
@@ -25,7 +25,7 @@ export const DetalhesItem = ({route}: Props) => {
     case 'eventos':
       return <Eventos />;
     case 'financas':
-      return <Financas titulo="Finanças" />;
+      return <Financas titulo={titulo} />;
     case 'contato':
       return <Contato />;
     default:

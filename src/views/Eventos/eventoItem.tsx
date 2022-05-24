@@ -10,6 +10,11 @@ import {
   FONT_AVENIR_BLACK,
   WOODSMOKE,
 } from '../../styles/styles';
+import {BotaoLaranja} from '../../components/BotaoLaranja';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 interface Props {
   evento: Evento;
@@ -57,6 +62,16 @@ export const EventoItem = ({evento}: Props) => {
             {titulo.toUpperCase()}
           </Text>
         </View>
+      </View>
+      <View style={styles.containerInfo}>
+        <BotaoLaranja
+          titulo="quero ir!"
+          onPress={() =>
+            navigation.push('EventoDesc', {
+              evento,
+            })
+          }
+        />
       </View>
     </TouchableOpacity>
   );
@@ -108,6 +123,9 @@ const getStyles = () => {
       justifyContent: 'center',
       width: 185,
       color: WOODSMOKE,
+    },
+    containerInfo: {
+      alignSelf: 'center',
     },
   });
 };

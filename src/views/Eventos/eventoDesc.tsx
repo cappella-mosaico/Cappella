@@ -26,7 +26,7 @@ export const EventoDesc = ({route}: Props) => {
   const {
     dataInicial,
     titulo,
-    // imagemURL,
+    imagemURL,
     sobre,
     valor,
     local,
@@ -34,15 +34,12 @@ export const EventoDesc = ({route}: Props) => {
   } = evento;
   const styles = getStyles();
 
-  const imagem = require('../../assets/images/felizNatal.png');
-
   return (
     <SafeAreaView>
       <ContainerPage titulo={'EVENTOS'}>
         <View style={styles.container}>
           <Image
-            // source={{uri: imagemURL}}
-            source={imagem}
+            source={{uri: imagemURL}}
             style={styles.imagem}
             resizeMode="contain"
           />

@@ -2,10 +2,7 @@ import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {SafeAreaView, StyleSheet, Platform, StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {
-  createStackNavigator,
-  StackNavigationProp,
-} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 
 import {LandingPage} from './src/views/LandingPage';
 import {DetalhesItem} from './src/views/DetalhesItem';
@@ -18,15 +15,10 @@ import {EventoDesc} from './src/views/Eventos/eventoDesc';
 export type RootStackParamList = {
   Home: undefined;
   Pastoral: {textoCard: string};
-  DetalhesItem: {id: string};
+  DetalhesItem: {titulo: string; id: string};
   EventoDesc: {evento: Evento};
   Item: undefined;
 };
-
-export type ProfileScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'Item'
->;
 
 const HomeStack = createStackNavigator();
 
