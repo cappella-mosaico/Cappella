@@ -5,13 +5,14 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import {RouteProp} from '@react-navigation/core';
+import {useNavigation} from '@react-navigation/native';
 
 import {
   FONT_AVENIR_ROMAN,
   FONT_AVENIR_BLACK,
   WOODSMOKE,
 } from '../../styles/styles';
-import {RootStackParamList} from '../../../App';
+import {RootStackParamList, ProfileScreenNavigationProp} from '../../../App';
 import {ContainerPage} from '../../components/ContainerPage';
 import {BotaoLaranja} from '../../components/BotaoLaranja';
 
@@ -33,6 +34,7 @@ export const EventoDesc = ({route}: Props) => {
     endereco,
   } = evento;
   const styles = getStyles();
+  const navigation: ProfileScreenNavigationProp = useNavigation();
 
   return (
     <SafeAreaView>
@@ -105,7 +107,14 @@ export const EventoDesc = ({route}: Props) => {
           </Text>
         </View>
         <View style={styles.containerInfo}>
-          <BotaoLaranja titulo="se inscreva!" onPress={() => {}} />
+          <BotaoLaranja
+            titulo="se inscreva!"
+            onPress={() =>
+              navigation.push('EventoForm', {
+                evento,
+              })
+            }
+          />
         </View>
       </ContainerPage>
     </SafeAreaView>

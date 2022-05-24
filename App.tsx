@@ -11,12 +11,14 @@ import {Pastoral} from './src/views/Pastoral';
 import {COR_DE_FUNDO, TITLE} from './src/styles/styles';
 import {Evento} from './src/views/Eventos';
 import {EventoDesc} from './src/views/Eventos/eventoDesc';
+import {EventoForm} from './src/views/Eventos/eventoForm';
 
 export type RootStackParamList = {
   Home: undefined;
   Pastoral: {textoCard: string};
   DetalhesItem: {titulo: string; id: string};
   EventoDesc: {evento: Evento};
+  EventoForm: {evento: Evento};
   Item: undefined;
 };
 
@@ -53,6 +55,11 @@ const App = () => {
             <HomeStack.Screen
               name="EventoDesc"
               component={EventoDesc}
+              options={{headerShown: false}}
+            />
+            <HomeStack.Screen
+              name="EventoForm"
+              component={EventoForm}
               options={{headerShown: false}}
             />
           </HomeStack.Navigator>

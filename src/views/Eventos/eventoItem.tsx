@@ -11,10 +11,6 @@ import {
   WOODSMOKE,
 } from '../../styles/styles';
 import {BotaoLaranja} from '../../components/BotaoLaranja';
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
 
 interface Props {
   evento: Evento;
@@ -24,17 +20,6 @@ export const EventoItem = ({evento}: Props) => {
   const styles = getStyles();
   const navigation: ProfileScreenNavigationProp = useNavigation();
   const {dataInicial, titulo, imagemURL} = evento;
-
-  const options = {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false,
-  };
 
   return (
     <TouchableOpacity
