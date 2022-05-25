@@ -28,6 +28,7 @@
     "react-native": "^0.64.2",
     "react-native-collapsible": "^1.6.0",
     "react-native-gesture-handler": "^1.10.2",
+    "react-native-masked-text": "^1.13.0",
     "react-native-onesignal": "^4.2.0",
     "react-native-reanimated": "^2.2.0",
     "react-native-responsive-linechart": "^5.7.1",

@@ -8,20 +8,28 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 import {RouteProp} from '@react-navigation/core';
 import {RootStackParamList} from '../../../App';
 import {ContainerPage} from '../../components/ContainerPage';
 import {Controller, useForm} from 'react-hook-form';
 import {EventoDescPadrao} from './eventoDescPadrao';
+import {TextInputMask} from 'react-native-masked-text';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'EventoForm'>;
+type ProfileScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'EventoForm'
+>;
 
 interface Props {
   route: ProfileScreenRouteProp;
 }
 
 export const EventoForm = ({route}: Props) => {
+  const navigation = useNavigation<ProfileScreenNavigationProp>();
   const {evento} = route.params;
   const {
     control,
@@ -29,18 +37,24 @@ export const EventoForm = ({route}: Props) => {
     formState: {errors},
   } = useForm({
     defaultValues: {
-      firstName: '',
-      lastName: '',
+      nome: '',
+      telefone: '',
+      email: '',
+      cpf: '',
     },
   });
-  const onSubmit = (data) => Alert.alert(JSON.stringify(data));
+  const onSubmit = (data) => {
+    console.log(JSON.stringify(data));
+    Alert.alert('Sucesso', 'Você foi cadastrado com sucesso!', [
+      {text: 'OK', onPress: () => navigation.popToTop()},
+    ]);
+  };
 
   return (
     <SafeAreaView>
       <ContainerPage titulo={'EVENTOS'}>
         <EventoDescPadrao evento={evento} />
         <View style={styles.container}>
-          <Text style={styles.label}>First name</Text>
           <Controller
             control={control}
             rules={{
@@ -52,16 +66,39 @@ export const EventoForm = ({route}: Props) => {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
+                placeholder="Nome"
               />
             )}
-            name="firstName"
+            name="nome"
           />
-          {errors.firstName && <Text>This is required.</Text>}
-          <Text style={styles.label}>Last name</Text>
+          {errors.nome && <Text>Este campo é obrigatório.</Text>}
           <Controller
             control={control}
             rules={{
-              maxLength: 100,
+              required: true,
+            }}
+            render={({field: {onChange, onBlur, value}}) => (
+              <TextInputMask
+                style={styles.input}
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+                placeholder="Telefone"
+                options={{
+                  maskType: 'BRL',
+                  withDDD: true,
+                  dddMask: '(99) ',
+                }}
+                type={'cel-phone'}
+              />
+            )}
+            name="telefone"
+          />
+          {errors.telefone && <Text>Este campo é obrigatório.</Text>}
+          <Controller
+            control={control}
+            rules={{
+              required: true,
             }}
             render={({field: {onChange, onBlur, value}}) => (
               <TextInput
@@ -69,12 +106,34 @@ export const EventoForm = ({route}: Props) => {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
+                placeholder="Email"
+                keyboardType="email-address"
+                autoCapitalize="none"
               />
             )}
-            name="lastName"
+            name="email"
           />
+          {errors.email && <Text>Este campo é obrigatório.</Text>}
+          <Controller
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({field: {onChange, onBlur, value}}) => (
+              <TextInputMask
+                type={'cpf'}
+                style={styles.input}
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+                placeholder="CPF"
+              />
+            )}
+            name="cpf"
+          />
+          {errors.cpf && <Text>Este campo é obrigatório.</Text>}
 
-          <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+          <Button title="Enviar" onPress={handleSubmit(onSubmit)} />
         </View>
       </ContainerPage>
     </SafeAreaView>
@@ -85,10 +144,6 @@ const styles = StyleSheet.create({
   container: {
     marginLeft: 25,
     marginRight: 25,
-  },
-  label: {
-    margin: 20,
-    marginLeft: 0,
   },
   button: {
     marginTop: 40,
@@ -101,5 +156,7 @@ const styles = StyleSheet.create({
     height: 40,
     padding: 10,
     borderRadius: 4,
+    margin: 10,
+    marginLeft: 0,
   },
 });
