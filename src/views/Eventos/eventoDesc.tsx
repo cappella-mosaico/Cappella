@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text, View, Image} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -15,6 +15,7 @@ import {
 import {RootStackParamList, ProfileScreenNavigationProp} from '../../../App';
 import {ContainerPage} from '../../components/ContainerPage';
 import {BotaoLaranja} from '../../components/BotaoLaranja';
+import {EventoDescPadrao} from './eventoDescPadrao';
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'EventoDesc'>;
 
@@ -24,41 +25,14 @@ interface Props {
 
 export const EventoDesc = ({route}: Props) => {
   const {evento} = route.params;
-  const {
-    dataInicial,
-    titulo,
-    imagemURL,
-    sobre,
-    valor,
-    local,
-    endereco,
-  } = evento;
+  const {dataInicial, sobre, valor, local, endereco} = evento;
   const styles = getStyles();
   const navigation: ProfileScreenNavigationProp = useNavigation();
 
   return (
     <SafeAreaView>
       <ContainerPage titulo={'EVENTOS'}>
-        <View style={styles.container}>
-          <Image
-            source={{uri: imagemURL}}
-            style={styles.imagem}
-            resizeMode="contain"
-          />
-          <View style={styles.containerText}>
-            <Text allowFontScaling={false} style={styles.data}>
-              {/* {dataInicial.toLocaleDateString('pt-br', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })} */}
-              {dataInicial}
-            </Text>
-            <Text allowFontScaling={false} style={styles.evento}>
-              {titulo.toUpperCase()}
-            </Text>
-          </View>
-        </View>
+        <EventoDescPadrao evento={evento} />
         <View style={styles.containerInfo}>
           <Text allowFontScaling={false} style={styles.title}>
             Sobre o evento
@@ -70,29 +44,26 @@ export const EventoDesc = ({route}: Props) => {
             Data
           </Text>
           <Text allowFontScaling={false} style={styles.text}>
-            {/* {new Intl.DateTimeFormat('pt-br', {weekday: 'long'})
-              .format(dataInicial)
+            {new Intl.DateTimeFormat('pt-br', {weekday: 'long'})
+              .format(new Date(dataInicial))
               .replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
                 letter.toUpperCase(),
-              )} */}
-            {dataInicial}
+              )}
           </Text>
           <Text allowFontScaling={false} style={styles.text}>
-            {/* {dataInicial.toLocaleDateString('pt-br', {
+            {new Date(dataInicial).toLocaleDateString('pt-br', {
               year: 'numeric',
               month: 'long',
               day: 'numeric',
-            })} */}
-            {dataInicial}
+            })}
           </Text>
           <Text allowFontScaling={false} style={styles.text}>
-            {/* {dataInicial.toLocaleTimeString('pt-br', {
+            {new Date(dataInicial).toLocaleTimeString('pt-br', {
               hour: '2-digit',
               minute: '2-digit',
               hour12: false,
             })}{' '}
-            horas */}
-            {dataInicial}
+            horas
           </Text>
           <Text allowFontScaling={false} style={styles.title}>
             Valor
@@ -127,36 +98,6 @@ export const EventoDesc = ({route}: Props) => {
 
 const getStyles = () => {
   return StyleSheet.create({
-    container: {
-      marginTop: 35,
-      display: 'flex',
-      flexDirection: 'row',
-    },
-    imagem: {
-      marginLeft: 25,
-      height: 120,
-      width: 120,
-      borderRadius: 18,
-    },
-    data: {
-      fontSize: 10,
-      fontFamily: FONT_AVENIR_ROMAN,
-      textAlign: 'center',
-      lineHeight: 16,
-    },
-    evento: {
-      fontSize: 14,
-      fontFamily: FONT_AVENIR_BLACK,
-      textAlign: 'center',
-      lineHeight: 16,
-    },
-    containerText: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      width: 185,
-      color: WOODSMOKE,
-    },
     containerInfo: {
       marginLeft: 25,
       marginRight: 25,

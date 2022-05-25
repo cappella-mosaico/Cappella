@@ -5,10 +5,11 @@ import {Aguarde} from '../../components/Aguarde';
 import {ContainerPage} from '../../components/ContainerPage';
 import {EventoItem} from './eventoItem';
 import {SemEvento} from './semEvento';
+import {EVENTOS} from './data/Evento';
 export interface Evento {
   titulo: string;
-  dataInicial: Date;
-  dataFim?: Date;
+  dataInicial: string;
+  dataFim?: string;
   imagemURL: string;
   sobre: string;
   valor: string;
@@ -17,18 +18,20 @@ export interface Evento {
 }
 
 export const Eventos = () => {
-  const [isLoading, setLoading] = useState(true);
-  const [eventos, setEventos] = useState<Evento[]>();
+  const eventos = EVENTOS;
+  const isLoading = false;
+  // const [isLoading, setLoading] = useState(true);
+  // const [eventos, setEventos] = useState<Evento[]>();
 
-  useEffect(() => {
-    fetch('http://admin.ipmosaico.com:8888/eventos')
-      .then((response) => response.json())
-      .then((json) => setEventos(json))
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally(() => setLoading(false));
-  }, []);
+  // useEffect(() => {
+  //   fetch('http://admin.ipmosaico.com:8888/eventos')
+  //     .then((response) => response.json())
+  //     .then((json) => setEventos(json))
+  //     .catch((error) => {
+  //       console.error(error);
+  //     })
+  //     .finally(() => setLoading(false));
+  // }, []);
 
   const eventoList = (EVENTO: Evento[]) => {
     return (

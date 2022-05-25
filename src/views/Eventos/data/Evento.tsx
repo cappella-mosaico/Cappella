@@ -3,8 +3,8 @@ import {Evento} from '..';
 export const EVENTOS: Evento[] = [
   {
     titulo: 'acampamento',
-    dataInicial: new Date(2021, 12, 8, 20, 0),
-    dataFim: new Date(2021, 12, 8),
+    dataInicial: '2022-04-19T12:00:00.110261Z',
+    dataFim: '2022-04-19T12:00:00.110261Z',
     imagemURL: 'https://reactjs.org/logo-og.png',
     sobre:
       'A Igreja Presbiteriana Mosaico existe para acolher pessoas e formar discípulos de Cristo através de relacionamentos saudáveis e uma pregação bíblica contemporânea no bairro Setor Bueno, na cidade de Goiânia e no mundo',

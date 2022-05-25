@@ -1,10 +1,19 @@
 import React from 'react';
-import {Alert, Button, SafeAreaView, Text, TextInput, View} from 'react-native';
+import {
+  Alert,
+  Button,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 
 import {RouteProp} from '@react-navigation/core';
 import {RootStackParamList, ProfileScreenNavigationProp} from '../../../App';
 import {ContainerPage} from '../../components/ContainerPage';
 import {Controller, useForm} from 'react-hook-form';
+import {EventoDescPadrao} from './eventoDescPadrao';
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'EventoForm'>;
 
@@ -29,7 +38,9 @@ export const EventoForm = ({route}: Props) => {
   return (
     <SafeAreaView>
       <ContainerPage titulo={'EVENTOS'}>
-        <View>
+        <EventoDescPadrao evento={evento} />
+        <View style={styles.container}>
+          <Text style={styles.label}>First name</Text>
           <Controller
             control={control}
             rules={{
@@ -37,7 +48,7 @@ export const EventoForm = ({route}: Props) => {
             }}
             render={({field: {onChange, onBlur, value}}) => (
               <TextInput
-                // style={styles.input}
+                style={styles.input}
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
@@ -46,7 +57,7 @@ export const EventoForm = ({route}: Props) => {
             name="firstName"
           />
           {errors.firstName && <Text>This is required.</Text>}
-
+          <Text style={styles.label}>Last name</Text>
           <Controller
             control={control}
             rules={{
@@ -54,7 +65,7 @@ export const EventoForm = ({route}: Props) => {
             }}
             render={({field: {onChange, onBlur, value}}) => (
               <TextInput
-                // style={styles.input}
+                style={styles.input}
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
@@ -69,3 +80,26 @@ export const EventoForm = ({route}: Props) => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    marginLeft: 25,
+    marginRight: 25,
+  },
+  label: {
+    margin: 20,
+    marginLeft: 0,
+  },
+  button: {
+    marginTop: 40,
+    height: 40,
+    backgroundColor: '#ec5990',
+    borderRadius: 4,
+  },
+  input: {
+    backgroundColor: 'white',
+    height: 40,
+    padding: 10,
+    borderRadius: 4,
+  },
+});
