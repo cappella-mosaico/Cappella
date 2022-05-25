@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, View, FlatList} from 'react-native';
 import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {Aguarde} from '../../components/Aguarde';
 import {ContainerPage} from '../../components/ContainerPage';
 import {EventoItem} from './eventoItem';
 import {SemEvento} from './semEvento';
-import {EVENTOS} from './data/Evento';
 export interface Evento {
   titulo: string;
   dataInicial: Date;
@@ -17,7 +17,18 @@ export interface Evento {
 }
 
 export const Eventos = () => {
-  const list = EVENTOS;
+  const [isLoading, setLoading] = useState(true);
+  const [eventos, setEventos] = useState<Evento[]>();
+
+  useEffect(() => {
+    fetch('http://admin.ipmosaico.com:8888/eventos')
+      .then((response) => response.json())
+      .then((json) => setEventos(json))
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => setLoading(false));
+  }, []);
 
   const eventoList = (EVENTO: Evento[]) => {
     return (
@@ -34,9 +45,15 @@ export const Eventos = () => {
   return (
     <SafeAreaView>
       <ContainerPage titulo={'EVENTOS'}>
-        <View style={styles.container}>
-          {list.length ? eventoList(list) : <SemEvento />}
-        </View>
+        {isLoading ? (
+          <View style={styles.aguarde}>
+            <Aguarde />
+          </View>
+        ) : (
+          <View style={styles.container}>
+            {eventos?.length ? eventoList(eventos) : <SemEvento />}
+          </View>
+        )}
       </ContainerPage>
     </SafeAreaView>
   );
@@ -48,5 +65,10 @@ const styles = StyleSheet.create({
   },
   containerList: {
     height: hp('80%'),
+  },
+  aguarde: {
+    alignItems: 'center',
+    marginBottom: hp('4%'),
+    marginTop: hp('15%'),
   },
 });

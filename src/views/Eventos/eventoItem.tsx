@@ -37,11 +37,12 @@ export const EventoItem = ({evento}: Props) => {
         />
         <View style={styles.containerText}>
           <Text allowFontScaling={false} style={styles.data}>
-            {dataInicial.toLocaleDateString('pt-br', {
+            {/* {dataInicial.toLocaleDateString('pt-br', {
               year: 'numeric',
               month: 'long',
               day: 'numeric',
-            })}
+            })} */}
+            {dataInicial}
           </Text>
           <Text allowFontScaling={false} style={styles.evento}>
             {titulo.toUpperCase()}

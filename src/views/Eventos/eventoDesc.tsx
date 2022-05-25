@@ -47,11 +47,12 @@ export const EventoDesc = ({route}: Props) => {
           />
           <View style={styles.containerText}>
             <Text allowFontScaling={false} style={styles.data}>
-              {dataInicial.toLocaleDateString('pt-br', {
+              {/* {dataInicial.toLocaleDateString('pt-br', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
-              })}
+              })} */}
+              {dataInicial}
             </Text>
             <Text allowFontScaling={false} style={styles.evento}>
               {titulo.toUpperCase()}
@@ -69,26 +70,29 @@ export const EventoDesc = ({route}: Props) => {
             Data
           </Text>
           <Text allowFontScaling={false} style={styles.text}>
-            {new Intl.DateTimeFormat('pt-br', {weekday: 'long'})
+            {/* {new Intl.DateTimeFormat('pt-br', {weekday: 'long'})
               .format(dataInicial)
               .replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
                 letter.toUpperCase(),
-              )}
+              )} */}
+            {dataInicial}
           </Text>
           <Text allowFontScaling={false} style={styles.text}>
-            {dataInicial.toLocaleDateString('pt-br', {
+            {/* {dataInicial.toLocaleDateString('pt-br', {
               year: 'numeric',
               month: 'long',
               day: 'numeric',
-            })}
+            })} */}
+            {dataInicial}
           </Text>
           <Text allowFontScaling={false} style={styles.text}>
-            {dataInicial.toLocaleTimeString('pt-br', {
+            {/* {dataInicial.toLocaleTimeString('pt-br', {
               hour: '2-digit',
               minute: '2-digit',
               hour12: false,
             })}{' '}
-            horas
+            horas */}
+            {dataInicial}
           </Text>
           <Text allowFontScaling={false} style={styles.title}>
             Valor
