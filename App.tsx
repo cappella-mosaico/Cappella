@@ -15,9 +15,10 @@ import {EventoForm} from './src/views/Eventos/eventoForm';
 
 export type RootStackParamList = {
   Home: undefined;
-  Pastoral: {textoCard: string};
+  PastoralItem: {textoCard: string};
   DetalhesItem: {titulo: string; id: string};
   EventoDesc: {evento: Evento};
+  EventoItem: {evento: Evento};
   EventoForm: {evento: Evento};
   Item: undefined;
 };

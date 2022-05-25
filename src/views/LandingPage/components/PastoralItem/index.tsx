@@ -6,7 +6,13 @@ import {
 } from 'react-native-responsive-screen';
 import {GenericItem} from '../../../../components/GenericItem';
 import {Image, StyleSheet} from 'react-native';
-import {ProfileScreenNavigationProp} from '../../../../../App';
+import {RootStackParamList} from '../../../../../App';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
+type ProfileScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'PastoralItem'
+>;
 
 export const PastoralItem = () => {
   const navigation: ProfileScreenNavigationProp = useNavigation();

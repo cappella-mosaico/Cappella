@@ -1,13 +1,18 @@
 import React from 'react';
 import {TouchableOpacity, StyleSheet, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {ProfileScreenNavigationProp} from '../../../App';
 import {Evento} from '.';
 
 import {LIGHTERGRAY} from '../../styles/styles';
 import {BotaoLaranja} from '../../components/BotaoLaranja';
 import {EventoDescPadrao} from './eventoDescPadrao';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../../App';
 
+type ProfileScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'EventoItem'
+>;
 interface Props {
   evento: Evento;
 }

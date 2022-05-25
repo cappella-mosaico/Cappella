@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import {RouteProp} from '@react-navigation/core';
-import {RootStackParamList, ProfileScreenNavigationProp} from '../../../App';
+import {RootStackParamList} from '../../../App';
 import {ContainerPage} from '../../components/ContainerPage';
 import {Controller, useForm} from 'react-hook-form';
 import {EventoDescPadrao} from './eventoDescPadrao';

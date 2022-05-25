@@ -6,18 +6,23 @@ import {
 } from 'react-native-responsive-screen';
 import {RouteProp} from '@react-navigation/core';
 import {useNavigation} from '@react-navigation/native';
+import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import {
   FONT_AVENIR_ROMAN,
   FONT_AVENIR_BLACK,
   WOODSMOKE,
 } from '../../styles/styles';
-import {RootStackParamList, ProfileScreenNavigationProp} from '../../../App';
+import {RootStackParamList} from '../../../App';
 import {ContainerPage} from '../../components/ContainerPage';
 import {BotaoLaranja} from '../../components/BotaoLaranja';
 import {EventoDescPadrao} from './eventoDescPadrao';
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'EventoDesc'>;
+type ProfileScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'EventoDesc'
+>;
 
 interface Props {
   route: ProfileScreenRouteProp;
@@ -27,7 +32,7 @@ export const EventoDesc = ({route}: Props) => {
   const {evento} = route.params;
   const {dataInicial, sobre, valor, local, endereco} = evento;
   const styles = getStyles();
-  const navigation: ProfileScreenNavigationProp = useNavigation();
+  const navigation = useNavigation<ProfileScreenNavigationProp>();
 
   return (
     <SafeAreaView>

@@ -6,7 +6,13 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {GenericItem} from '../../../../components/GenericItem';
 import {SvgXml} from 'react-native-svg';
-import {ProfileScreenNavigationProp} from '../../../../../App';
+import {RootStackParamList} from '../../../../../App';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
+type ProfileScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'Item'
+>;
 
 interface Props {
   imagem: string | JSX.Element;
@@ -16,7 +22,7 @@ interface Props {
   url?: string;
 }
 
-export const Item = ({imagem, titulo, textoCard, id, url}: Props) => {
+export const Item = ({imagem, textoCard, id, url}: Props) => {
   const navigation: ProfileScreenNavigationProp = useNavigation();
 
   return (
