@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Alert,
   Button,
@@ -17,12 +17,17 @@ import {Controller, useForm} from 'react-hook-form';
 import {EventoDescPadrao} from './eventoDescPadrao';
 import {TextInputMask} from 'react-native-masked-text';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import CheckBox from '@react-native-community/checkbox';
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'EventoForm'>;
 type ProfileScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
   'EventoForm'
 >;
+
+type Dependente = {
+  nome: string;
+};
 
 interface Props {
   route: ProfileScreenRouteProp;
@@ -31,6 +36,8 @@ interface Props {
 export const EventoForm = ({route}: Props) => {
   const navigation = useNavigation<ProfileScreenNavigationProp>();
   const {evento} = route.params;
+  const [dependentes, setDependentes] = useState<Dependente[]>([]);
+
   const {
     control,
     handleSubmit,
@@ -41,13 +48,25 @@ export const EventoForm = ({route}: Props) => {
       telefone: '',
       email: '',
       cpf: '',
+      dependentes: '',
     },
   });
+
   const onSubmit = (data) => {
-    console.log(JSON.stringify(data));
+    console.log(JSON.stringify({...data, dependentes}));
     Alert.alert('Sucesso', 'Você foi cadastrado com sucesso!', [
       {text: 'OK', onPress: () => navigation.popToTop()},
     ]);
+  };
+
+  const handleAddClick = () => {
+    setDependentes([...dependentes, {nome: ''}]);
+  };
+
+  const handleRemoveClick = (index: number) => {
+    const list = [...dependentes];
+    list.splice(index, 1);
+    setDependentes(list);
   };
 
   return (
@@ -132,6 +151,33 @@ export const EventoForm = ({route}: Props) => {
             name="cpf"
           />
           {errors.cpf && <Text>Este campo é obrigatório.</Text>}
+          <View style={styles.toggleDependentes}>
+            <CheckBox
+              disabled={false}
+              value={Boolean(dependentes.length)}
+              onValueChange={(newValue) => {
+                newValue ? handleAddClick() : setDependentes([]);
+              }}
+            />
+            <Text style={styles.textDependente}>Tem Dependente?</Text>
+          </View>
+
+          {dependentes?.length > 0 &&
+            dependentes.map((dependente, index) => (
+              <View style={styles.dependente}>
+                <TextInput
+                  style={styles.inputDependente}
+                  onChangeText={(e) => {
+                    dependente.nome = e;
+                    setDependentes([...dependentes]);
+                  }}
+                  value={dependente.nome}
+                  placeholder="Nome"
+                />
+                <Button title="+" onPress={() => handleAddClick()} />
+                <Button title="-" onPress={() => handleRemoveClick(index)} />
+              </View>
+            ))}
 
           <Button title="Enviar" onPress={handleSubmit(onSubmit)} />
         </View>
@@ -154,6 +200,29 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: 'white',
     height: 40,
+    padding: 10,
+    borderRadius: 4,
+    margin: 10,
+    marginLeft: 0,
+  },
+  toggleDependentes: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  dependente: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  textDependente: {
+    margin: 10,
+  },
+  inputDependente: {
+    backgroundColor: 'white',
+    height: 40,
+    width: 300,
     padding: 10,
     borderRadius: 4,
     margin: 10,
