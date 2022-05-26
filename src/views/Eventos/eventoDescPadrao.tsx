@@ -57,12 +57,14 @@ const getStyles = () => {
       fontFamily: FONT_AVENIR_ROMAN,
       textAlign: 'center',
       lineHeight: 16,
+      color: WOODSMOKE,
     },
     evento: {
       fontSize: 14,
       fontFamily: FONT_AVENIR_BLACK,
       textAlign: 'center',
       lineHeight: 16,
+      color: WOODSMOKE,
     },
     containerText: {
       display: 'flex',

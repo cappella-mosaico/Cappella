@@ -30,16 +30,15 @@ export const EventoItem = ({evento}: Props) => {
         })
       }>
       <EventoDescPadrao evento={evento} />
-      <View style={styles.containerInfo}>
-        <BotaoBranco
-          titulo="quero ir!"
-          onPress={() =>
-            navigation.push('EventoDesc', {
-              evento,
-            })
-          }
-        />
-      </View>
+      <BotaoBranco
+        style={styles.botao}
+        titulo="quero ir!"
+        onPress={() =>
+          navigation.push('EventoDesc', {
+            evento,
+          })
+        }
+      />
     </TouchableOpacity>
   );
 };
@@ -53,6 +52,7 @@ const getStyles = () => {
       borderRadius: 8,
       marginVertical: 10,
       margin: 10,
+      justifyContent: 'flex-start',
     },
     elevation: {
       elevation: 20,
@@ -61,8 +61,10 @@ const getStyles = () => {
       shadowOpacity: 0.2,
       shadowRadius: 3,
     },
-    containerInfo: {
+    botao: {
       alignSelf: 'center',
+      marginTop: -35,
+      left: 75,
     },
   });
 };

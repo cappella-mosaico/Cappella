@@ -164,7 +164,7 @@ export const EventoForm = ({route}: Props) => {
 
           {dependentes?.length > 0 &&
             dependentes.map((dependente, index) => (
-              <View style={styles.dependente}>
+              <View style={styles.dependente} key={index}>
                 <TextInput
                   style={styles.inputDependente}
                   onChangeText={(e) => {
@@ -188,8 +188,7 @@ export const EventoForm = ({route}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: 25,
-    marginRight: 25,
+    margin: 25,
   },
   button: {
     marginTop: 40,

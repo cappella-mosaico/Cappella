@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   GestureResponderEvent,
+  ViewStyle,
 } from 'react-native';
 import {WHITE, FONT_AVENIR_BLACK, EXTRAORANGE} from '../styles/styles';
 import {
@@ -14,15 +15,16 @@ import {
 
 interface Props {
   titulo: string;
+  style?: ViewStyle;
   onPress: (event: GestureResponderEvent) => void;
 }
 
-export const BotaoBranco = ({titulo, onPress}: Props) => {
+export const BotaoBranco = ({titulo, style, onPress}: Props) => {
   const styles = getStyles();
 
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={styles.botaoContainer}>
+      <View style={[style, styles.botaoContainer]}>
         <Text allowFontScaling={false} style={styles.botaoTexto}>
           {titulo}
         </Text>
