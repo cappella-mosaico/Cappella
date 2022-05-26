@@ -6,7 +6,7 @@ import {
   StyleSheet,
   GestureResponderEvent,
 } from 'react-native';
-import {WHITE, JUMBO, FONT_AVENIR_BLACK} from '../styles/styles';
+import {WHITE, FONT_AVENIR_BLACK, EXTRAORANGE} from '../styles/styles';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -49,7 +49,7 @@ const getStyles = () => {
     botaoTexto: {
       fontFamily: FONT_AVENIR_BLACK,
       fontSize: wp('2.3%'),
-      color: JUMBO,
+      color: EXTRAORANGE,
       textAlign: 'center',
     },
   });

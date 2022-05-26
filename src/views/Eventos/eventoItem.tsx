@@ -4,10 +4,10 @@ import {useNavigation} from '@react-navigation/native';
 import {Evento} from '.';
 
 import {LIGHTERGRAY} from '../../styles/styles';
-import {BotaoLaranja} from '../../components/BotaoLaranja';
 import {EventoDescPadrao} from './eventoDescPadrao';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../App';
+import {BotaoBranco} from '../../components/BotaoBranco';
 
 type ProfileScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -31,7 +31,7 @@ export const EventoItem = ({evento}: Props) => {
       }>
       <EventoDescPadrao evento={evento} />
       <View style={styles.containerInfo}>
-        <BotaoLaranja
+        <BotaoBranco
           titulo="quero ir!"
           onPress={() =>
             navigation.push('EventoDesc', {
