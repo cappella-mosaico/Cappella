@@ -1,5 +1,5 @@
 export const FALLBACK = {
-  nomeBanco: 'BANCO SINCREDI',
+  nomeBanco: 'BANCO SICREDI',
   banco: 'Banco 748',
   agencia: 'Agência 3950',
   cc: 'C/C 75716-0',
