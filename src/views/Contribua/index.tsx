@@ -47,23 +47,23 @@ interface Contribua {
   banco: string;
   agencia: string;
   cc: string;
-  operacao: string;
   igreja: string;
   cnpj: string;
+  chavePix: string;
 }
 
 export const Contribua = () => {
-  const [cnpjCopiado, setCnpjCopiado] = useState(false);
+  const [chavePixCopiada, setChavePixCopiada] = useState(false);
   const {height} = useWindowDimensions();
   const styles = getStyles(getSize(height));
 
   const copyToClipboard = (cnpj: string) => {
     Clipboard.setString(cnpj);
-    setCnpjCopiado(true);
+    setChavePixCopiada(true);
   };
 
   const contribuaItems = (CONTRIBUA: Contribua) => {
-    const {nomeBanco, banco, agencia, cc, operacao, igreja, cnpj} = CONTRIBUA;
+    const {nomeBanco, banco, agencia, cc, igreja, cnpj, chavePix} = CONTRIBUA;
 
     return (
       <View style={styles.container}>
@@ -86,9 +86,6 @@ export const Contribua = () => {
             <Text allowFontScaling={false} style={styles.conta}>
               {cc}
             </Text>
-            <Text allowFontScaling={false} style={styles.conta}>
-              {operacao}
-            </Text>
           </View>
         </View>
 
@@ -97,14 +94,14 @@ export const Contribua = () => {
         </Text>
         <View style={styles.containerConta}>
           <View style={styles.containerPix}>
-            <TouchableOpacity onPress={() => copyToClipboard(cnpj)}>
+            <TouchableOpacity onPress={() => copyToClipboard(chavePix)}>
               <Text
                 allowFontScaling={false}
-                style={styles.conta}>{`Chave:  ${cnpj}`}</Text>
+                style={styles.conta}>{`Chave:  ${chavePix}`}</Text>
             </TouchableOpacity>
-            {cnpjCopiado && (
+            {chavePixCopiada && (
               <Text allowFontScaling={false} style={styles.copiedText}>
-                {'CNPJ copiado'}
+                {'Chave Pix copiada'}
               </Text>
             )}
           </View>
