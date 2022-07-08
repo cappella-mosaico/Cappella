@@ -62,25 +62,6 @@ export const EventoForm = ({route}: Props) => {
 
   const onSubmit: SubmitHandler<Participante> = async (data: Participante) => {
     const participante: Participante = data;
-    let auth = null;
-
-    try {
-      const response = await fetch('http://admin.ipmosaico.com:8888/login', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: '', // user Mosaico admin
-          password: '', // senha Mosaico admin
-        }),
-      });
-      const json = await response.json();
-      auth = json.token;
-    } catch (error) {
-      console.error(error);
-    }
 
     try {
       const response = await fetch(
@@ -88,17 +69,25 @@ export const EventoForm = ({route}: Props) => {
         {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${auth}`,
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({...participante, dependentes}),
+          body: JSON.stringify({
+            eventoId: evento.id,
+            ...participante,
+            dependentes,
+          }),
         },
       );
 
-      if (response.ok) {
+      const json = await response.json();
+      console.log(json);
+
+      if (response.ok && response.status === 200) {
         Alert.alert('Sucesso', 'Você foi cadastrado com sucesso!', [
           {text: 'OK', onPress: () => navigation.popToTop()},
         ]);
+      } else {
+        Alert.alert('Erro', 'Ocorreu um erro no seu cadastro.');
       }
     } catch (error) {
       console.error(error);

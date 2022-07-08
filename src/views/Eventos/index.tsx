@@ -6,6 +6,7 @@ import {ContainerPage} from '../../components/ContainerPage';
 import {EventoItem} from './eventoItem';
 import {SemEvento} from './semEvento';
 export interface Evento {
+  id: number;
   titulo: string;
   dataInicial: string;
   dataFim?: string;
