@@ -1,9 +1,13 @@
 import React from 'react';
 import {TouchableOpacity, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 import {Evento} from '.';
 
-import {LIGHTERGRAY} from '../../styles/styles';
+import {INDIGO, LIGHTERGRAY} from '../../styles/styles';
 import {EventoDescPadrao} from './eventoDescPadrao';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../App';
@@ -46,25 +50,23 @@ export const EventoItem = ({evento}: Props) => {
 const getStyles = () => {
   return StyleSheet.create({
     card: {
-      height: 205,
-      width: 340,
+      height: hp('24.3%'),
+      width: wp('87%'),
       backgroundColor: LIGHTERGRAY,
       borderRadius: 8,
-      marginVertical: 10,
-      margin: 10,
+      margin: wp('5%'),
       justifyContent: 'flex-start',
     },
     elevation: {
       elevation: 20,
-      shadowColor: '#52006A',
+      shadowColor: INDIGO,
       shadowOffset: {width: 0, height: 2},
       shadowOpacity: 0.2,
-      shadowRadius: 3,
     },
     botao: {
       alignSelf: 'center',
-      marginTop: -35,
-      left: 75,
+      marginTop: -hp('2%'),
+      left: wp('19%'),
     },
   });
 };

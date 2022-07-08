@@ -104,8 +104,8 @@ export const EventoDesc = ({route}: Props) => {
 const getStyles = () => {
   return StyleSheet.create({
     containerInfo: {
-      marginLeft: 25,
-      marginRight: 25,
+      marginLeft: wp('6%'),
+      marginRight: wp('6%'),
       alignSelf: 'center',
       marginTop: hp('3.5%'),
     },
@@ -114,12 +114,12 @@ const getStyles = () => {
       textAlign: 'left',
       fontFamily: FONT_AVENIR_BLACK,
       fontSize: wp('4%'),
-      marginBottom: 10,
+      marginBottom: hp('1%'),
     },
     text: {
       color: WOODSMOKE,
       marginLeft: wp('3%'),
-      marginBottom: 10,
+      marginBottom: hp('1%'),
       textAlign: 'left',
       fontFamily: FONT_AVENIR_ROMAN,
       fontSize: wp('3.1%'),

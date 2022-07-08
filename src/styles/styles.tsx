@@ -20,6 +20,7 @@ export const ACTIVE_GREEN = '#77A02D';
 export const DARKGREEN = '#ADC681';
 export const INACTIVE_GRAY = '#B1AEAE';
 export const IRON = '#707071';
+export const INDIGO = '#52006A';
 export const SUBTEXT = '#7D7D7E';
 export const GRAY = '#D9D9D9';
 export const COMET = '#6C6C6D';

@@ -1,5 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 import {
   FONT_AVENIR_ROMAN,
@@ -42,35 +46,35 @@ export const EventoDescPadrao = ({evento}: Props) => {
 const getStyles = () => {
   return StyleSheet.create({
     container: {
-      marginTop: 35,
+      marginTop: hp('4.5%'),
       display: 'flex',
       flexDirection: 'row',
     },
     imagem: {
-      marginLeft: 25,
-      height: 120,
-      width: 120,
+      marginLeft: wp('6%'),
+      height: hp('15%'),
+      width: wp('31%'),
       borderRadius: 18,
     },
     data: {
-      fontSize: 10,
+      fontSize: wp('2.6%'),
       fontFamily: FONT_AVENIR_ROMAN,
       textAlign: 'center',
-      lineHeight: 16,
+      lineHeight: hp('2%'),
       color: WOODSMOKE,
     },
     evento: {
-      fontSize: 14,
+      fontSize: wp('3.6%'),
       fontFamily: FONT_AVENIR_BLACK,
       textAlign: 'center',
-      lineHeight: 16,
+      lineHeight: hp('2%'),
       color: WOODSMOKE,
     },
     containerText: {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      width: 185,
+      width: wp('50%'),
       color: WOODSMOKE,
     },
   });
