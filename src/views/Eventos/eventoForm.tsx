@@ -18,6 +18,7 @@ import {EventoDescPadrao} from './eventoDescPadrao';
 import {TextInputMask} from 'react-native-masked-text';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import CheckBox from '@react-native-community/checkbox';
+import {isValidCPF, isValidEmail} from './formValidators';
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'EventoForm'>;
 type ProfileScreenNavigationProp = NativeStackNavigationProp<
@@ -153,6 +154,7 @@ export const EventoForm = ({route}: Props) => {
             control={control}
             rules={{
               required: true,
+              validate: (email) => isValidEmail(email),
             }}
             render={({field: {onChange, onBlur, value}}) => (
               <TextInput
@@ -167,11 +169,12 @@ export const EventoForm = ({route}: Props) => {
             )}
             name="email"
           />
-          {errors.email && <Text>Este campo é obrigatório.</Text>}
+          {errors.email && <Text>Email Inválido!</Text>}
           <Controller
             control={control}
             rules={{
               required: true,
+              validate: (cpf) => isValidCPF(cpf),
             }}
             render={({field: {onChange, onBlur, value}}) => (
               <TextInputMask
@@ -185,7 +188,7 @@ export const EventoForm = ({route}: Props) => {
             )}
             name="cpf"
           />
-          {errors.cpf && <Text>Este campo é obrigatório.</Text>}
+          {errors.cpf && <Text>CPF Inválido!</Text>}
           <View style={styles.toggleDependentes}>
             <CheckBox
               disabled={false}
