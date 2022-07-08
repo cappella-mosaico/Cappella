@@ -13,7 +13,7 @@ import {useNavigation} from '@react-navigation/native';
 import {RouteProp} from '@react-navigation/core';
 import {RootStackParamList} from '../../../App';
 import {ContainerPage} from '../../components/ContainerPage';
-import {Controller, useForm} from 'react-hook-form';
+import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {EventoDescPadrao} from './eventoDescPadrao';
 import {TextInputMask} from 'react-native-masked-text';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -27,6 +27,14 @@ type ProfileScreenNavigationProp = NativeStackNavigationProp<
 
 type Dependente = {
   nome: string;
+};
+
+type Participante = {
+  nome: string;
+  telefone: string;
+  email: string;
+  cpf: string;
+  dependentes: Dependente[];
 };
 
 interface Props {
@@ -48,15 +56,53 @@ export const EventoForm = ({route}: Props) => {
       telefone: '',
       email: '',
       cpf: '',
-      dependentes: '',
+      dependentes: [],
     },
   });
 
-  const onSubmit = (data) => {
-    console.log(JSON.stringify({...data, dependentes}));
-    Alert.alert('Sucesso', 'Você foi cadastrado com sucesso!', [
-      {text: 'OK', onPress: () => navigation.popToTop()},
-    ]);
+  const onSubmit: SubmitHandler<Participante> = async (data: Participante) => {
+    const participante: Participante = data;
+    let auth = null;
+
+    try {
+      const response = await fetch('http://admin.ipmosaico.com:8888/login', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: '', // user Mosaico admin
+          password: '', // senha Mosaico admin
+        }),
+      });
+      const json = await response.json();
+      auth = json.token;
+    } catch (error) {
+      console.error(error);
+    }
+
+    try {
+      const response = await fetch(
+        'http://admin.ipmosaico.com:8888/eventos/participante',
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${auth}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({...participante, dependentes}),
+        },
+      );
+
+      if (response.ok) {
+        Alert.alert('Sucesso', 'Você foi cadastrado com sucesso!', [
+          {text: 'OK', onPress: () => navigation.popToTop()},
+        ]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleAddClick = () => {

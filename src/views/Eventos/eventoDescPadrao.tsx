@@ -13,13 +13,13 @@ interface Props {
 }
 
 export const EventoDescPadrao = ({evento}: Props) => {
-  const {dataInicial, titulo, imagemURL} = evento;
+  const {dataInicial, titulo, imagem} = evento;
   const styles = getStyles();
 
   return (
     <View style={styles.container}>
       <Image
-        source={{uri: imagemURL}}
+        source={{uri: imagem}}
         style={styles.imagem}
         resizeMode="contain"
       />
