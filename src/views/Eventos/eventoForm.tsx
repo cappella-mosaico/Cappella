@@ -22,11 +22,11 @@ import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {EventoDescPadrao} from './eventoDescPadrao';
 import {TextInputMask} from 'react-native-masked-text';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-// import CheckBox from '@react-native-community/checkbox';
 import CheckBox from 'expo-checkbox';
 import {isValidCPF, isValidEmail} from './formValidators';
 import {ScrollView} from 'react-native-gesture-handler';
 import {getSize} from '../../utils/utils';
+import {IRON} from '../../styles/styles';
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'EventoForm'>;
 type ProfileScreenNavigationProp = NativeStackNavigationProp<
@@ -133,6 +133,7 @@ export const EventoForm = ({route}: Props) => {
                   onChangeText={onChange}
                   value={value}
                   placeholder="Nome"
+                  placeholderTextColor={IRON}
                 />
               )}
               name="nome"
@@ -150,6 +151,7 @@ export const EventoForm = ({route}: Props) => {
                   onChangeText={onChange}
                   value={value}
                   placeholder="Telefone"
+                  placeholderTextColor={IRON}
                   options={{
                     maskType: 'BRL',
                     withDDD: true,
@@ -174,6 +176,7 @@ export const EventoForm = ({route}: Props) => {
                   onChangeText={onChange}
                   value={value}
                   placeholder="Email"
+                  placeholderTextColor={IRON}
                   keyboardType="email-address"
                   autoCapitalize="none"
                 />
@@ -195,6 +198,7 @@ export const EventoForm = ({route}: Props) => {
                   onChangeText={onChange}
                   value={value}
                   placeholder="CPF"
+                  placeholderTextColor={IRON}
                 />
               )}
               name="cpf"
@@ -222,6 +226,7 @@ export const EventoForm = ({route}: Props) => {
                     }}
                     value={dependente.nome}
                     placeholder="Nome"
+                    placeholderTextColor={IRON}
                   />
                   <Button title="+" onPress={() => handleAddClick()} />
                   <Button title="-" onPress={() => handleRemoveClick(index)} />
