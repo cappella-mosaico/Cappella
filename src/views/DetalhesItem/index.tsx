@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {Eventos} from '../Eventos';
 import {Contribua} from '../Contribua';
 import {RouteProp} from '@react-navigation/core';
 import {RootStackParamList} from '../../../App';
@@ -21,6 +22,8 @@ export const DetalhesItem = ({route}: Props) => {
       return <Contribua />;
     case 'agenda':
       return <Agenda />;
+    case 'eventos':
+      return <Eventos />;
     case 'financas':
       return <Financas titulo={titulo} />;
     case 'contato':

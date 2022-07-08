@@ -34,7 +34,7 @@ export const Pastoral = () => {
   useEffect(() => {
     setFallback(false);
 
-    fetch('http://admin.ipmosaico.com:8888/pastorais/public/latest?amount=1')
+    fetch('http://admin.ipmosaico.com:8888/pastorais?amount=1')
       .then((response) => response.json())
       .then((json) => setPastoral(json[0]))
       .catch((error) => {
@@ -80,7 +80,7 @@ const getHeight = (size: string) => {
     case 'xlarge':
     case 'xxlarge':
     case 'xxxlarge':
-      return hp('75%');
+      return hp('80%');
     default:
       break;
   }

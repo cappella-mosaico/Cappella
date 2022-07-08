@@ -5,8 +5,9 @@ import {
   TouchableOpacity,
   StyleSheet,
   GestureResponderEvent,
+  ViewStyle,
 } from 'react-native';
-import {WHITE, JUMBO, FONT_AVENIR_BLACK} from '../styles/styles';
+import {WHITE, FONT_AVENIR_BLACK, EXTRAORANGE} from '../styles/styles';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -14,15 +15,16 @@ import {
 
 interface Props {
   titulo: string;
+  style?: ViewStyle;
   onPress: (event: GestureResponderEvent) => void;
 }
 
-export const BotaoBranco = ({titulo, onPress}: Props) => {
+export const BotaoBranco = ({titulo, style, onPress}: Props) => {
   const styles = getStyles();
 
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={styles.botaoContainer}>
+      <View style={[style, styles.botaoContainer]}>
         <Text allowFontScaling={false} style={styles.botaoTexto}>
           {titulo}
         </Text>
@@ -49,7 +51,7 @@ const getStyles = () => {
     botaoTexto: {
       fontFamily: FONT_AVENIR_BLACK,
       fontSize: wp('2.3%'),
-      color: JUMBO,
+      color: EXTRAORANGE,
       textAlign: 'center',
     },
   });
