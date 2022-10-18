@@ -144,11 +144,11 @@ export const Financas = ({titulo}: Props) => {
                     xDomain={{min: 1, max: financeiros.length}}
                     yDomain={{
                       min: 0,
-                      max: financeiros[0].orcado * (1 + 0.2),
+                      max: financeiros[0].orcado * (1 + 0.3),
                     }}>
                     <VerticalAxis
                       tickValues={[
-                        financeiros[0].orcado * (1 + 0.2),
+                        financeiros[0].orcado * (1 + 0.3),
                         financeiros[0].orcado,
                         financeiros[0].orcado / 2,
                       ]}

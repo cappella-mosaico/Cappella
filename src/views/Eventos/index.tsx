@@ -8,8 +8,8 @@ import {SemEvento} from './semEvento';
 export interface Evento {
   id: number;
   titulo: string;
-  dataInicial: string;
-  dataFim?: string;
+  dataInicial: Date;
+  dataFim?: Date;
   imagem: string;
   sobre: string;
   valor: string;
@@ -43,6 +43,12 @@ export const Eventos = () => {
     );
   };
 
+  const existeEventoFuturo = () => {
+    return eventos?.find(
+      (evento) => new Date(evento.dataInicial) >= new Date(),
+    );
+  };
+
   return (
     <SafeAreaView>
       <ContainerPage titulo={'EVENTOS'}>
@@ -52,7 +58,11 @@ export const Eventos = () => {
           </View>
         ) : (
           <View style={styles.container}>
-            {eventos?.length ? eventoList(eventos) : <SemEvento />}
+            {eventos?.length && existeEventoFuturo() ? (
+              eventoList(eventos)
+            ) : (
+              <SemEvento />
+            )}
           </View>
         )}
       </ContainerPage>
