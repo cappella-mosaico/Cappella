@@ -36,6 +36,7 @@ type ProfileScreenNavigationProp = NativeStackNavigationProp<
 
 type Dependente = {
   nome: string;
+  dataNascimento: string;
 };
 
 type Participante = {
@@ -89,10 +90,8 @@ export const EventoForm = ({route}: Props) => {
           }),
         },
       );
-
       const json = await response.json();
       console.log(json);
-
       if (response.ok && response.status === 200) {
         Alert.alert('Sucesso', 'Você foi cadastrado com sucesso!', [
           {text: 'OK', onPress: () => navigation.popToTop()},
@@ -106,7 +105,7 @@ export const EventoForm = ({route}: Props) => {
   };
 
   const handleAddClick = () => {
-    setDependentes([...dependentes, {nome: ''}]);
+    setDependentes([...dependentes, {nome: '', dataNascimento: ''}]);
   };
 
   const handleRemoveClick = (index: number) => {
@@ -228,6 +227,20 @@ export const EventoForm = ({route}: Props) => {
                     placeholder="Nome"
                     placeholderTextColor={IRON}
                   />
+                  <TextInputMask
+                    type={'datetime'}
+                    options={{
+                      format: 'DD/MM/YYYY',
+                    }}
+                    style={styles.inputNascimento}
+                    onChangeText={(e) => {
+                      dependente.dataNascimento = e;
+                      setDependentes([...dependentes]);
+                    }}
+                    value={dependente.dataNascimento}
+                    placeholder="Dt. Nasc"
+                    placeholderTextColor={IRON}
+                  />
                   <Button title="+" onPress={() => handleAddClick()} />
                   <Button title="-" onPress={() => handleRemoveClick(index)} />
                 </View>
@@ -291,7 +304,17 @@ const getStyles = (size: string) => {
       backgroundColor: 'white',
       fontSize: wp('3.5%'),
       height: hp('5.75%'),
-      width: wp('70%'),
+      width: wp('45%'),
+      padding: wp('3%'),
+      borderRadius: 4,
+      margin: wp('3%'),
+      marginLeft: 0,
+    },
+    inputNascimento: {
+      backgroundColor: 'white',
+      fontSize: wp('3.5%'),
+      height: hp('5.75%'),
+      width: wp('26%'),
       padding: wp('3%'),
       borderRadius: 4,
       margin: wp('3%'),

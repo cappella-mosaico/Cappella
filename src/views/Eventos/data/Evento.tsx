@@ -2,10 +2,11 @@ import {Evento} from '..';
 
 export const EVENTOS: Evento[] = [
   {
+    id: 1,
     titulo: 'acampamento',
-    dataInicial: '2022-04-19T12:00:00.110261Z',
-    dataFim: '2022-04-19T12:00:00.110261Z',
-    imagemURL:
+    dataInicial: new Date('2022-12-19T12:00:00.110261Z'),
+    dataFim: new Date('2022-12-19T12:00:00.110261Z'),
+    imagem:
       'https://raw.githubusercontent.com/cappella-mosaico/Cappella/eventos/src/assets/images/acampamento.jpeg',
     sobre:
       'A Igreja Presbiteriana Mosaico existe para acolher pessoas e formar discípulos de Cristo através de relacionamentos saudáveis e uma pregação bíblica contemporânea no bairro Setor Bueno, na cidade de Goiânia e no mundo',
