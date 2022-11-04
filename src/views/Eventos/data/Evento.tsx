@@ -4,8 +4,8 @@ export const EVENTOS: Evento[] = [
   {
     id: 1,
     titulo: 'acampamento',
-    dataInicial: new Date('2022-12-19T12:00:00.110261Z'),
-    dataFim: new Date('2022-12-19T12:00:00.110261Z'),
+    dataInicial: new Date('2023-12-19T12:00:00.110261Z'),
+    dataFim: new Date('2023-12-19T12:00:00.110261Z'),
     imagem:
       'https://raw.githubusercontent.com/cappella-mosaico/Cappella/eventos/src/assets/images/acampamento.jpeg',
     sobre:
