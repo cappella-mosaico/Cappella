@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
-import Carousel from 'react-native-snap-carousel';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -57,6 +57,8 @@ export const Financas = ({titulo}: Props) => {
   const styles = getStyles();
   const [isLoading, setLoading] = useState(true);
   const [financeiroList, setFinanceiroList] = useState<Financeiro[]>();
+  const [index, setIndex] = useState(0);
+  const isCarousel = useRef(null);
 
   // const financeiroList = FINANCEIROS;
   // const isLoading = false;
@@ -115,12 +117,22 @@ export const Financas = ({titulo}: Props) => {
         <Carousel
           layout="default"
           layoutCardOffset={9}
+          ref={isCarousel}
           data={financasAgrupadas}
           renderItem={CarouselCardItem}
           sliderWidth={SLIDER_WIDTH}
           itemWidth={ITEM_WIDTH}
-          inactiveSlideShift={0}
+          onSnapToItem={(index) => setIndex(index)}
           useScrollView={true}
+        />
+        <Pagination
+          dotsLength={financasAgrupadas.length}
+          activeDotIndex={index}
+          carouselRef={isCarousel}
+          dotStyle={styles.dotStyle}
+          inactiveDotOpacity={0.4}
+          inactiveDotScale={0.6}
+          tappableDots={true}
         />
       </View>
     );
@@ -156,7 +168,7 @@ const getStyles = () => {
       elevation: 2,
     },
     containerCarousel: {
-      marginTop: hp('7%'),
+      marginTop: hp('3%'),
       alignItems: 'center',
       shadowOffset: {
         width: 0.2,
@@ -182,6 +194,13 @@ const getStyles = () => {
     containerSemOrcamentos: {
       alignItems: 'center',
       marginBottom: hp('4%'),
+    },
+    dotStyle: {
+      width: 10,
+      height: 10,
+      borderRadius: 5,
+      marginHorizontal: 0,
+      backgroundColor: 'rgba(0, 0, 0, 0.92)',
     },
   });
 };
