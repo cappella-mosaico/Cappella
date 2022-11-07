@@ -44,6 +44,7 @@ type Participante = {
   telefone: string;
   email: string;
   cpf: string;
+  idade: string;
   dependentes: Dependente[];
 };
 
@@ -68,6 +69,7 @@ export const EventoForm = ({route}: Props) => {
       telefone: '',
       email: '',
       cpf: '',
+      idade: '',
       dependentes: [],
     },
   });
@@ -137,7 +139,7 @@ export const EventoForm = ({route}: Props) => {
               )}
               name="nome"
             />
-            {errors.nome && <Text>Este campo é obrigatório.</Text>}
+            {errors.nome && <Text>O campo Nome é obrigatório.</Text>}
             <Controller
               control={control}
               rules={{
@@ -161,7 +163,7 @@ export const EventoForm = ({route}: Props) => {
               )}
               name="telefone"
             />
-            {errors.telefone && <Text>Este campo é obrigatório.</Text>}
+            {errors.telefone && <Text>O campo Telefone é obrigatório.</Text>}
             <Controller
               control={control}
               rules={{
@@ -203,6 +205,25 @@ export const EventoForm = ({route}: Props) => {
               name="cpf"
             />
             {errors.cpf && <Text>CPF Inválido!</Text>}
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({field: {onChange, onBlur, value}}) => (
+                <TextInputMask
+                  type={'only-numbers'}
+                  style={styles.input}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Idade"
+                  placeholderTextColor={IRON}
+                />
+              )}
+              name="idade"
+            />
+            {errors.idade && <Text>O campo Idade é obrigatório.</Text>}
             <View style={styles.toggleDependentes}>
               <CheckBox
                 disabled={false}
