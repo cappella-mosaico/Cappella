@@ -63,9 +63,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     width: wp('80%'),
-    height: hp('8%'),
+    height: hp('4%'),
     marginBottom: hp('1%'),
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   valorJaneiro: {

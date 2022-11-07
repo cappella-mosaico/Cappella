@@ -36,7 +36,7 @@ type ProfileScreenNavigationProp = NativeStackNavigationProp<
 
 type Dependente = {
   nome: string;
-  dataNascimento: string;
+  idade: string;
 };
 
 type Participante = {
@@ -44,7 +44,6 @@ type Participante = {
   telefone: string;
   email: string;
   cpf: string;
-  dataNascimento: string;
   dependentes: Dependente[];
 };
 
@@ -69,7 +68,6 @@ export const EventoForm = ({route}: Props) => {
       telefone: '',
       email: '',
       cpf: '',
-      dataNascimento: '',
       dependentes: [],
     },
   });
@@ -107,7 +105,7 @@ export const EventoForm = ({route}: Props) => {
   };
 
   const handleAddClick = () => {
-    setDependentes([...dependentes, {nome: '', dataNascimento: ''}]);
+    setDependentes([...dependentes, {nome: '', idade: ''}]);
   };
 
   const handleRemoveClick = (index: number) => {
@@ -205,28 +203,6 @@ export const EventoForm = ({route}: Props) => {
               name="cpf"
             />
             {errors.cpf && <Text>CPF Inválido!</Text>}
-            <Controller
-              control={control}
-              rules={{
-                required: true,
-              }}
-              render={({field: {onChange, onBlur, value}}) => (
-                <TextInputMask
-                  type={'datetime'}
-                  options={{
-                    format: 'DD/MM/YYYY',
-                  }}
-                  style={styles.input}
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  placeholder="Dt. Nasc"
-                  placeholderTextColor={IRON}
-                />
-              )}
-              name="dataNascimento"
-            />
-            {errors.dataNascimento && <Text>Este campo é obrigatório.</Text>}
             <View style={styles.toggleDependentes}>
               <CheckBox
                 disabled={false}
@@ -252,17 +228,14 @@ export const EventoForm = ({route}: Props) => {
                     placeholderTextColor={IRON}
                   />
                   <TextInputMask
-                    type={'datetime'}
-                    options={{
-                      format: 'DD/MM/YYYY',
-                    }}
-                    style={styles.inputNascimento}
+                    type={'only-numbers'}
+                    style={styles.inputIdade}
                     onChangeText={(e) => {
-                      dependente.dataNascimento = e;
+                      dependente.idade = e;
                       setDependentes([...dependentes]);
                     }}
-                    value={dependente.dataNascimento}
-                    placeholder="Dt. Nasc"
+                    value={dependente.idade}
+                    placeholder="Idade"
                     placeholderTextColor={IRON}
                   />
                   <Button title="+" onPress={() => handleAddClick()} />
@@ -334,7 +307,7 @@ const getStyles = (size: string) => {
       margin: wp('3%'),
       marginLeft: 0,
     },
-    inputNascimento: {
+    inputIdade: {
       backgroundColor: 'white',
       fontSize: wp('3.5%'),
       height: hp('5.75%'),
