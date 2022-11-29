@@ -36,6 +36,7 @@ type ProfileScreenNavigationProp = NativeStackNavigationProp<
 
 type Dependente = {
   nome: string;
+  idade: string;
 };
 
 type Participante = {
@@ -43,6 +44,7 @@ type Participante = {
   telefone: string;
   email: string;
   cpf: string;
+  idade: string;
   dependentes: Dependente[];
 };
 
@@ -67,6 +69,7 @@ export const EventoForm = ({route}: Props) => {
       telefone: '',
       email: '',
       cpf: '',
+      idade: '',
       dependentes: [],
     },
   });
@@ -89,10 +92,8 @@ export const EventoForm = ({route}: Props) => {
           }),
         },
       );
-
       const json = await response.json();
       console.log(json);
-
       if (response.ok && response.status === 200) {
         Alert.alert('Sucesso', 'Você foi cadastrado com sucesso!', [
           {text: 'OK', onPress: () => navigation.popToTop()},
@@ -106,7 +107,7 @@ export const EventoForm = ({route}: Props) => {
   };
 
   const handleAddClick = () => {
-    setDependentes([...dependentes, {nome: ''}]);
+    setDependentes([...dependentes, {nome: '', idade: ''}]);
   };
 
   const handleRemoveClick = (index: number) => {
@@ -138,7 +139,7 @@ export const EventoForm = ({route}: Props) => {
               )}
               name="nome"
             />
-            {errors.nome && <Text>Este campo é obrigatório.</Text>}
+            {errors.nome && <Text>O campo Nome é obrigatório.</Text>}
             <Controller
               control={control}
               rules={{
@@ -162,7 +163,7 @@ export const EventoForm = ({route}: Props) => {
               )}
               name="telefone"
             />
-            {errors.telefone && <Text>Este campo é obrigatório.</Text>}
+            {errors.telefone && <Text>O campo Telefone é obrigatório.</Text>}
             <Controller
               control={control}
               rules={{
@@ -204,6 +205,25 @@ export const EventoForm = ({route}: Props) => {
               name="cpf"
             />
             {errors.cpf && <Text>CPF Inválido!</Text>}
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({field: {onChange, onBlur, value}}) => (
+                <TextInputMask
+                  type={'only-numbers'}
+                  style={styles.input}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Idade"
+                  placeholderTextColor={IRON}
+                />
+              )}
+              name="idade"
+            />
+            {errors.idade && <Text>O campo Idade é obrigatório.</Text>}
             <View style={styles.toggleDependentes}>
               <CheckBox
                 disabled={false}
@@ -226,6 +246,17 @@ export const EventoForm = ({route}: Props) => {
                     }}
                     value={dependente.nome}
                     placeholder="Nome"
+                    placeholderTextColor={IRON}
+                  />
+                  <TextInputMask
+                    type={'only-numbers'}
+                    style={styles.inputIdade}
+                    onChangeText={(e) => {
+                      dependente.idade = e;
+                      setDependentes([...dependentes]);
+                    }}
+                    value={dependente.idade}
+                    placeholder="Idade"
                     placeholderTextColor={IRON}
                   />
                   <Button title="+" onPress={() => handleAddClick()} />
@@ -291,7 +322,17 @@ const getStyles = (size: string) => {
       backgroundColor: 'white',
       fontSize: wp('3.5%'),
       height: hp('5.75%'),
-      width: wp('70%'),
+      width: wp('45%'),
+      padding: wp('3%'),
+      borderRadius: 4,
+      margin: wp('3%'),
+      marginLeft: 0,
+    },
+    inputIdade: {
+      backgroundColor: 'white',
+      fontSize: wp('3.5%'),
+      height: hp('5.75%'),
+      width: wp('26%'),
       padding: wp('3%'),
       borderRadius: 4,
       margin: wp('3%'),

@@ -5,11 +5,12 @@ import {Aguarde} from '../../components/Aguarde';
 import {ContainerPage} from '../../components/ContainerPage';
 import {EventoItem} from './eventoItem';
 import {SemEvento} from './semEvento';
+// import {EVENTOS} from './data/Evento';
 export interface Evento {
   id: number;
   titulo: string;
-  dataInicial: string;
-  dataFim?: string;
+  dataInicial: Date;
+  dataFim?: Date;
   imagem: string;
   sobre: string;
   valor: string;
@@ -20,6 +21,9 @@ export interface Evento {
 export const Eventos = () => {
   const [isLoading, setLoading] = useState(true);
   const [eventos, setEventos] = useState<Evento[]>();
+
+  // const eventos = EVENTOS;
+  // const isLoading = false;
 
   useEffect(() => {
     fetch('http://admin.ipmosaico.com:8888/eventos')
@@ -43,6 +47,12 @@ export const Eventos = () => {
     );
   };
 
+  const existeEventoFuturo = () => {
+    return eventos?.find(
+      (evento) => new Date(evento.dataInicial) >= new Date(),
+    );
+  };
+
   return (
     <SafeAreaView>
       <ContainerPage titulo={'EVENTOS'}>
@@ -52,7 +62,11 @@ export const Eventos = () => {
           </View>
         ) : (
           <View style={styles.container}>
-            {eventos?.length ? eventoList(eventos) : <SemEvento />}
+            {eventos?.length && existeEventoFuturo() ? (
+              eventoList(eventos)
+            ) : (
+              <SemEvento />
+            )}
           </View>
         )}
       </ContainerPage>
