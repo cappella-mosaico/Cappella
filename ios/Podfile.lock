@@ -551,9 +551,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
-  DoubleConversion: cde416483dac037923206447da6e1454df403714
+  DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: e686045572151edef46010a6f819ade377dfeb4b
-  FBReactNativeSpec: e4f13026b7983d6990a317fb733203229f4f554b
+  FBReactNativeSpec: 12bd5c6ab7832cef895a0563d2eb62a85fcc2602
   Flipper: 1dae30a6929a29e74fa2a0dfde524fea5841f081
   Flipper-Boost-iOSX: fd1e2b8cbef7e662a122412d7ac5f5bea715403c
   Flipper-DoubleConversion: 38631e41ef4f9b12861c67d17cb5518d06badc41
@@ -563,7 +563,7 @@ SPEC CHECKSUMS:
   Flipper-PeerTalk: 116d8f857dc6ef55c7a5a75ea3ceaafe878aadc9
   Flipper-RSocket: d9d9ade67cbecf6ac10730304bf5607266dd2541
   FlipperKit: eba86e7b40917336b4af05561c2cb46e39a63802
-  glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
+  glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OneSignal: ce8d6dd77450aa653dc2f6a22f3372570030260a
   OneSignalXCFramework: 4e08d8353adec161c3d9174e2572c849e1225c9f
@@ -605,6 +605,6 @@ SPEC CHECKSUMS:
   Yoga: 575c581c63e0d35c9a83f4b46d01d63abc1100ac
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: f3742ff2e88e1f97aa3d6446aef4c2a9b10b9894
+PODFILE CHECKSUM: 7e29c3405b9a839d459d1f04af9da0904bf754b0
 
 COCOAPODS: 1.11.0.beta.2

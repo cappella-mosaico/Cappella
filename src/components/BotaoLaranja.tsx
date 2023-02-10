@@ -36,15 +36,15 @@ const getStyles = () => {
     botaoContainer: {
       backgroundColor: ORANGE,
       padding: wp('4%'),
-      width: wp('73%'),
-      height: hp('7%'),
+      width: 175,
+      height: 45,
       borderRadius: 50,
       opacity: 0.56,
       justifyContent: 'center',
     },
     botaoTexto: {
       fontFamily: FONT_AVENIR_BLACK,
-      fontSize: wp('5%'),
+      fontSize: 12,
       color: WHITE,
       textAlign: 'center',
     },

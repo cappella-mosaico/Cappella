@@ -6,9 +6,16 @@ import {
 } from 'react-native-responsive-screen';
 import {GenericItem} from '../../../../components/GenericItem';
 import {Image, StyleSheet} from 'react-native';
+import {RootStackParamList} from '../../../../../App';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
+type ProfileScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'PastoralItem'
+>;
 
 export const PastoralItem = () => {
-  const navigation: any = useNavigation();
+  const navigation: ProfileScreenNavigationProp = useNavigation();
   const textoCard = 'uma palavra pastoral';
 
   return (

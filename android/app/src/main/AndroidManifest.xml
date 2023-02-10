@@ -1,8 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.cappella">
-
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
-
     <queries>
       <intent>
         <action android:name="android.intent.action.VIEW" />
@@ -28,7 +25,8 @@
       android:icon="@mipmap/ic_launcher"
       android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
-      android:theme="@style/AppTheme">
+      android:theme="@style/AppTheme"
+      android:usesCleartextTraffic="true">
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme"

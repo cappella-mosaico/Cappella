@@ -2,7 +2,6 @@ import React from 'react';
 import {FlatList, StyleSheet} from 'react-native';
 
 import {MosaicoOnlineItem} from './mosaicoOnlineItem';
-import {ComunidadesCollection} from '../../../imports/api/comunidades';
 import {
   faFacebook,
   faInstagram,
@@ -10,9 +9,7 @@ import {
   faWhatsapp,
   faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
-import {ContainerServer} from '../../components/ContainerServer';
 import {FALLBACK} from './data/Comunidade';
-import {Aguarde} from '../../components/Aguarde';
 
 interface Comunidade {
   facebook: string;
@@ -23,11 +20,7 @@ interface Comunidade {
   site: string;
 }
 
-interface Props {
-  isConnected: boolean;
-}
-
-export const MosaicoOnline = ({isConnected}: Props) => {
+export const MosaicoOnline = () => {
   const styles = getStyles();
 
   const getMappedRedes = (collection: Comunidade) => {
@@ -87,30 +80,7 @@ export const MosaicoOnline = ({isConnected}: Props) => {
     );
   };
 
-  return (
-    <>
-      {isConnected ? (
-        <ContainerServer collection={ComunidadesCollection}>
-          {(collection: Comunidade[]) => {
-            const COMUNIDADE = collection.map((com) => {
-              return {
-                facebook: com.facebook,
-                instagram: com.instagram,
-                whatsapp: com.whatsapp,
-                youtube: com.youtube,
-                spotify: com.spotify,
-                site: com.site,
-              };
-            })[0];
-
-            return collection ? comunidadeList(COMUNIDADE) : <Aguarde />;
-          }}
-        </ContainerServer>
-      ) : (
-        comunidadeList(FALLBACK)
-      )}
-    </>
-  );
+  return <>{comunidadeList(FALLBACK)}</>;
 };
 
 const getStyles = () => {

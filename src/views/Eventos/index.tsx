@@ -1,49 +1,89 @@
-import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
-
+import React, {useEffect, useState} from 'react';
+import {SafeAreaView, StyleSheet, View, FlatList} from 'react-native';
+import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {Aguarde} from '../../components/Aguarde';
 import {ContainerPage} from '../../components/ContainerPage';
-import {FONT_AVENIR_ROMAN, PAMPAS, PIPER} from '../../styles/styles';
-
-interface Props {
+import {EventoItem} from './eventoItem';
+import {SemEvento} from './semEvento';
+// import {EVENTOS} from './data/Evento';
+export interface Evento {
+  id: number;
   titulo: string;
+  dataInicial: Date;
+  dataFim?: Date;
+  imagem: string;
+  sobre: string;
+  valor: string;
+  local: string;
+  endereco: string;
 }
 
-export const Eventos = ({titulo}: Props) => {
-  const styles = getStyles();
+export const Eventos = () => {
+  const [isLoading, setLoading] = useState(true);
+  const [eventos, setEventos] = useState<Evento[]>();
+
+  // const eventos = EVENTOS;
+  // const isLoading = false;
+
+  useEffect(() => {
+    fetch('http://admin.ipmosaico.com:8888/eventos')
+      .then((response) => response.json())
+      .then((json) => setEventos(json))
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  const eventoList = (EVENTO: Evento[]) => {
+    return (
+      <FlatList
+        style={styles.containerList}
+        numColumns={1}
+        data={EVENTO}
+        renderItem={({item}) => <EventoItem evento={item} />}
+        keyExtractor={(item) => item.titulo}
+      />
+    );
+  };
+
+  const existeEventoFuturo = () => {
+    return eventos?.find(
+      (evento) => new Date(evento.dataInicial) >= new Date(),
+    );
+  };
 
   return (
-    <ContainerPage titulo={titulo}>
-      <View style={styles.container}>
-        <Image
-          source={require('../../assets/images/semEventos.png')}
-          style={styles.imagem}
-          resizeMode="contain"
-        />
-        <Text style={styles.semEventos}>Nenhum evento programado</Text>
-      </View>
-    </ContainerPage>
+    <SafeAreaView>
+      <ContainerPage titulo={'EVENTOS'}>
+        {isLoading ? (
+          <View style={styles.aguarde}>
+            <Aguarde />
+          </View>
+        ) : (
+          <View style={styles.container}>
+            {eventos?.length && existeEventoFuturo() ? (
+              eventoList(eventos)
+            ) : (
+              <SemEvento />
+            )}
+          </View>
+        )}
+      </ContainerPage>
+    </SafeAreaView>
   );
 };
 
-const getStyles = () => {
-  return StyleSheet.create({
-    container: {
-      marginTop: hp('15%'),
-      alignItems: 'center',
-      backgroundColor: PAMPAS,
-    },
-    semEventos: {
-      color: PIPER,
-      fontSize: wp('5%'),
-      fontFamily: FONT_AVENIR_ROMAN,
-      textAlign: 'center',
-    },
-    imagem: {
-      height: hp('40%'),
-    },
-  });
-};
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+  },
+  containerList: {
+    height: hp('80%'),
+  },
+  aguarde: {
+    alignItems: 'center',
+    marginBottom: hp('4%'),
+    marginTop: hp('15%'),
+  },
+});
