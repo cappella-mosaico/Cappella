@@ -63,7 +63,7 @@ export const Eventos = () => {
         ) : (
           <View style={styles.container}>
             {eventos?.length && existeEventoFuturo() ? (
-              eventoList(eventos)
+              eventoList(eventos.filter(e => new Date(e.dataInicial) >= new Date()))
             ) : (
               <SemEvento />
             )}
