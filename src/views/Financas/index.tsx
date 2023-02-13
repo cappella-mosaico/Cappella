@@ -64,8 +64,7 @@ export const Financas = ({titulo}: Props) => {
   // const isLoading = false;
 
   useEffect(() => {
-    const date = new Date().getMonth();
-    fetch(`http://admin.ipmosaico.com:8888/financeiro?amount=${date}`)
+    fetch(`http://admin.ipmosaico.com:8888/financeiro?amount=99999`)
       .then((response) => response.json())
       .then((json) => {
         setFinanceiroList(json);
