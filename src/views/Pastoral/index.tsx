@@ -10,6 +10,7 @@ import {
   FONT_AVENIR_ROMAN,
   FONT_AVENIR_BOOK,
   FONT_AVENIR_BLACK,
+  FONT_GEORGIA,
   IRON,
   SUBTEXT,
 } from '../../styles/styles';
@@ -112,7 +113,7 @@ const getStyles = (size: string) => {
     },
     descricao: {
       fontSize: wp('4.4%'),
-      fontFamily: FONT_AVENIR_ROMAN,
+      fontFamily: FONT_GEORGIA,
       color: IRON,
       lineHeight: wp('6.3%'),
       textAlign: 'left',
