@@ -47,10 +47,12 @@ export const Pastoral = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  const onShare = ({message}) => async () => {
+  const onShare = ({message, url, title}) => async () => {
     try {
       const result = await Share.share({
         message,
+        url,
+        title
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -67,13 +69,14 @@ export const Pastoral = () => {
   };
 
   const pastoralItems = (PASTORAL: Pastoral) => {
-    const shareMessage = `Você vai gostar dessa pastoral da Igreja Presbiteriana Mosaico: ${BACKEND_URL}/pastorais/${PASTORAL.pequenoTitulo}`;
+    const url = `${BACKEND_URL}/pastorais/${PASTORAL.pequenoTitulo}`;
+    const shareMessage = `Você vai gostar dessa pastoral da Igreja Presbiteriana Mosaico: ${url}`;
     return (
       <>
         <Text style={styles.titulo}>{PASTORAL.titulo?.toUpperCase()}</Text>
         <Text style={styles.autor}>{PASTORAL.autor}</Text>
         <Text style={styles.descricao}>{PASTORAL.descricao}</Text>
-        <Button onPress={onShare({message: shareMessage})} title="Compartilhar" />
+        <Button onPress={onShare({message: shareMessage, url, title: PASTORAL.titulo })} title="Compartilhar" />
       </>
     );
   };
