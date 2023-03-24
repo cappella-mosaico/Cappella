@@ -30,3 +30,5 @@ export const validURL = (str: string) => {
   ); // fragment locator
   return !!pattern.test(str);
 };
+
+export const BACKEND_URL = 'https://admin.ipmosaico.com:9090';

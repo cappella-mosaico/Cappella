@@ -1,5 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, useWindowDimensions, View, Alert, Share, Button} from 'react-native';
+import {
+  Alert,
+  Button,
+  Share,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {
   widthPercentageToDP as wp,
@@ -7,14 +15,13 @@ import {
 } from 'react-native-responsive-screen';
 
 import {
-  FONT_AVENIR_ROMAN,
   FONT_AVENIR_BOOK,
   FONT_AVENIR_BLACK,
   FONT_GEORGIA,
   IRON,
   SUBTEXT,
 } from '../../styles/styles';
-import {getSize} from '../../utils/utils';
+import {BACKEND_URL, getSize} from '../../utils/utils';
 import {FALLBACK} from './data/Pastoral';
 import {ContainerPage} from '../../components/ContainerPage';
 import {Aguarde} from '../../components/Aguarde';
@@ -23,9 +30,15 @@ interface Pastoral {
   titulo: string;
   autor: string;
   descricao: string;
+  pequenoTitulo: string;
+}
+interface SharedPastoral {
+  message: string;
+  url: string;
+  title: string;
 }
 
-const BACKEND_URL = "https://admin.ipmosaico.com:9090"
+const BACKEND_URL = 'https://admin.ipmosaico.com:9090';
 
 export const Pastoral = () => {
   const [isLoading, setLoading] = useState(true);
@@ -47,26 +60,28 @@ export const Pastoral = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  const onShare = ({message, url, title}) => async () => {
-    try {
-      const result = await Share.share({
-        message,
-        url,
-        title
-      });
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-        } else {
-          // shared
+  const onShare =
+    ({message, url, title}: SharedPastoral) =>
+    async () => {
+      try {
+        const result = await Share.share({
+          message,
+          url,
+          title,
+        });
+        if (result.action === Share.sharedAction) {
+          if (result.activityType) {
+            // shared with activity type of result.activityType
+          } else {
+            // shared
+          }
+        } else if (result.action === Share.dismissedAction) {
+          // dismissed
         }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
+      } catch (error: any) {
+        Alert.alert(error.message);
       }
-    } catch (error: any) {
-      Alert.alert(error.message);
-    }
-  };
+    };
 
   const pastoralItems = (PASTORAL: Pastoral) => {
     const url = `${BACKEND_URL}/pastorais/${PASTORAL.pequenoTitulo}`;
@@ -76,7 +91,14 @@ export const Pastoral = () => {
         <Text style={styles.titulo}>{PASTORAL.titulo?.toUpperCase()}</Text>
         <Text style={styles.autor}>{PASTORAL.autor}</Text>
         <Text style={styles.descricao}>{PASTORAL.descricao}</Text>
-        <Button onPress={onShare({message: shareMessage, url, title: PASTORAL.titulo })} title="Compartilhar" />
+        <Button
+          onPress={onShare({
+            message: shareMessage,
+            url,
+            title: PASTORAL.titulo,
+          })}
+          title="Compartilhar"
+        />
       </>
     );
   };
