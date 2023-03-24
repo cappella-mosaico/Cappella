@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, useWindowDimensions, View} from 'react-native';
+import {StyleSheet, Text, useWindowDimensions, View, Alert, Share, Button} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {
   widthPercentageToDP as wp,
@@ -25,6 +25,8 @@ interface Pastoral {
   descricao: string;
 }
 
+const BACKEND_URL = "https://admin.ipmosaico.com:9090"
+
 export const Pastoral = () => {
   const [isLoading, setLoading] = useState(true);
   const [pastoral, setPastoral] = useState<Pastoral>();
@@ -35,7 +37,7 @@ export const Pastoral = () => {
   useEffect(() => {
     setFallback(false);
 
-    fetch('http://admin.ipmosaico.com:8888/pastorais?amount=1')
+    fetch(`${BACKEND_URL}/pastorais?amount=1`)
       .then((response) => response.json())
       .then((json) => setPastoral(json[0]))
       .catch((error) => {
@@ -45,12 +47,33 @@ export const Pastoral = () => {
       .finally(() => setLoading(false));
   }, []);
 
+  const onShare = ({message}) => async () => {
+    try {
+      const result = await Share.share({
+        message,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error: any) {
+      Alert.alert(error.message);
+    }
+  };
+
   const pastoralItems = (PASTORAL: Pastoral) => {
+    const shareMessage = `Você vai gostar dessa pastoral da Igreja Presbiteriana Mosaico: ${BACKEND_URL}/pastorais/${PASTORAL.pequenoTitulo}`;
     return (
       <>
         <Text style={styles.titulo}>{PASTORAL.titulo?.toUpperCase()}</Text>
         <Text style={styles.autor}>{PASTORAL.autor}</Text>
         <Text style={styles.descricao}>{PASTORAL.descricao}</Text>
+        <Button onPress={onShare({message: shareMessage})} title="Compartilhar" />
       </>
     );
   };
