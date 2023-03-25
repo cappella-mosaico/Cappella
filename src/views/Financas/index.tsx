@@ -18,6 +18,7 @@ import {
 } from '../../styles/styles';
 // import {FINANCEIROS} from './data/Financas';
 import CarouselCardItem from './CarouselCardItem';
+import {BACKEND_URL} from '../../utils/utils';
 
 interface Props {
   titulo: string;
@@ -64,7 +65,7 @@ export const Financas = ({titulo}: Props) => {
   // const isLoading = false;
 
   useEffect(() => {
-    fetch(`http://admin.ipmosaico.com:8888/financeiro?amount=99999`)
+    fetch(`${BACKEND_URL}/financeiro?amount=99999`)
       .then((response) => response.json())
       .then((json) => {
         setFinanceiroList(json);
@@ -117,7 +118,7 @@ export const Financas = ({titulo}: Props) => {
           layout="default"
           layoutCardOffset={9}
           ref={isCarousel}
-          data={financasAgrupadas}
+          data={financasAgrupadas.reverse()}
           renderItem={CarouselCardItem}
           sliderWidth={SLIDER_WIDTH}
           itemWidth={ITEM_WIDTH}

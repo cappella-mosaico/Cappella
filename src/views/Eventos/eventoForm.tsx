@@ -25,7 +25,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import CheckBox from 'expo-checkbox';
 import {isValidCPF, isValidEmail} from './formValidators';
 import {ScrollView} from 'react-native-gesture-handler';
-import {getSize} from '../../utils/utils';
+import {BACKEND_URL, getSize} from '../../utils/utils';
 import {IRON} from '../../styles/styles';
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'EventoForm'>;
@@ -78,20 +78,17 @@ export const EventoForm = ({route}: Props) => {
     const participante: Participante = data;
 
     try {
-      const response = await fetch(
-        'http://admin.ipmosaico.com:8888/eventos/participante',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            eventoId: evento.id,
-            ...participante,
-            dependentes,
-          }),
+      const response = await fetch(`${BACKEND_URL}/eventos/participante`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+        body: JSON.stringify({
+          eventoId: evento.id,
+          ...participante,
+          dependentes,
+        }),
+      });
       const json = await response.json();
       console.log(json);
       if (response.ok && response.status === 200) {

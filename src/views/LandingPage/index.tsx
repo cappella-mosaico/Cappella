@@ -44,18 +44,6 @@ const styles = StyleSheet.create({
 
 const DATA = [
   {
-    id: 'mosaikids',
-    titulo: '',
-    url: 'https://www.canva.com/design/DAE0silzM5A/faantxopx95LdtLmQIz2Tg/view',
-    imagem: (
-      <Image
-        source={require('../../assets/images/mosaikids.png')}
-        style={styles.imagem}
-        resizeMode="contain"
-      />
-    ),
-  },
-  {
     id: 'contribua',
     textoCard: 'contribua',
     titulo: 'CONTRIBUA',

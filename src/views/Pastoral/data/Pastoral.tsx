@@ -1,5 +1,6 @@
 export const FALLBACK = {
   titulo: 'BEM VINDO!',
+  pequenoTitulo: 'BEM VINDO!',
   autor: 'Rev. Felipe Lobo Andrade',
   descricao: `
  É com grande alegria que damos boas vindas ao Aplicativo da Igreja Presbiteriana Mosaico. Somos muito gratos a Deus por mais uma ferramenta na propagação do evangelho e na edificação da igreja de Jesus.

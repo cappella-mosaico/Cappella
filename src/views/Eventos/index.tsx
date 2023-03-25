@@ -3,6 +3,7 @@ import {SafeAreaView, StyleSheet, View, FlatList} from 'react-native';
 import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {Aguarde} from '../../components/Aguarde';
 import {ContainerPage} from '../../components/ContainerPage';
+import {BACKEND_URL} from '../../utils/utils';
 import {EventoItem} from './eventoItem';
 import {SemEvento} from './semEvento';
 // import {EVENTOS} from './data/Evento';
@@ -26,7 +27,7 @@ export const Eventos = () => {
   // const isLoading = false;
 
   useEffect(() => {
-    fetch('http://admin.ipmosaico.com:8888/eventos')
+    fetch(`${BACKEND_URL}/eventos`)
       .then((response) => response.json())
       .then((json) => setEventos(json))
       .catch((error) => {
@@ -63,7 +64,9 @@ export const Eventos = () => {
         ) : (
           <View style={styles.container}>
             {eventos?.length && existeEventoFuturo() ? (
-              eventoList(eventos.filter(e => new Date(e.dataInicial) >= new Date()))
+              eventoList(
+                eventos.filter((e) => new Date(e.dataInicial) >= new Date()),
+              )
             ) : (
               <SemEvento />
             )}
