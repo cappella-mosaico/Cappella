@@ -38,8 +38,6 @@ interface SharedPastoral {
   title: string;
 }
 
-const BACKEND_URL = 'https://admin.ipmosaico.com:9090';
-
 export const Pastoral = () => {
   const [isLoading, setLoading] = useState(true);
   const [pastoral, setPastoral] = useState<Pastoral>();
