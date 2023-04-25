@@ -39,7 +39,7 @@ export const EscalaItem = ({nome, inicio, ministerio, equipes}: Props) => {
         </Text>
       </View>
       {equipes.map((item) => (
-        <View style={styles.containerNome}>
+        <View style={styles.containerNome} key={item.nome}>
           <Text allowFontScaling={false} style={styles.nome}>
             {`\u2022 ${item.equipe}`}
           </Text>

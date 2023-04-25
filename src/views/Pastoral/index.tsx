@@ -58,28 +58,26 @@ export const Pastoral = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  const onShare =
-    ({message, url, title}: SharedPastoral) =>
-    async () => {
-      try {
-        const result = await Share.share({
-          message,
-          url,
-          title,
-        });
-        if (result.action === Share.sharedAction) {
-          if (result.activityType) {
-            // shared with activity type of result.activityType
-          } else {
-            // shared
-          }
-        } else if (result.action === Share.dismissedAction) {
-          // dismissed
+  const onShare = ({message, url, title}: SharedPastoral) => async () => {
+    try {
+      const result = await Share.share({
+        message,
+        url,
+        title,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
         }
-      } catch (error: any) {
-        Alert.alert(error.message);
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
       }
-    };
+    } catch (error: any) {
+      Alert.alert(error.message);
+    }
+  };
 
   const pastoralItems = (PASTORAL: Pastoral) => {
     const url = `${BACKEND_URL}/pastorais/${PASTORAL.pequenoTitulo}`;
