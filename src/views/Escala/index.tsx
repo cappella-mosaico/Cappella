@@ -1,21 +1,22 @@
 import React, {useRef, useState} from 'react';
-import {Dimensions, Image, StyleSheet, View} from 'react-native';
 import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
+  FlatList,
+  SafeAreaView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Text,
+} from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
+// import {
+//   heightPercentageToDP as hp,
+//   widthPercentageToDP as wp,
+// } from 'react-native-responsive-screen';
 
-import {FALLBACK} from './data/Escala';
+import {FALLBACK, MINISTERIO} from './data/Escala';
 import {ContainerPage} from '../../components/ContainerPage';
-import CarouselCardItem from './CarouselCardItem';
-import {Text} from 'react-native';
-import {
-  CAPER,
-  COLORCOMUNIDADE,
-  FONT_AVENIR_ROMAN,
-  PIPER,
-} from '../../styles/styles';
+import {EscalaItem} from './escalaItem';
+import {FONT_GILLSANS, WAIKAWAGREY, WHITE} from '../../styles/styles';
 
 export interface Equipe {
   nome: string;
@@ -27,121 +28,126 @@ export type Escala = {
   id: string;
   nome: string;
   inicio: string;
-  imagem: string;
   ministerio: string;
-  tipo: string | null;
   equipes: Equipe[];
 };
 
-export const SLIDER_WIDTH = Dimensions.get('window').width + 95;
-export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
+interface MenuEscalaItem {
+  item: Escala;
+  index: number;
+}
 
 export const Escala = () => {
-  const styles = getStyles();
   const isCarousel = useRef(null);
-  const [index, setIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeMinisterio, setActiveMinisterio] = useState<string>(
+    FALLBACK[0].ministerio,
+  );
 
-  const escalaItems = (financeiros: Escala[]) => {
-    if (!financeiros) {
-      return (
-        <View style={styles.container}>
-          <View style={styles.containerSemOrcamentos}>
-            <Image
-              source={require('../../assets/images/semEventos.png')}
-              style={styles.imagem}
-              resizeMode="contain"
-            />
-            <Text style={styles.semOrcamentos}>
-              Sem orçamentos para apresentar no momento.
-            </Text>
-          </View>
-        </View>
-      );
-    }
+  const escalaList = (escalas: Escala[]) => (
+    <FlatList
+      numColumns={1}
+      data={escalas}
+      renderItem={({item}) => <EscalaItem {...item} />}
+      keyExtractor={(item) => item.id}
+    />
+  );
 
-    const data = [...new Map(FALLBACK.map((m) => [m.ministerio, m])).values()];
+  const escalaMenuItem = ({item, index}: MenuEscalaItem) => {
+    const title = (MINISTERIO as any)[item.ministerio];
 
     return (
-      <View style={styles.containerCarousel}>
-        <Carousel
-          layout="default"
-          layoutCardOffset={9}
-          ref={isCarousel}
-          data={FALLBACK}
-          renderItem={CarouselCardItem}
-          sliderWidth={SLIDER_WIDTH}
-          itemWidth={ITEM_WIDTH}
-          onSnapToItem={(i) => setIndex(i)}
-          useScrollView={true}
-        />
-        <Pagination
-          dotsLength={data.length}
-          activeDotIndex={index}
-          carouselRef={isCarousel}
-          dotStyle={styles.dotStyle}
-          inactiveDotOpacity={0.4}
-          inactiveDotScale={0.6}
-          tappableDots={true}
-        />
-      </View>
+      <TouchableOpacity
+        key={index}
+        onPress={() => {
+          setActiveIndex(index);
+          setActiveMinisterio(item.ministerio);
+        }}>
+        <View style={styles.botaoContainer}>
+          <Text allowFontScaling={false} style={styles.botaoTexto}>
+            {title}
+          </Text>
+        </View>
+      </TouchableOpacity>
     );
   };
 
+  const data = [...new Map(FALLBACK.map((m) => [m.ministerio, m])).values()];
+
   return (
-    <ContainerPage titulo={'ESCALAS'}>{escalaItems(FALLBACK!)}</ContainerPage>
+    <SafeAreaView style={styles.safeArea}>
+      <ContainerPage titulo={'ESCALAS'}>
+        <View style={styles.container}>
+          <Carousel
+            firstItem={activeIndex}
+            layout="default"
+            layoutCardOffset={9}
+            data={data}
+            renderItem={escalaMenuItem}
+            sliderWidth={400}
+            itemWidth={160}
+            useScrollView={true}
+            onSnapToItem={(index) => setActiveIndex(index)}
+            ref={isCarousel}
+          />
+          <Pagination
+            dotsLength={data.length}
+            activeDotIndex={activeIndex}
+            carouselRef={isCarousel}
+            dotStyle={styles.dotStyle}
+            inactiveDotOpacity={0.4}
+            inactiveDotScale={0.6}
+            tappableDots={true}
+          />
+          {escalaList(
+            FALLBACK.filter(
+              (escala) => escala.ministerio === activeMinisterio,
+            ).sort(
+              (a: Escala, b: Escala) =>
+                new Date(b.inicio).valueOf() - new Date(a.inicio).valueOf(),
+            ),
+          )}
+        </View>
+      </ContainerPage>
+    </SafeAreaView>
   );
 };
 
-const getStyles = () => {
-  return StyleSheet.create({
-    container: {
-      marginTop: hp('7%'),
-      alignItems: 'center',
-      backgroundColor: COLORCOMUNIDADE,
-      borderColor: CAPER,
-      borderWidth: 1,
-      borderRadius: 10,
-      shadowOffset: {
-        width: 0.2,
-        height: 0.2,
-      },
-      shadowOpacity: 0.2,
-      elevation: 2,
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
+  container: {
+    alignItems: 'center',
+  },
+  botaoContainer: {
+    backgroundColor: WHITE,
+    width: 160,
+    height: 70,
+    borderRadius: 10,
+    borderColor: WAIKAWAGREY,
+    borderWidth: 1,
+    justifyContent: 'center',
+    shadowOffset: {
+      width: 0.2,
+      height: 0.2,
     },
-    containerCarousel: {
-      marginTop: hp('3%'),
-      alignItems: 'center',
-      shadowOffset: {
-        width: 0.2,
-        height: 0.2,
-      },
-      shadowOpacity: 0.2,
-      elevation: 2,
-    },
-    aguarde: {
-      alignItems: 'center',
-      marginBottom: hp('4%'),
-      marginTop: hp('15%'),
-    },
-    imagem: {
-      height: hp('40%'),
-    },
-    semOrcamentos: {
-      color: PIPER,
-      fontSize: wp('5%'),
-      fontFamily: FONT_AVENIR_ROMAN,
-      textAlign: 'center',
-    },
-    containerSemOrcamentos: {
-      alignItems: 'center',
-      marginBottom: hp('4%'),
-    },
-    dotStyle: {
-      width: 10,
-      height: 10,
-      borderRadius: 5,
-      marginHorizontal: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.92)',
-    },
-  });
-};
+    shadowOpacity: 0.2,
+    elevation: 2,
+    marginTop: 17,
+    marginBottom: 5,
+  },
+  botaoTexto: {
+    fontFamily: FONT_GILLSANS,
+    fontSize: 14,
+    color: WAIKAWAGREY,
+    textAlign: 'center',
+  },
+  dotStyle: {
+    width: 10,
+    height: 10,
+    marginTop: -9.9,
+    borderRadius: 5,
+    marginHorizontal: 0,
+  },
+});

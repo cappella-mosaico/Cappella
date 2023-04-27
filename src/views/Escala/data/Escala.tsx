@@ -1,7 +1,6 @@
 export const FALLBACK = [
   {
     id: '2ce0d8da-6604-4bcd-9f40-3d8457e26441',
-    tipo: null,
     ministerio: 'MUSICA',
     nome: 'Louvor Culto',
     inicio: '2023-04-30T00:00:00',
@@ -12,12 +11,10 @@ export const FALLBACK = [
         equipe: ['Diogo', 'Felipe', 'Marcos', 'Ruither'],
       },
     ],
-    imagem:
-      'https://imgs.search.brave.com/mtoeCWyNoYc1WQBw4sMvfpJ5k398SX0mPw178a-3fyo/rs:fit:1200:853:1/g:ce/aHR0cHM6Ly93d3cu/YWR2ZXJ0aXNlbWlu/dC5jb20vd3AtY29u/dGVudC91cGxvYWRz/LzIwMTcvMDgvMTIt/dGlwcy1mb3ItY3Jl/YXRpbmctZ3JlYXQt/bW9iaWxlLWFwcC1k/ZXNpZ25zLTIuanBl/Zw',
   },
   {
     id: 'a528efe7-9802-41d4-97c4-505448b2612b',
-    tipo: null,
+
     ministerio: 'MIDIA',
     nome: 'Midia Culto',
     inicio: '2023-04-30T00:00:00',
@@ -28,11 +25,9 @@ export const FALLBACK = [
         equipe: ['José', 'João', 'Maria'],
       },
     ],
-    imagem: '',
   },
   {
     id: 'fd875821-711e-4e25-9382-4a4ad5db3d57',
-    tipo: null,
     ministerio: 'MUSICA',
     nome: 'Louvor Culto',
     inicio: '2023-05-07T00:00:00',
@@ -43,7 +38,6 @@ export const FALLBACK = [
         equipe: ['Joãozin', 'Luizin', 'Zezin'],
       },
     ],
-    imagem: '',
   },
 ];
 
@@ -54,9 +48,9 @@ export enum TIPOS {
 }
 
 export const MINISTERIO = {
-  MUSICA: 'Música',
-  MIDIA: 'Mídia',
-  MOSAIKIDS: 'Mosaikids',
-  DIACONOS: 'Diáconos',
-  ACAMPAMENTO: 'Acampamento',
+  MUSICA: 'MÚSICA',
+  MIDIA: 'MÍDIA',
+  MOSAIKIDS: 'MOSAIKIDS',
+  DIACONOS: 'DIÁCONOS',
+  ACAMPAMENTO: 'ACAMPAMENTO',
 };

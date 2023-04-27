@@ -16,7 +16,7 @@ import {
 
 import {
   FONT_AVENIR_BOOK,
-  FONT_AVENIR_BLACK,
+  FONT_GEORGIA_BOLD,
   FONT_GEORGIA,
   IRON,
   SUBTEXT,
@@ -143,7 +143,7 @@ const getStyles = (size: string) => {
     },
     titulo: {
       fontSize: wp('6%'),
-      fontFamily: FONT_AVENIR_BLACK,
+      fontFamily: FONT_GEORGIA_BOLD,
       alignSelf: 'center',
       textAlign: 'center',
       color: IRON,
