@@ -27,20 +27,26 @@ const CarouselCardItem = ({item, index}: EscalaItem) => {
   const {inicio, equipes} = item;
   const isNextDomingo = domingoCheck(inicio);
   const styles = getStyles(isNextDomingo);
+  const lider = equipes.length === 1 ? equipes[0].lider : null;
 
-  return equipes.map((equipe) => (
+  return (
     <View style={styles.container} key={index}>
       <Text allowFontScaling={false} style={styles.titulo}>
         {isNextDomingo ? 'NESTE DOMINGO' : 'PROXIMA SEMANA'}
       </Text>
       <View style={styles.containerCards}>
         <View style={styles.containerTexts}>
-          <Text allowFontScaling={false} style={styles.liderTitle}>
-            LIDER
-          </Text>
-          <Text allowFontScaling={false} style={styles.lider}>
-            {equipe.lider}
-          </Text>
+          {lider && (
+            <>
+              <Text allowFontScaling={false} style={styles.liderTitle}>
+                LIDER
+              </Text>
+
+              <Text allowFontScaling={false} style={styles.lider}>
+                {lider}
+              </Text>
+            </>
+          )}
           <Text allowFontScaling={false} style={styles.inicioTitle}>
             INÍCIO:
           </Text>
@@ -66,17 +72,41 @@ const CarouselCardItem = ({item, index}: EscalaItem) => {
       <Text allowFontScaling={false} style={styles.titulo}>
         EQUIPE
       </Text>
-
       <View style={styles.containerCards}>
-        <FlatList
-          numColumns={1}
-          data={equipe.equipe}
-          renderItem={({item}) => <EquipeItem equipe={item} />}
-          keyExtractor={(item) => item}
-        />
+        <View style={styles.containerTexts}>
+          {equipes.length > 1
+            ? equipes.map((equipe, i) => (
+                <View key={`${equipe}-${i}`}>
+                  <Text style={styles.equipeTitle}>
+                    {equipe.nome.toUpperCase()}
+                  </Text>
+                  <View style={{display: 'flex', flexDirection: 'row'}}>
+                    <Text style={styles.liderEquipe}>LIDER:</Text>
+                    <Text style={styles.inicioLider}>{equipe.lider}</Text>
+                  </View>
+
+                  <Text
+                    allowFontScaling={false}
+                    style={styles.equipe}
+                    key={equipe.nome}>
+                    {`EQUIPE: ${equipe.equipe}`}
+                  </Text>
+                </View>
+              ))
+            : equipes.map((equipe) => {
+                return (
+                  <FlatList
+                    numColumns={1}
+                    data={equipe.equipe}
+                    renderItem={({item}) => <EquipeItem equipe={item} />}
+                    keyExtractor={(item, index) => `${item}${index}`}
+                  />
+                );
+              })}
+        </View>
       </View>
     </View>
-  ));
+  );
 };
 
 const getStyles = (isNextDomingo: boolean) => {
@@ -150,9 +180,29 @@ const getStyles = (isNextDomingo: boolean) => {
       fontSize: 10,
       fontFamily: FONT_AVENIR_ROMAN,
     },
+    equipeTitle: {
+      color: WOODSMOKE,
+      fontSize: 10,
+      fontFamily: FONT_AVENIR_BLACK,
+      marginBottom: 10,
+      marginTop: 10,
+    },
     equipe: {
       color: WOODSMOKE,
       fontSize: 10,
+      marginBottom: 5,
+      marginTop: 5,
+    },
+    liderEquipe: {
+      color: WOODSMOKE,
+      fontFamily: FONT_AVENIR_ROMAN,
+      fontSize: 10,
+      marginRight: 10,
+    },
+    inicioLider: {
+      color: WOODSMOKE,
+      fontSize: 10,
+      fontFamily: FONT_AVENIR_BLACK,
     },
   });
 };

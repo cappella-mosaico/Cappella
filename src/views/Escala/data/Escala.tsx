@@ -38,6 +38,24 @@ export const FALLBACK = [
       },
     ],
   },
+  {
+    id: '2ce0d8da-6604-4bcd-9f40-3d8457e26441',
+    ministerio: 'MOSAIKIDS',
+    nome: 'Louvor Culto',
+    inicio: '2023-05-07T18:00:00',
+    equipes: [
+      {
+        nome: 'Berçario',
+        lider: 'Joyce',
+        equipe: ['Felipe', 'Joyce', 'Marcos', 'Ruither'],
+      },
+      {
+        nome: 'Historinha',
+        lider: 'Eu',
+        equipe: ['Tu', 'Ele', 'Nós', 'Vós', 'Eles'],
+      },
+    ],
+  },
 ];
 
 export enum TIPOS {

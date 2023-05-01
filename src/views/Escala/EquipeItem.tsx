@@ -9,7 +9,7 @@ interface Props {
 
 export const EquipeItem = ({equipe}: Props) => {
   return (
-    <View style={styles.containerEquipes}>
+    <View style={styles.containerEquipes} key={equipe}>
       <Text style={styles.equipe}>{equipe}</Text>
     </View>
   );
@@ -17,7 +17,6 @@ export const EquipeItem = ({equipe}: Props) => {
 
 const styles = StyleSheet.create({
   containerEquipes: {
-    marginLeft: 33,
     marginTop: 5,
     marginBottom: 5,
   },
