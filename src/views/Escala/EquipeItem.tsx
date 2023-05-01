@@ -22,6 +22,6 @@ const styles = StyleSheet.create({
   },
   equipe: {
     color: WOODSMOKE,
-    fontSize: 10,
+    fontSize: 12,
   },
 });

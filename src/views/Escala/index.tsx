@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   },
   botaoTexto: {
     fontFamily: FONT_GILLSANS,
-    fontSize: 14,
+    fontSize: 16,
     color: WAIKAWAGREY,
     textAlign: 'center',
   },
