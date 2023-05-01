@@ -35,6 +35,7 @@ export const LIGHTTITLE = '#78C1CA';
 export const COLORCOMUNIDADE = '#F3F5EC';
 export const WOODSMOKE = '#2F3436';
 export const WAIKAWAGREY = '#657188';
+export const CHELSEACUCUMBER = '#92B356';
 
 // TIPOGRAFIA
 export const FONT_AVENIR_BLACK = 'AvenirLTStd-Black';

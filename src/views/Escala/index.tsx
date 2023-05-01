@@ -1,11 +1,11 @@
 import React, {useRef, useState} from 'react';
 import {
-  FlatList,
   SafeAreaView,
   StyleSheet,
   TouchableOpacity,
   View,
   Text,
+  Dimensions,
 } from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 // import {
@@ -15,8 +15,8 @@ import Carousel, {Pagination} from 'react-native-snap-carousel';
 
 import {FALLBACK, MINISTERIO} from './data/Escala';
 import {ContainerPage} from '../../components/ContainerPage';
-import {EscalaItem} from './escalaItem';
 import {FONT_GILLSANS, WAIKAWAGREY, WHITE} from '../../styles/styles';
+import CarouselCardItem from './CarouselCardItem';
 
 export interface Equipe {
   nome: string;
@@ -37,20 +37,15 @@ interface MenuEscalaItem {
   index: number;
 }
 
+export const SLIDER_WIDTH = Dimensions.get('window').width + 95;
+export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
+
 export const Escala = () => {
   const isCarousel = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [menuIndex, setMenuIndex] = useState(0);
+  const [cardIndex, setCardIndex] = useState(0);
   const [activeMinisterio, setActiveMinisterio] = useState<string>(
     FALLBACK[0].ministerio,
-  );
-
-  const escalaList = (escalas: Escala[]) => (
-    <FlatList
-      numColumns={1}
-      data={escalas}
-      renderItem={({item}) => <EscalaItem {...item} />}
-      keyExtractor={(item) => item.id}
-    />
   );
 
   const escalaMenuItem = ({item, index}: MenuEscalaItem) => {
@@ -60,7 +55,7 @@ export const Escala = () => {
       <TouchableOpacity
         key={index}
         onPress={() => {
-          setActiveIndex(index);
+          setMenuIndex(index);
           setActiveMinisterio(item.ministerio);
         }}>
         <View style={styles.botaoContainer}>
@@ -72,41 +67,53 @@ export const Escala = () => {
     );
   };
 
-  const data = [...new Map(FALLBACK.map((m) => [m.ministerio, m])).values()];
+  const data = FALLBACK.filter(
+    (escala) => new Date(escala.inicio) >= new Date(),
+  );
+
+  const menuData = [...new Map(data.map((m) => [m.ministerio, m])).values()];
+  const cardsData = data
+    .filter((escala) => escala.ministerio === activeMinisterio)
+    .sort(
+      (a: Escala, b: Escala) =>
+        new Date(a.inicio).valueOf() - new Date(b.inicio).valueOf(),
+    );
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <ContainerPage titulo={'ESCALAS'}>
         <View style={styles.container}>
           <Carousel
-            firstItem={activeIndex}
+            firstItem={menuIndex}
             layout="default"
             layoutCardOffset={9}
-            data={data}
+            data={menuData}
             renderItem={escalaMenuItem}
             sliderWidth={400}
             itemWidth={160}
             useScrollView={true}
-            onSnapToItem={(index) => setActiveIndex(index)}
+            onSnapToItem={(index) => setMenuIndex(index)}
+          />
+          <Carousel
+            layout="default"
+            layoutCardOffset={9}
             ref={isCarousel}
+            data={cardsData}
+            renderItem={CarouselCardItem}
+            sliderWidth={SLIDER_WIDTH}
+            itemWidth={ITEM_WIDTH}
+            onSnapToItem={(i) => setCardIndex(i)}
+            useScrollView={true}
           />
           <Pagination
-            dotsLength={data.length}
-            activeDotIndex={activeIndex}
+            dotsLength={cardsData.length}
+            activeDotIndex={cardIndex}
             carouselRef={isCarousel}
             dotStyle={styles.dotStyle}
             inactiveDotOpacity={0.4}
             inactiveDotScale={0.6}
             tappableDots={true}
           />
-          {escalaList(
-            FALLBACK.filter(
-              (escala) => escala.ministerio === activeMinisterio,
-            ).sort(
-              (a: Escala, b: Escala) =>
-                new Date(b.inicio).valueOf() - new Date(a.inicio).valueOf(),
-            ),
-          )}
         </View>
       </ContainerPage>
     </SafeAreaView>
@@ -134,8 +141,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     elevation: 2,
-    marginTop: 17,
-    marginBottom: 5,
+    marginTop: 50,
+    marginBottom: 65,
   },
   botaoTexto: {
     fontFamily: FONT_GILLSANS,

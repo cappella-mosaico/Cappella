@@ -1,23 +1,22 @@
 export const FALLBACK = [
   {
-    id: '2ce0d8da-6604-4bcd-9f40-3d8457e26441',
+    id: 'fd875821-711e-4e25-9382-4a4ad5db3d57',
     ministerio: 'MUSICA',
     nome: 'Louvor Culto',
-    inicio: '2023-04-30T00:00:00',
+    inicio: '2023-05-07T09:00:00',
     equipes: [
       {
-        nome: '8be1aefa366551270fd2a8af7f6b4883',
-        lider: 'Diogo',
-        equipe: ['Diogo', 'Felipe', 'Marcos', 'Ruither'],
+        nome: 'b638fdfd5a7c609793639ab3299bac4b',
+        lider: 'Joãozin',
+        equipe: ['Joãozin', 'Luizin', 'Zezin'],
       },
     ],
   },
   {
     id: 'a528efe7-9802-41d4-97c4-505448b2612b',
-
     ministerio: 'MIDIA',
     nome: 'Midia Culto',
-    inicio: '2023-04-30T00:00:00',
+    inicio: '2023-05-07T09:00:00',
     equipes: [
       {
         nome: 'ca102399bdd6012792d4d01fe8fec553',
@@ -27,15 +26,15 @@ export const FALLBACK = [
     ],
   },
   {
-    id: 'fd875821-711e-4e25-9382-4a4ad5db3d57',
+    id: '2ce0d8da-6604-4bcd-9f40-3d8457e26441',
     ministerio: 'MUSICA',
     nome: 'Louvor Culto',
-    inicio: '2023-05-07T00:00:00',
+    inicio: '2023-05-14T18:00:00',
     equipes: [
       {
-        nome: 'b638fdfd5a7c609793639ab3299bac4b',
-        lider: 'Joãozin',
-        equipe: ['Joãozin', 'Luizin', 'Zezin'],
+        nome: '3761bf9125c5023ad56fe1d8fdf125ef',
+        lider: 'Joyce',
+        equipe: ['Felipe', 'Joyce', 'Marcos', 'Ruither'],
       },
     ],
   },

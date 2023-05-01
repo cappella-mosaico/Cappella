@@ -32,3 +32,34 @@ export const validURL = (str: string) => {
 };
 
 export const BACKEND_URL = 'https://admin.ipmosaico.com:9090';
+
+const getNextSunday = (date = new Date()) => {
+  const dateCopy = new Date(date.getTime());
+
+  const nextMonday = new Date(
+    dateCopy.setDate(dateCopy.getDate() + ((7 - dateCopy.getDay()) % 7 || 7)),
+  );
+
+  return nextMonday;
+};
+
+const padTo2Digits = (num: number) => {
+  return num.toString().padStart(2, '0');
+};
+
+const formatDate = (date: Date) => {
+  return `${date.getFullYear()}-${padTo2Digits(
+    date.getMonth() + 1,
+  )}-${padTo2Digits(date.getDate())}`;
+};
+
+export const domingoCheck = (inicio: string) => {
+  const nextSunday = formatDate(getNextSunday(new Date()));
+  const nextEscala = formatDate(new Date(inicio));
+
+  if (nextEscala === nextSunday) {
+    return true;
+  } else {
+    return false;
+  }
+};
