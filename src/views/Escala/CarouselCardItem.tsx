@@ -74,35 +74,33 @@ const CarouselCardItem = ({item, index}: EscalaItem) => {
       </Text>
       <View style={styles.containerCards}>
         <View style={styles.containerTexts}>
-          {equipes.length > 1
-            ? equipes.map((equipe, i) => (
-                <View key={`${equipe}-${i}`}>
-                  <Text style={styles.equipeTitle}>
-                    {equipe.nome.toUpperCase()}
-                  </Text>
-                  <View style={{display: 'flex', flexDirection: 'row'}}>
-                    <Text style={styles.liderEquipe}>LIDER:</Text>
-                    <Text style={styles.inicioLider}>{equipe.lider}</Text>
-                  </View>
-
-                  <Text
-                    allowFontScaling={false}
-                    style={styles.equipe}
-                    key={equipe.nome}>
-                    {`EQUIPE: ${equipe.equipe}`}
-                  </Text>
+          {equipes.length > 1 ? (
+            equipes.map((equipe, i) => (
+              <View key={`${equipe}-${i}`}>
+                <Text style={styles.equipeTitle}>
+                  {equipe.nome.toUpperCase()}
+                </Text>
+                <View style={{display: 'flex', flexDirection: 'row'}}>
+                  <Text style={styles.liderEquipe}>LIDER:</Text>
+                  <Text style={styles.inicioLider}>{equipe.lider}</Text>
                 </View>
-              ))
-            : equipes.map((equipe) => {
-                return (
-                  <FlatList
-                    numColumns={1}
-                    data={equipe.equipe}
-                    renderItem={({item}) => <EquipeItem equipe={item} />}
-                    keyExtractor={(item, index) => `${item}${index}`}
-                  />
-                );
-              })}
+
+                <Text
+                  allowFontScaling={false}
+                  style={styles.equipe}
+                  key={equipe.nome}>
+                  {`EQUIPE: ${equipe.equipe}`}
+                </Text>
+              </View>
+            ))
+          ) : (
+            <FlatList
+              numColumns={1}
+              data={equipes}
+              renderItem={({item}) => <EquipeItem equipe={item.equipe} />}
+              keyExtractor={(item, index) => `${item}${index}`}
+            />
+          )}
         </View>
       </View>
     </View>
