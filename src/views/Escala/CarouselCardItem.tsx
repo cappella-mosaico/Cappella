@@ -14,17 +14,17 @@ import {
   WHITE,
   WOODSMOKE,
 } from '../../styles/styles';
-import {Escala, ITEM_WIDTH} from '.';
+import {ITEM_WIDTH, NewEscala} from '.';
 import {EquipeItem} from './EquipeItem';
 import {domingoCheck} from '../../utils/utils';
 
 interface EscalaItem {
-  item: Escala;
+  item: NewEscala;
   index: number;
 }
 
 const CarouselCardItem = ({item, index}: EscalaItem) => {
-  const {inicio, equipes, ebd} = item;
+  const {inicio, equipes} = item;
   const isNextDomingo = domingoCheck(inicio);
   const styles = getStyles(isNextDomingo);
   const lider = equipes.length === 1 ? equipes[0].lider : null;
@@ -75,24 +75,26 @@ const CarouselCardItem = ({item, index}: EscalaItem) => {
       <View style={styles.containerCards}>
         <View style={styles.containerTexts}>
           {equipes.length > 1 ? (
-            equipes.map((equipe, i) => (
-              <View key={`${equipe}-${i}`}>
-                <Text style={styles.equipeTitle}>
-                  {equipe.nome.toUpperCase()}
-                </Text>
-                <View style={styles.liderMultipleEquipe}>
-                  <Text style={styles.liderEquipe}>LIDER:</Text>
-                  <Text style={styles.inicioLider}>{equipe.lider}</Text>
-                </View>
+            equipes.map((equipe, i) => {
+              return (
+                <View key={`${equipe}-${i}`}>
+                  <Text style={styles.equipeTitle}>
+                    {equipe.nome.toUpperCase()} {equipe.ebd && ' - EBD'}
+                  </Text>
+                  <View style={styles.liderMultipleEquipe}>
+                    <Text style={styles.liderEquipe}>LIDER:</Text>
+                    <Text style={styles.inicioLider}>{equipe.lider}</Text>
+                  </View>
 
-                <Text
-                  allowFontScaling={false}
-                  style={styles.equipe}
-                  key={equipe.nome}>
-                  {`EQUIPE: ${equipe.equipe}`}
-                </Text>
-              </View>
-            ))
+                  <Text
+                    allowFontScaling={false}
+                    style={styles.equipe}
+                    key={equipe.nome}>
+                    {`EQUIPE: ${equipe.equipe}`}
+                  </Text>
+                </View>
+              );
+            })
           ) : (
             <FlatList
               numColumns={1}
