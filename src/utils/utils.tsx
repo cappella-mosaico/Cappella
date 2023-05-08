@@ -1,3 +1,5 @@
+import {Escala, NewEquipe, NewEscala} from '../views/Escala';
+
 export const getSize = (height: number) => {
   let size = 'xsmall';
 
@@ -62,4 +64,52 @@ export const domingoCheck = (inicio: string) => {
   } else {
     return false;
   }
+};
+
+export const findEscalasWithSameDay = (escalas: Escala[]) => {
+  const days = new Set();
+  const result = [];
+
+  for (let i = 0; i < escalas.length; i++) {
+    const date = new Date(escalas[i].inicio);
+    const day = date.getDate();
+    if (days.has(day) || !days.size) {
+      result.push(escalas[i]);
+    }
+    days.add(day);
+  }
+
+  return result;
+};
+
+export const mergeEscalas = (escalas: Escala[]) => {
+  const newEquipes: NewEquipe[] = [];
+  let newEscala: NewEscala | null = null;
+
+  escalas.forEach((escala) => {
+    const equipes: NewEquipe[] = escala.equipes.map((equipe) => {
+      return {
+        nome: equipe.nome,
+        lider: equipe.lider,
+        equipe: equipe.equipe,
+        ebd: escala.ebd,
+      };
+    });
+
+    newEquipes.push(...equipes);
+
+    if (!newEscala) {
+      newEscala = {
+        id: escala.id,
+        ministerio: escala.ministerio,
+        nome: escala.nome,
+        inicio: escala.inicio,
+        equipes: newEquipes,
+      };
+    } else {
+      newEscala.equipes = newEquipes;
+    }
+  });
+
+  return newEscala;
 };

@@ -24,7 +24,7 @@ interface EscalaItem {
 }
 
 const CarouselCardItem = ({item, index}: EscalaItem) => {
-  const {inicio, equipes} = item;
+  const {inicio, equipes, ebd} = item;
   const isNextDomingo = domingoCheck(inicio);
   const styles = getStyles(isNextDomingo);
   const lider = equipes.length === 1 ? equipes[0].lider : null;
@@ -80,7 +80,7 @@ const CarouselCardItem = ({item, index}: EscalaItem) => {
                 <Text style={styles.equipeTitle}>
                   {equipe.nome.toUpperCase()}
                 </Text>
-                <View style={{display: 'flex', flexDirection: 'row'}}>
+                <View style={styles.liderMultipleEquipe}>
                   <Text style={styles.liderEquipe}>LIDER:</Text>
                   <Text style={styles.inicioLider}>{equipe.lider}</Text>
                 </View>
@@ -201,6 +201,10 @@ const getStyles = (isNextDomingo: boolean) => {
       color: WOODSMOKE,
       fontSize: 12,
       fontFamily: FONT_AVENIR_BLACK,
+    },
+    liderMultipleEquipe: {
+      display: 'flex',
+      flexDirection: 'row',
     },
   });
 };

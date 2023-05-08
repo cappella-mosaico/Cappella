@@ -6,12 +6,50 @@ export const FALLBACK = [
     inicio: '2023-05-14T10:00:00',
     equipes: [
       {
-        nome: '516dcd6af4f3c798e391550adc7de5ea',
+        nome: 'Berçario',
         lider: 'José',
         equipe: ['José', 'Maria'],
       },
     ],
     ebd: true,
+  },
+  {
+    id: '2ce0d8da-6604-4bcd-9f40-3d8457e26441',
+    ministerio: 'MOSAIKIDS',
+    nome: 'Louvor Culto',
+    inicio: '2023-05-14T18:00:00',
+    equipes: [
+      {
+        nome: 'Berçario',
+        lider: 'Joyce',
+        equipe: ['Felipe', 'Joyce', 'Marcos', 'Ruither'],
+      },
+      {
+        nome: 'Historinha',
+        lider: 'Eu',
+        equipe: ['Tu', 'Ele', 'Nós', 'Vós', 'Eles'],
+      },
+    ],
+    ebd: false,
+  },
+  {
+    id: '2ce0d8da-6604-4bcd-9f40-3d8457e26442',
+    ministerio: 'MOSAIKIDS',
+    nome: 'Louvor Culto',
+    inicio: '2023-05-21T09:00:00',
+    equipes: [
+      {
+        nome: 'Berçario',
+        lider: 'Joyce',
+        equipe: ['Felipe', 'Joyce', 'Marcos', 'Ruither'],
+      },
+      {
+        nome: 'Historinha',
+        lider: 'Eu',
+        equipe: ['Tu', 'Ele', 'Nós', 'Vós', 'Eles'],
+      },
+    ],
+    ebd: false,
   },
   {
     id: 'fd875821-711e-4e25-9382-4a4ad5db3d57',
@@ -42,7 +80,7 @@ export const FALLBACK = [
     ebd: true,
   },
   {
-    id: '2ce0d8da-6604-4bcd-9f40-3d8457e26441',
+    id: '2ce0d8da-6604-4bcd-9f40-3d8457e26443',
     ministerio: 'MUSICA',
     nome: 'Louvor Culto',
     inicio: '2023-05-21T18:00:00',
@@ -51,25 +89,6 @@ export const FALLBACK = [
         nome: '3761bf9125c5023ad56fe1d8fdf125ef',
         lider: 'Joyce',
         equipe: ['Felipe', 'Joyce', 'Marcos', 'Ruither'],
-      },
-    ],
-    ebd: false,
-  },
-  {
-    id: '2ce0d8da-6604-4bcd-9f40-3d8457e26441',
-    ministerio: 'MOSAIKIDS',
-    nome: 'Louvor Culto',
-    inicio: '2023-05-14T18:00:00',
-    equipes: [
-      {
-        nome: 'Berçario',
-        lider: 'Joyce',
-        equipe: ['Felipe', 'Joyce', 'Marcos', 'Ruither'],
-      },
-      {
-        nome: 'Historinha',
-        lider: 'Eu',
-        equipe: ['Tu', 'Ele', 'Nós', 'Vós', 'Eles'],
       },
     ],
     ebd: false,

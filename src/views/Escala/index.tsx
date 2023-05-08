@@ -17,6 +17,7 @@ import {FALLBACK, MINISTERIO} from './data/Escala';
 import {ContainerPage} from '../../components/ContainerPage';
 import {FONT_GILLSANS, WAIKAWAGREY, WHITE} from '../../styles/styles';
 import CarouselCardItem from './CarouselCardItem';
+import {findEscalasWithSameDay, mergeEscalas} from '../../utils/utils';
 
 export interface Equipe {
   nome: string;
@@ -24,13 +25,29 @@ export interface Equipe {
   equipe: string[];
 }
 
-export type Escala = {
+export interface Escala {
   id: string;
+  ministerio: string;
   nome: string;
   inicio: string;
-  ministerio: string;
   equipes: Equipe[];
-};
+  ebd: boolean;
+}
+
+export interface NewEquipe {
+  nome: string;
+  lider: string;
+  equipe: string[];
+  ebd: boolean;
+}
+
+export interface NewEscala {
+  id: string;
+  ministerio: string;
+  nome: string;
+  inicio: string;
+  equipes: NewEquipe[];
+}
 
 interface MenuEscalaItem {
   item: Escala;
@@ -69,15 +86,32 @@ export const Escala = () => {
 
   const data = FALLBACK.filter(
     (escala) => new Date(escala.inicio) >= new Date(),
-  );
+  ).sort((a: Escala, b: Escala) => {
+    if (a.ministerio < b.ministerio) {
+      return -1;
+    }
+    if (a.ministerio > b.ministerio) {
+      return 1;
+    }
+    return 0;
+  });
 
   const menuData = [...new Map(data.map((m) => [m.ministerio, m])).values()];
-  const cardsData = data
-    .filter((escala) => escala.ministerio === activeMinisterio)
-    .sort(
-      (a: Escala, b: Escala) =>
-        new Date(a.inicio).valueOf() - new Date(b.inicio).valueOf(),
-    );
+  let cardsData = data.filter(
+    (escala) => escala.ministerio === activeMinisterio,
+  );
+  const escalasInTheSameDay = findEscalasWithSameDay(cardsData);
+
+  cardsData = cardsData.filter(
+    (item) =>
+      !escalasInTheSameDay.some((removeItem) => item.id === removeItem.id),
+  );
+
+  const mergedEscalas = mergeEscalas(escalasInTheSameDay);
+
+  if (mergedEscalas) {
+    cardsData.push(mergedEscalas);
+  }
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -98,7 +132,10 @@ export const Escala = () => {
             layout="default"
             layoutCardOffset={9}
             ref={isCarousel}
-            data={cardsData}
+            data={cardsData.sort(
+              (a: Escala, b: Escala) =>
+                new Date(a.inicio).valueOf() - new Date(b.inicio).valueOf(),
+            )}
             renderItem={CarouselCardItem}
             sliderWidth={SLIDER_WIDTH}
             itemWidth={ITEM_WIDTH}
