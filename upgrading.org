@@ -1,0 +1,8 @@
+useful https://react-native-community.github.io/upgrade-helper/?from=0.64.4&to=0.71.8
+
+* conflict between node lib versions
+stop using npm install and start using yarn install
+* Cannot run Project.afterEvaluate(Closure) when the project is already evaluated.
+this has been "fixed" on versions of react-native >=0.65
+* Unexpected token '?'
+this happened when I tried to jump to react-native 0.70.0
