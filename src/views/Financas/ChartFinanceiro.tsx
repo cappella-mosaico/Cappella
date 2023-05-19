@@ -15,7 +15,7 @@ import {
 } from 'react-native-responsive-linechart';
 
 import {ORANGEBUTTON, OTHERGRAY, PIPER} from '../../styles/styles';
-import {FinancasPorAno, Financeiro, months} from '.';
+import {FinancasPorAno, Financeiro, months} from './common';
 
 interface Props {
   meses: Financeiro[];

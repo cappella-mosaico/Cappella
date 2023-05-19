@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -15,14 +15,9 @@ import {
   LIGHTGRAY,
   WHITE,
 } from '../../styles/styles';
-import {FinancasPorAno, ITEM_WIDTH} from '.';
 import {ChartFinanceiro} from './ChartFinanceiro';
 import FinanceiroProgressBar from './FinanceiroProgressBar';
-
-export interface FinanceiroItem {
-  item: FinancasPorAno;
-  index: number;
-}
+import { ITEM_WIDTH } from './common';
 
 const CarouselCardItem = ({item, index}: FinanceiroItem) => {
   const {ano, meses} = item;

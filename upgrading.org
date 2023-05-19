@@ -13,3 +13,17 @@ yarn add react-native-reanimated@2.3.0-alpha.3
 https://github.com/software-mansion/react-native-reanimated/issues/2369
 https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation/#android
 in the end I've fixed it by upgrading the reanimated version to `2.3.0-alpha.2` as opposed to `2.3.0-alpha.3`
+
+### this was enough to upgrade react-native to 0.65.0 /\
+
+* Failed to transform react-native-reanimated-66-jsc.aar (project :react-native-reanimated) to match attributes {artifactType=android-aar-metadata}
+[[https://stackoverflow.com/a/69509098]["This issue has resolved in react-native-reanimated@2.3.0-beta.2 release."]]
+
+* attempt to invoke virtual method 'java.lang.Object java.lang.ref.WeakReference.get()'on a null object reference
+yes, I got this a second time now. What I did was to upgrade react-native-reacnimated to its latest stable release, 2.17.0 and it seem to have worked. I'm getting a kind of annoying warning (below) showing up when the app first loads, but I think this is only during debug.
+https://github.com/software-mansion/react-native-reanimated/releases
+
+* new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method
+that didn't work: https://bugsfixing.com/solved-new-nativeeventemitter-was-called-with-a-non-null-argument-without-the-required-addlistener-method/
+:/ it might be happening even for non-debug, I'm not so sure.
+LogBox at the App.js hid the warning for good :) https://github.com/michalchudziak/react-native-geolocation/issues/195#issuecomment-1260049366
