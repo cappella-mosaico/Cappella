@@ -37,7 +37,3 @@ smooth
 5. <2023-05-19 sex 06:38> still getting the warnings but now I upgraded '@react-native-async-storage/async-storage', '@react-native-clipboard/clipboard' and '@react-native-masked-view/masked-view'.
 6. <2023-05-19 sex 06:54> I upgraded a bunch of libs to their recommended versions on 0.68.0, but I'm still getting the warnings. I saw they were indeed added into 0.68.0. This github issue might help https://github.com/facebook/react-native/issues/33557 and this [[https://github.com/facebook/react-native/issues/33557#issuecomment-1114498902][comment]] in particular sounds based.
 7. <2023-05-19 sex 07:02> Ok, these warnings can't be solved by the current recommended versions of the libs for this package; So I'll also ignore them via LogBox and come back to it once we get everything upgraded.
-8. <2023-05-19 sex 07:10> back to upgrading libs using the upgrader, I downgraded reanimated to keep it happy and now every one of them is up to date with 0.68.0 but one: react-native-gesture-handler. Upgrading it will cause the error below:
-** A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
-https://github.com/software-mansion/react-native-gesture-handler/issues/2168
-Nice. Upgrading the compileSdk and targetSdk from 31 to 33 fixed the issue, kudos to this [[https://github.com/software-mansion/react-native-gesture-handler/issues/2168#issuecomment-1546998935][comment]].
