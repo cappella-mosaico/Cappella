@@ -6,3 +6,10 @@ stop using npm install and start using yarn install
 this has been "fixed" on versions of react-native >=0.65
 * Unexpected token '?'
 this happened when I tried to jump to react-native 0.70.0
+* Failed to transform react-native-reanimated-65-jsc.aar (project :react-native-reanimated) to match attributes {artifactType=android-aar-metadata}.
+https://stackoverflow.com/a/69077685/1851150
+yarn add react-native-reanimated@2.3.0-alpha.3
+* attempt to invoke virtual method 'java.lang.Object java.lang.ref.WeakReference.get()'on a null object reference
+https://github.com/software-mansion/react-native-reanimated/issues/2369
+https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation/#android
+in the end I've fixed it by upgrading the reanimated version to `2.3.0-alpha.2` as opposed to `2.3.0-alpha.3`
