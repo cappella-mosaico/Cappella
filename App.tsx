@@ -13,8 +13,10 @@ import {Evento} from './src/views/Eventos';
 import {EventoDesc} from './src/views/Eventos/eventoDesc';
 import {EventoForm} from './src/views/Eventos/eventoForm';
 import { LogBox  } from 'react-native';
-
-LogBox.ignoreLogs(['new NativeEventEmitter']);
+LogBox.ignoreLogs([
+    'new NativeEventEmitter',
+	'ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from \'deprecated-react-native-prop-types\'.',
+])
 
 export type RootStackParamList = {
   Home: undefined;
