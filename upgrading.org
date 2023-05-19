@@ -30,6 +30,8 @@ useful https://react-native-community.github.io/upgrade-helper/?from=0.64.4&to=0
 * react-native 0.67.0
 smooth
 * react-native 0.68.0
-I'm getting this warning /ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'./  22 times.
-It seems like the ViewPropTypes is not directly used by our code, but by libs that we use and that are outdated. I'll leverage the [[updater too][updater tool]] to see if I can get rid of any.
-Using the tool, the change I made was to @react-native-masked-view/masked-view upgrading it to 0.2.0 and renaming the "community" part of the package. My plan is to use it as a canary to check if we can drop to 21 warnings but it didn't work. I'll try to upgrade to the most recent version of the package.
+1. I'm getting this warning /ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'./  22 times.
+2. It seems like the ViewPropTypes is not directly used by our code, but by libs that we use and that are outdated. I'll leverage the [[updater too][updater tool]] to see if I can get rid of any.
+3. Using the tool, the change I made was to @react-native-masked-view/masked-view upgrading it to 0.2.0 and renaming the "community" part of the package. My plan is to use it as a canary to check if we can drop to 21 warnings but it didn't work. I'll try to upgrade to the most recent version of the package.
+4. <2023-05-19 sex 06:29> the warnings won't go away, but at least the package is updated :)
+5. <2023-05-19 sex 06:38> still getting the warnings but now I upgraded '@react-native-async-storage/async-storage', '@react-native-clipboard/clipboard' and '@react-native-masked-view/masked-view'.
