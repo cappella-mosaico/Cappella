@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
-import Carousel, {Pagination} from 'react-native-snap-carousel';
+import Carousel from 'react-native-reanimated-carousel';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -86,24 +86,12 @@ export const Financas = ({titulo}: Props) => {
     return (
       <View style={styles.containerCarousel}>
         <Carousel
-          layout="default"
-          layoutCardOffset={9}
-          ref={isCarousel}
-          data={financasAgrupadas.reverse()}
-          renderItem={CarouselCardItem}
-          sliderWidth={SLIDER_WIDTH}
-          itemWidth={ITEM_WIDTH}
-          onSnapToItem={(index) => setIndex(index)}
-          useScrollView={true}
-        />
-        <Pagination
-          dotsLength={financasAgrupadas.length}
-          activeDotIndex={index}
-          carouselRef={isCarousel}
-          dotStyle={styles.dotStyle}
-          inactiveDotOpacity={0.4}
-          inactiveDotScale={0.6}
-          tappableDots={true}
+            loop
+            width={ITEM_WIDTH}
+            height={hp}
+            data={financasAgrupadas.reverse()}
+            onSnapToItem={(index) => setIndex(index)}
+            renderItem={CarouselCardItem}
         />
       </View>
     );

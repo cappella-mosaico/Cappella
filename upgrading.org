@@ -1,4 +1,5 @@
-useful https://react-native-community.github.io/upgrade-helper/?from=0.64.4&to=0.71.8
+we should keep ourselves in the supported releases described here https://github.com/reactwg/react-native-releases#which-versions-are-currently-supported
+useful react-native upgrade tool: https://react-native-community.github.io/upgrade-helper/?from=0.64.4&to=0.71.8
 
 * react-native 0.65.0
 ** conflict between node lib versions
@@ -41,3 +42,11 @@ smooth
 ** A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
 https://github.com/software-mansion/react-native-gesture-handler/issues/2168
 Nice. Upgrading the compileSdk and targetSdk from 31 to 33 fixed the issue, kudos to this [[https://github.com/software-mansion/react-native-gesture-handler/issues/2168#issuecomment-1546998935][comment]].
+* react-native 0.69.0
+** Error: ENOENT: no such file or directory, scandir 'node_modules'
+I removed the node_modules folder and run an yarn install again but it didn't work. So I ran the run-android command with a --no-jetifier flag and it seem to have worked
+**  ERROR  Invariant Violation: ViewPropTypes has been removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'.
+1. <2023-05-19 sex 20:45> After upgrading the dependencies to 0.69.0 I was still getting this error related to ViewPropTypes. What I found is that one of our dependencies was not being maintained for the past 3 years. So the usage this lib did of ViewPropTypes became unsustainable. Is the `react-native-snap-carousel`. The lib should have at least fixed that but they didn't and the whole thing [[https://github.com/meliorence/react-native-snap-carousel/issues/982][was deprecated]].
+   Removing this lib from our project fixed all the issues I was having, but it completely breaks the 'Financeiro' screen. The following error was also fixed: /ERROR  Invariant Violation: Module AppRegistry is not a registered callable module (calling runApplication). A frequent cause of the error is that the application entry file path is incorrect. This can also happen when the JS bundle is corrupt or there is an early initialization error when loading React Native./
+   There's a bunch of ViewPropTypes [[https://github.com/meliorence/react-native-snap-carousel/issues?q=is%3Aissue+is%3Aopen+ViewPropTypes][open issues for the repo]]  and I don't think they are going to be addressed. My last resource came from [[https://github.com/meliorence/react-native-snap-carousel/issues/981#issuecomment-1528901361][one of the comments]] in one of those issues. Which is using this other lib [[https://www.npmjs.com/package/react-native-reanimated-carousel][react-native-reanimated-carousel]] that is currently maintained and hopefully keeps the same interface.
+2. <2023-05-19 sex 21:06> HELL YEAH. After a small adaptation I managed to get the new Carousel working 🕺
