@@ -68,3 +68,11 @@ people is saying this is related to node version. But I'm sure I'm running node 
 
 
 
+* react-native 0.71.0
+** frozen ./gradlew clean
+https://github.com/volta-cli/volta/issues/1007#issuecomment-881771029
+** Could not get unknown property 'hermesEnabled' for project ':app' of type org.gradle.api.Project.
+add ~hermesEnabled=true~ to gradle.properties
+** Could not find any matches for com.facebook.react:react-native:+ as no versions of com.facebook.react:react-native are available.
+fixed removing block from android/build.gradle: https://github.com/facebook/react-native/issues/36234#issuecomment-1439770679
+** Could not find com.facebook.react:react-android:.
