@@ -50,3 +50,21 @@ I removed the node_modules folder and run an yarn install again but it didn't wo
    Removing this lib from our project fixed all the issues I was having, but it completely breaks the 'Financeiro' screen. The following error was also fixed: /ERROR  Invariant Violation: Module AppRegistry is not a registered callable module (calling runApplication). A frequent cause of the error is that the application entry file path is incorrect. This can also happen when the JS bundle is corrupt or there is an early initialization error when loading React Native./
    There's a bunch of ViewPropTypes [[https://github.com/meliorence/react-native-snap-carousel/issues?q=is%3Aissue+is%3Aopen+ViewPropTypes][open issues for the repo]]  and I don't think they are going to be addressed. My last resource came from [[https://github.com/meliorence/react-native-snap-carousel/issues/981#issuecomment-1528901361][one of the comments]] in one of those issues. Which is using this other lib [[https://www.npmjs.com/package/react-native-reanimated-carousel][react-native-reanimated-carousel]] that is currently maintained and hopefully keeps the same interface.
 2. <2023-05-19 sex 21:06> HELL YEAH. After a small adaptation I managed to get the new Carousel working 🕺
+* react-native 0.70.0
+** yntaxError: Unexpected token '?'
+cmd.option(opt.name, opt.description ?? '', opt.parse || (val => val), typeof opt.default === 'function' ? opt.default(rest[0]) : opt.default);
+https://github.com/facebook/react-native/issues/34768
+https://github.com/react-native-community/cli/issues/1703
+people is saying this is related to node version. But I'm sure I'm running node v18.16.0 which is pretty new. I wonder if react-native has its own node or something like that.
+1. <2023-05-20 sáb 07:10> I might have fixed it but there is still something wrong. I pasted the error to ChatGPT, it explained that the nullish coalescing operator was introduced in node 14 and that I should try to upgrade my node version (which I did) but also clear use an alternative method to clear the cache besides the `--reset-cache` option. The way I'm currently trying to run react-native is by running ~watchman watch-del-all && react-native start --reset-cache~. It then suggested me to run a  ~rm -rf $TMPDIR/metro-*~ that would reset this "metro" folder from a $TMPDIR that is not really assigned to anything on my terminal :shrug:
+   After runnng the rm -rf the application successfully ran once with ~react-native start --reset-cache~, but when I tried to ~watchman watch-del-all && react-native start --reset-cache~ it failed again with the same coalescing operator ?? error. It feels like the project is using its own node version instead of using the one I have on my machine.
+   Since I didn't know what metro is or does, I also asked ChatGPT: "In the context of a React Native application, Metro is the JavaScript bundler used to package and serve the JavaScript code for your app during development. It is responsible for transforming your JavaScript code, resolving dependencies, and creating a bundle that can be executed by the JavaScript runtime on the device or emulator.". With that I tried to change the node version used by Metro by adding the following "engines" block to my package.json but it also didn't work:
+#+BEGIN_SRC
+  "engines": {
+    "node": ">=14.x"
+  }
+#+END_SRC
+2. <2023-05-20 sáb 07:40> It seems like I figured it out. There was two react-native versions being executed when I typed ~react-native start~. By typing it like that it would use the react-native globally installed on my local environment and it would fail with above error. Starting it with ~npx react-native start~ works because it starts the Metro from within the project's node_modules, which is what we want. The "engines" blocks is unnecessary. I'm not sure why the globally installed version of react-native wouldn't work, or why its Metro was using an obsolete version of node, but I'm ok with simply moving on. 
+
+
+
