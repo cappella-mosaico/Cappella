@@ -1,4 +1,4 @@
-import {Escala, NewEquipe, NewEscala} from '../views/Escala';
+import {Equipe, Escala} from '../views/Escala';
 
 export const getSize = (height: number) => {
   let size = 'xsmall';
@@ -45,19 +45,8 @@ const getNextSunday = (date = new Date()) => {
   return nextMonday;
 };
 
-const padTo2Digits = (num: number) => {
-  return num.toString().padStart(2, '0');
-};
-
-const formatDate = (date: Date) => {
-  return `${date.getFullYear()}-${padTo2Digits(
-    date.getMonth() + 1,
-  )}-${padTo2Digits(date.getDate())}`;
-};
-
-export const domingoCheck = (inicio: string) => {
+export const domingoCheck = (nextEscala: string) => {
   const nextSunday = formatDate(getNextSunday(new Date()));
-  const nextEscala = formatDate(new Date(inicio));
 
   if (nextEscala === nextSunday) {
     return true;
@@ -66,50 +55,89 @@ export const domingoCheck = (inicio: string) => {
   }
 };
 
-export const findEscalasWithSameDay = (escalas: Escala[]) => {
-  const days = new Set();
-  const result = [];
-
-  for (let i = 0; i < escalas.length; i++) {
-    const date = new Date(escalas[i].inicio);
-    const day = date.getDate();
-    if (days.has(day) || !days.size) {
-      result.push(escalas[i]);
-    }
-    days.add(day);
-  }
-
-  return result;
+const padTo2Digits = (num: number) => {
+  return num.toString().padStart(2, '0');
 };
 
-export const mergeEscalas = (escalas: Escala[]) => {
-  const newEquipes: NewEquipe[] = [];
-  let newEscala: NewEscala | null = null;
+export const formatDate = (date: Date) => {
+  return `${date.getFullYear()}-${padTo2Digits(
+    date.getMonth() + 1,
+  )}-${padTo2Digits(date.getDate())}`;
+};
 
-  escalas.forEach((escala) => {
-    const equipes: NewEquipe[] = escala.equipes.map((equipe) => {
-      return {
-        nome: equipe.nome,
-        lider: equipe.lider,
-        equipe: equipe.equipe,
-        ebd: escala.ebd,
-      };
-    });
+export function formatDatePT(dateString: string): string {
+  const options: Intl.DateTimeFormatOptions = {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  };
+  const date = new Date(dateString);
+  const formattedDate = date.toLocaleDateString('pt-BR', options);
+  const capitalizedMonth = formattedDate.replace(/(\b\w)/gi, (match) =>
+    match.toUpperCase(),
+  );
+  return capitalizedMonth;
+}
 
-    newEquipes.push(...equipes);
+export const createSetFromArray = (
+  dataArray: Escala[],
+): Map<string, Escala[]> => {
+  const resultSet = new Map();
 
-    if (!newEscala) {
-      newEscala = {
-        id: escala.id,
-        ministerio: escala.ministerio,
-        nome: escala.nome,
-        inicio: escala.inicio,
-        equipes: newEquipes,
-      };
+  // Iterate over the array
+  for (const item of dataArray) {
+    const inicio = item.inicio.split('T')[0]; // Extract only the date part
+
+    // Check if the 'inicio' key already exists in the set
+    if (resultSet.has(inicio)) {
+      // Append the item to the existing array value
+      const existingValue = resultSet.get(inicio);
+      resultSet.set(inicio, [...existingValue, item]);
     } else {
-      newEscala.equipes = newEquipes;
+      // Create a new array value with the item
+      resultSet.set(inicio, [item]);
     }
+  }
+
+  return resultSet;
+};
+
+export const groupByLocal = (
+  escalas: Escala[],
+): {local: string; values: Escala[]}[] => {
+  const grouped: {[local: string]: Escala[]} = {};
+  escalas.forEach((item) => {
+    const {local, ...rest} = item;
+    if (!grouped[local]) {
+      grouped[local] = [];
+    }
+    grouped[local].push(rest as Escala);
+  });
+  return Object.entries(grouped).map(([local, values]) => ({local, values}));
+};
+
+export const joinPeriodoValues = (
+  escalas: Escala[],
+): {
+  periodo: string;
+  values: Escala[];
+}[] => {
+  const grouped: {
+    [key: string]: Escala[];
+  } = {};
+
+  escalas.forEach((item) => {
+    const {periodo, ...rest} = item;
+
+    if (!grouped[periodo]) {
+      grouped[periodo] = [];
+    }
+
+    grouped[periodo].push(rest as Escala);
   });
 
-  return newEscala;
+  return Object.entries(grouped).map(([periodo, values]) => ({
+    periodo,
+    values,
+  }));
 };

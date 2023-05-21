@@ -17,12 +17,12 @@ import {FALLBACK, MINISTERIO} from './data/Escala';
 import {ContainerPage} from '../../components/ContainerPage';
 import {FONT_GILLSANS, WAIKAWAGREY, WHITE} from '../../styles/styles';
 import CarouselCardItem from './CarouselCardItem';
-import {findEscalasWithSameDay, mergeEscalas} from '../../utils/utils';
+import {createSetFromArray} from '../../utils/utils';
 
 export interface Equipe {
   nome: string;
   lider: string;
-  equipe: string[];
+  participantes: string[];
 }
 
 export interface Escala {
@@ -30,23 +30,14 @@ export interface Escala {
   ministerio: string;
   nome: string;
   inicio: string;
-  equipes: Equipe[];
-  ebd: boolean;
+  equipe: Equipe;
+  local: string;
+  periodo: string;
 }
 
-export interface NewEquipe {
-  nome: string;
-  lider: string;
-  equipe: string[];
-  ebd: boolean;
-}
-
-export interface NewEscala {
-  id: string;
-  ministerio: string;
-  nome: string;
-  inicio: string;
-  equipes: NewEquipe[];
+export interface EscalaByDay {
+  dia: string;
+  escalas: Escala[];
 }
 
 interface MenuEscalaItem {
@@ -87,31 +78,36 @@ export const Escala = () => {
   const data = FALLBACK.filter(
     (escala) => new Date(escala.inicio) >= new Date(),
   ).sort((a: Escala, b: Escala) => {
-    if (a.ministerio < b.ministerio) {
+    if (new Date(a.inicio) < new Date(b.inicio)) {
       return -1;
     }
-    if (a.ministerio > b.ministerio) {
+    if (new Date(a.inicio) > new Date(b.inicio)) {
       return 1;
     }
     return 0;
   });
 
   const menuData = [...new Map(data.map((m) => [m.ministerio, m])).values()];
-  let cardsData = data.filter(
-    (escala) => escala.ministerio === activeMinisterio,
+  let cardsData = data
+    .filter((escala) => escala.ministerio === activeMinisterio)
+    .sort((a: Escala, b: Escala) => {
+      if (a.ministerio < b.ministerio) {
+        return -1;
+      }
+      if (a.ministerio > b.ministerio) {
+        return 1;
+      }
+      return 0;
+    });
+
+  const resultMap = createSetFromArray(cardsData);
+  const escalasByDay: EscalaByDay[] = Array.from(
+    resultMap,
+    ([dia, escalas]) => ({
+      dia,
+      escalas,
+    }),
   );
-  const escalasInTheSameDay = findEscalasWithSameDay(cardsData);
-
-  cardsData = cardsData.filter(
-    (item) =>
-      !escalasInTheSameDay.some((removeItem) => item.id === removeItem.id),
-  );
-
-  const mergedEscalas = mergeEscalas(escalasInTheSameDay);
-
-  if (mergedEscalas) {
-    cardsData.push(mergedEscalas);
-  }
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -132,10 +128,7 @@ export const Escala = () => {
             layout="default"
             layoutCardOffset={9}
             ref={isCarousel}
-            data={cardsData.sort(
-              (a: Escala, b: Escala) =>
-                new Date(a.inicio).valueOf() - new Date(b.inicio).valueOf(),
-            )}
+            data={escalasByDay}
             renderItem={CarouselCardItem}
             sliderWidth={SLIDER_WIDTH}
             itemWidth={ITEM_WIDTH}
@@ -143,7 +136,7 @@ export const Escala = () => {
             useScrollView={true}
           />
           <Pagination
-            dotsLength={cardsData.length}
+            dotsLength={escalasByDay.length}
             activeDotIndex={cardIndex}
             carouselRef={isCarousel}
             dotStyle={styles.dotStyle}
@@ -167,7 +160,7 @@ const styles = StyleSheet.create({
   botaoContainer: {
     backgroundColor: WHITE,
     width: 160,
-    height: 70,
+    height: 50,
     borderRadius: 10,
     borderColor: WAIKAWAGREY,
     borderWidth: 1,
@@ -178,8 +171,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     elevation: 2,
-    marginTop: 50,
-    marginBottom: 65,
+    marginTop: 15,
+    marginBottom: 15,
   },
   botaoTexto: {
     fontFamily: FONT_GILLSANS,

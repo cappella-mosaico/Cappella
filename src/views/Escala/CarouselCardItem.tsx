@@ -1,10 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
-
+import {View, Text, StyleSheet} from 'react-native';
 import {
   BLACK,
   CHELSEACUCUMBER,
@@ -14,97 +9,104 @@ import {
   WHITE,
   WOODSMOKE,
 } from '../../styles/styles';
-import {ITEM_WIDTH, NewEscala} from '.';
-import {EquipeItem} from './EquipeItem';
-import {domingoCheck} from '../../utils/utils';
+import {EscalaByDay, ITEM_WIDTH} from '.';
+import {
+  domingoCheck,
+  formatDatePT,
+  groupByLocal,
+  joinPeriodoValues,
+} from '../../utils/utils';
 
 interface EscalaItem {
-  item: NewEscala;
+  item: EscalaByDay;
   index: number;
 }
 
 const CarouselCardItem = ({item, index}: EscalaItem) => {
-  const {inicio, equipes} = item;
-  const isNextDomingo = domingoCheck(inicio);
+  const {dia, escalas} = item;
+  const isNextDomingo = domingoCheck(dia);
   const styles = getStyles(isNextDomingo);
-  const lider = equipes.length === 1 ? equipes[0].lider : null;
+  const grupos = groupByLocal(escalas);
+
+  console.log(dia);
+  console.log(new Date(dia));
 
   return (
     <View style={styles.container} key={index}>
-      <Text allowFontScaling={false} style={styles.titulo}>
-        {isNextDomingo ? 'NESTE DOMINGO' : 'PROXIMA SEMANA'}
+      <Text allowFontScaling={false} style={styles.white}>
+        {isNextDomingo ? 'NESTE DOMINGO' : 'PROXIMA SEMANA'} -{' '}
+        {formatDatePT(dia)}
       </Text>
-      <View style={styles.containerCards}>
-        <View style={styles.containerTexts}>
-          {lider && (
-            <>
-              <Text allowFontScaling={false} style={styles.liderTitle}>
-                LIDER
-              </Text>
 
-              <Text allowFontScaling={false} style={styles.lider}>
-                {lider}
-              </Text>
-            </>
-          )}
-          <Text allowFontScaling={false} style={styles.inicioTitle}>
-            INÍCIO:
-          </Text>
-          <Text allowFontScaling={false} style={styles.inicio}>
-            {new Intl.DateTimeFormat('pt-br', {
-              hour: '2-digit',
-            })
-              .format(new Date(inicio))
-              .replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
-                letter.toUpperCase(),
-              )}
-            {'h - '}
-            {new Intl.DateTimeFormat('pt-br', {
-              dateStyle: 'full',
-            })
-              .format(new Date(inicio))
-              .replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
-                letter.toUpperCase(),
-              )}
-          </Text>
-        </View>
-      </View>
-      <Text allowFontScaling={false} style={styles.titulo}>
-        EQUIPE
-      </Text>
-      <View style={styles.containerCards}>
-        <View style={styles.containerTexts}>
-          {equipes.length > 1 ? (
-            equipes.map((equipe, i) => {
-              return (
-                <View key={`${equipe}-${i}`}>
-                  <Text style={styles.equipeTitle}>
-                    {equipe.nome.toUpperCase()} {equipe.ebd && ' - EBD'}
-                  </Text>
-                  <View style={styles.liderMultipleEquipe}>
-                    <Text style={styles.liderEquipe}>LIDER:</Text>
-                    <Text style={styles.inicioLider}>{equipe.lider}</Text>
-                  </View>
+      {grupos.map((grupo, grupoIndex) => {
+        const {local, values} = grupo;
+        const groupedPeriodos = joinPeriodoValues(values);
 
-                  <Text
-                    allowFontScaling={false}
-                    style={styles.equipe}
-                    key={equipe.nome}>
-                    {`EQUIPE: ${equipe.equipe}`}
-                  </Text>
-                </View>
-              );
-            })
-          ) : (
-            <FlatList
-              numColumns={1}
-              data={equipes}
-              renderItem={({item}) => <EquipeItem equipe={item.equipe} />}
-              keyExtractor={(item, index) => `${item}${index}`}
-            />
-          )}
-        </View>
-      </View>
+        return (
+          <View key={`${local}-${grupoIndex}`}>
+            <Text allowFontScaling={false} style={styles.titulo}>
+              {local.toUpperCase()}
+            </Text>
+            <View style={styles.containerCards}>
+              <View style={styles.containerTexts}>
+                {groupedPeriodos.map((groupPeriodo, groupPeriodoIndex) => {
+                  const {periodo, values} = groupPeriodo;
+
+                  return (
+                    <View key={`${periodo}-${groupPeriodoIndex}`}>
+                      <Text style={styles.periodo}>
+                        {periodo.toUpperCase()}
+                      </Text>
+
+                      {values.map((value, i) => {
+                        const {equipe, nome} = value;
+                        const {lider, participantes} = equipe;
+
+                        return (
+                          <View key={`${equipe}-${i}`}>
+                            <View style={styles.liderMultipleEquipe}>
+                              <Text style={styles.equipe}>{nome}</Text>
+                              {participantes.length === 1 ? (
+                                <Text
+                                  allowFontScaling={false}
+                                  style={styles.equipe}>
+                                  {` - ${participantes[0]}`}
+                                </Text>
+                              ) : (
+                                participantes.map((participante, ind) => {
+                                  return (
+                                    <View key={`${equipe}-${ind}`}>
+                                      <View style={styles.liderMultipleEquipe}>
+                                        <Text style={styles.liderEquipe}>
+                                          LIDER:
+                                        </Text>
+                                        <Text style={styles.inicioLider}>
+                                          {lider}
+                                        </Text>
+                                      </View>
+
+                                      <Text
+                                        allowFontScaling={false}
+                                        style={styles.equipe}
+                                        key={participante}>
+                                        {` - ${participante}`}
+                                      </Text>
+                                    </View>
+                                  );
+                                })
+                              )}
+                            </View>
+                          </View>
+                        );
+                      })}
+                    </View>
+                  );
+                })}
+              </View>
+            </View>
+          </View>
+        );
+      })}
     </View>
   );
 };
@@ -140,58 +142,27 @@ const getStyles = (isNextDomingo: boolean) => {
       marginRight: 11,
     },
     containerTexts: {
-      marginLeft: 33,
-      marginTop: 21,
-      marginBottom: 21,
-    },
-    containerEquipes: {
-      marginLeft: 33,
-      marginTop: 21,
-      marginBottom: 21,
+      marginLeft: 25,
+      marginBottom: 15,
+      marginTop: 10,
     },
     titulo: {
       color: WOODSMOKE,
       fontSize: 12,
       fontFamily: FONT_AVENIR_BLACK,
-      marginTop: 17,
-      marginBottom: 12,
+      marginTop: 12,
+      marginBottom: 10,
       marginLeft: 19,
     },
-    liderTitle: {
-      color: WOODSMOKE,
-      fontSize: 12,
-      fontFamily: FONT_AVENIR_ROMAN,
-      marginBottom: 5,
-    },
-    lider: {
-      color: WOODSMOKE,
-      fontSize: 16,
-      fontFamily: FONT_AVENIR_BLACK,
-      marginBottom: 15,
-    },
-    inicioTitle: {
+    periodo: {
       color: WOODSMOKE,
       fontSize: 12,
       fontFamily: FONT_AVENIR_BLACK,
-      marginBottom: 2,
-    },
-    inicio: {
-      color: WOODSMOKE,
-      fontSize: 12,
-      fontFamily: FONT_AVENIR_ROMAN,
-    },
-    equipeTitle: {
-      color: WOODSMOKE,
-      fontSize: 12,
-      fontFamily: FONT_AVENIR_BLACK,
-      marginBottom: 10,
       marginTop: 10,
     },
     equipe: {
       color: WOODSMOKE,
       fontSize: 12,
-      marginBottom: 5,
-      marginTop: 5,
     },
     liderEquipe: {
       color: WOODSMOKE,
@@ -207,6 +178,15 @@ const getStyles = (isNextDomingo: boolean) => {
     liderMultipleEquipe: {
       display: 'flex',
       flexDirection: 'row',
+      marginTop: 5,
+    },
+    white: {
+      color: WHITE,
+      fontSize: 12,
+      fontFamily: FONT_AVENIR_BLACK,
+      marginTop: 12,
+      marginBottom: 10,
+      marginLeft: 19,
     },
   });
 };
