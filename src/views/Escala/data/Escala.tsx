@@ -3,12 +3,12 @@ export const FALLBACK = [
     id: '22e91b46-69a0-4a84-8a5e-d233a56aa003',
     ministerio: 'MOSAIKIDS',
     nome: 'Atividades',
-    inicio: '2023-05-21T19:00:00',
+    inicio: '2023-05-28T19:00:00',
     periodo: 'CULTO',
     equipe: {
       nome: 'c4cf90c8949da096363afbf3e1567cf0',
       lider: 'Nathalia',
-      participantes: ['Nathalia'],
+      participantes: ['Nathalia', 'Leticia'],
     },
     local: '6-11 anos',
   },
@@ -16,7 +16,7 @@ export const FALLBACK = [
     id: '6f7bae86-f102-44a1-b264-db9f425b48aa',
     ministerio: 'MOSAIKIDS',
     nome: 'Atividades',
-    inicio: '2023-05-21T00:00:00',
+    inicio: '2023-05-28T00:00:00',
     periodo: 'AMBOS',
     equipe: {
       nome: '301509102ebca4759d86a5ade3960059',
@@ -29,7 +29,7 @@ export const FALLBACK = [
     id: 'ab727340-b082-499f-ae84-586b6b490fc4',
     ministerio: 'MOSAIKIDS',
     nome: 'História',
-    inicio: '2023-05-21T00:00:00',
+    inicio: '2023-05-28T00:00:00',
     periodo: 'AMBOS',
     equipe: {
       nome: '301509102ebca4759d86a5ade3960059',
@@ -42,7 +42,7 @@ export const FALLBACK = [
     id: 'e7b6f1e0-b212-4f87-be6d-1edcbaceb63e',
     ministerio: 'MOSAIKIDS',
     nome: 'História',
-    inicio: '2023-05-28T00:00:00',
+    inicio: '2023-06-04T00:00:00',
     periodo: 'AMBOS',
     equipe: {
       nome: '47572a54828eb8863d3c789d1010d182',
@@ -55,7 +55,7 @@ export const FALLBACK = [
     id: '51698690-9497-4878-b091-7e901922fb30',
     ministerio: 'MOSAIKIDS',
     nome: 'Atividades',
-    inicio: '2023-05-28T19:00:00',
+    inicio: '2023-06-04T19:00:00',
     periodo: 'CULTO',
     equipe: {
       nome: '150c16d9d096e70af3596111d7402397',
@@ -68,7 +68,7 @@ export const FALLBACK = [
     id: '2c68aa7b-4153-441e-95ee-ef357c909013',
     ministerio: 'MOSAIKIDS',
     nome: 'História',
-    inicio: '2023-05-28T00:00:00',
+    inicio: '2023-06-04T00:00:00',
     periodo: 'AMBOS',
     equipe: {
       nome: '255c0e54e7fa4c1097291beb4ddcdf4e',
@@ -81,7 +81,7 @@ export const FALLBACK = [
     id: 'f0909f72-0867-44ce-9cab-10fd217ce8c6',
     ministerio: 'MOSAIKIDS',
     nome: 'Atividades',
-    inicio: '2023-05-28T10:00:00',
+    inicio: '2023-06-04T10:00:00',
     periodo: 'EBD',
     equipe: {
       nome: '150c16d9d096e70af3596111d7402397',
@@ -94,7 +94,7 @@ export const FALLBACK = [
     id: '07a90657-6c2b-4b80-810e-9ebf38b9f388',
     ministerio: 'MOSAIKIDS',
     nome: 'Atividades',
-    inicio: '2023-05-28T19:00:00',
+    inicio: '2023-06-04T19:00:00',
     periodo: 'CULTO',
     equipe: {
       nome: '19fdf51d7001bd6430bc30fcaaa570c5',
@@ -107,7 +107,7 @@ export const FALLBACK = [
     id: '15d44e91-6783-4ea1-9957-2dbd3f2a0360',
     ministerio: 'MOSAIKIDS',
     nome: 'Atividades',
-    inicio: '2023-05-28T00:00:00',
+    inicio: '2023-06-04T00:00:00',
     periodo: 'AMBOS',
     equipe: {
       nome: 'cbc19b07662418d5f14cc55657295924',
@@ -120,7 +120,7 @@ export const FALLBACK = [
     id: '47cf536b-7a4e-462b-b6b4-d4e9abe38583',
     ministerio: 'MOSAIKIDS',
     nome: 'História',
-    inicio: '2023-05-28T00:00:00',
+    inicio: '2023-06-04T00:00:00',
     periodo: 'AMBOS',
     equipe: {
       nome: 'cbc19b07662418d5f14cc55657295924',
@@ -133,7 +133,7 @@ export const FALLBACK = [
     id: '0dd9d89c-a6d9-4eb5-a301-3afa45c5c1cb',
     ministerio: 'MUSICA',
     nome: 'Louvor',
-    inicio: '2023-05-21T00:00:00',
+    inicio: '2023-05-28T00:00:00',
     periodo: 'AMBOS',
     equipe: {
       nome: 'b917bb856461bf8ab90e763247057091',
@@ -146,7 +146,7 @@ export const FALLBACK = [
     id: '94847dc8-1132-4df2-801f-60372f4a1afa',
     ministerio: 'MOSAIKIDS',
     nome: 'História',
-    inicio: '2023-05-21T10:00:00',
+    inicio: '2023-05-28T10:00:00',
     periodo: 'EBD',
     equipe: {
       nome: '7d54d9da656fa80e4e5a5230e0a2a549',
@@ -159,7 +159,7 @@ export const FALLBACK = [
     id: 'd059bcd2-286b-4f1d-833c-9a1e5f8c0f49',
     ministerio: 'MOSAIKIDS',
     nome: 'História',
-    inicio: '2023-05-21T19:00:00',
+    inicio: '2023-05-28T19:00:00',
     periodo: 'CULTO',
     equipe: {
       nome: 'e97c3ea3327b3a873542e7e57a95f567',
@@ -172,7 +172,7 @@ export const FALLBACK = [
     id: '2b7b4471-1d47-4063-9d38-3b124486367a',
     ministerio: 'MOSAIKIDS',
     nome: 'Atividades',
-    inicio: '2023-05-21T19:00:00',
+    inicio: '2023-05-28T19:00:00',
     periodo: 'CULTO',
     equipe: {
       nome: 'da4fd8a50d64f47b1bac8b9a28e787cc',
@@ -185,7 +185,7 @@ export const FALLBACK = [
     id: '26822e01-e17c-4cd6-81fd-5bd81023d8db',
     ministerio: 'MOSAIKIDS',
     nome: 'História',
-    inicio: '2023-05-21T00:00:00',
+    inicio: '2023-05-28T00:00:00',
     periodo: 'AMBOS',
     equipe: {
       nome: '70c8a0bcb08f998d8057de0d24c0dd88',

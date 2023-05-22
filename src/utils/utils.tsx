@@ -71,7 +71,7 @@ export function formatDatePT(dateString: string): string {
     month: 'long',
     year: 'numeric',
   };
-  const date = new Date(dateString);
+  const date = new Date(dateString.concat('T00:00'));
   const formattedDate = date.toLocaleDateString('pt-BR', options);
   const capitalizedMonth = formattedDate.replace(/(\b\w)/gi, (match) =>
     match.toUpperCase(),

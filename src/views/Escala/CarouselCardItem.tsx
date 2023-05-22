@@ -28,9 +28,6 @@ const CarouselCardItem = ({item, index}: EscalaItem) => {
   const styles = getStyles(isNextDomingo);
   const grupos = groupByLocal(escalas);
 
-  console.log(dia);
-  console.log(new Date(dia));
-
   return (
     <View style={styles.container} key={index}>
       <Text allowFontScaling={false} style={styles.white}>
@@ -61,41 +58,38 @@ const CarouselCardItem = ({item, index}: EscalaItem) => {
                       {values.map((value, i) => {
                         const {equipe, nome} = value;
                         const {lider, participantes} = equipe;
+                        const result = participantes.join(', ');
 
                         return (
-                          <View key={`${equipe}-${i}`}>
-                            <View style={styles.liderMultipleEquipe}>
-                              <Text style={styles.equipe}>{nome}</Text>
-                              {participantes.length === 1 ? (
+                          <View key={`${nome}-${i}`}>
+                            {participantes.length === 1 ? (
+                              <View style={styles.liderMultipleEquipe}>
+                                <Text style={styles.equipe}>{nome}</Text>
                                 <Text
                                   allowFontScaling={false}
                                   style={styles.equipe}>
                                   {` - ${participantes[0]}`}
                                 </Text>
-                              ) : (
-                                participantes.map((participante, ind) => {
-                                  return (
-                                    <View key={`${equipe}-${ind}`}>
-                                      <View style={styles.liderMultipleEquipe}>
-                                        <Text style={styles.liderEquipe}>
-                                          LIDER:
-                                        </Text>
-                                        <Text style={styles.inicioLider}>
-                                          {lider}
-                                        </Text>
-                                      </View>
-
-                                      <Text
-                                        allowFontScaling={false}
-                                        style={styles.equipe}
-                                        key={participante}>
-                                        {` - ${participante}`}
-                                      </Text>
-                                    </View>
-                                  );
-                                })
-                              )}
-                            </View>
+                              </View>
+                            ) : (
+                              <View style={styles.espace}>
+                                <Text style={styles.inicioLider}>{nome}</Text>
+                                <View style={styles.liderMultipleEquipe}>
+                                  <Text style={styles.liderEquipe}>Lider:</Text>
+                                  <Text style={styles.liderEquipe}>
+                                    {lider}
+                                  </Text>
+                                </View>
+                                <View style={styles.liderMultipleEquipe}>
+                                  <Text style={styles.liderEquipe}>
+                                    Equipe:
+                                  </Text>
+                                  <Text style={styles.liderEquipe}>
+                                    {result}
+                                  </Text>
+                                </View>
+                              </View>
+                            )}
                           </View>
                         );
                       })}
@@ -187,6 +181,9 @@ const getStyles = (isNextDomingo: boolean) => {
       marginTop: 12,
       marginBottom: 10,
       marginLeft: 19,
+    },
+    espace: {
+      marginTop: 5,
     },
   });
 };
