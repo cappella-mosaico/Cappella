@@ -1,14 +1,13 @@
 import React from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import {
-  BLACK,
   FONT_AVENIR_BLACK,
   FONT_AVENIR_ROMAN,
-  WHITE,
   WOODSMOKE,
 } from '../../styles/styles';
 import {Escala} from '.';
 import {joinPeriodoValues} from '../../utils/utils';
+import CardsWrappers from './CardsWrappers';
 
 interface Grupo {
   local: string;
@@ -30,132 +29,111 @@ const SingleGrupos = ({local, values}: Grupo) => {
         ]}>
         {local.toUpperCase()}
       </Text>
-      <View style={styles.containerCards}>
-        <View style={styles.containerTexts}>
-          {groupedPeriodos.map((groupPeriodo, groupPeriodoIndex) => {
-            const {periodo, values} = groupPeriodo;
+      <CardsWrappers>
+        {groupedPeriodos.map((groupPeriodo, groupPeriodoIndex) => {
+          const {periodo, values} = groupPeriodo;
 
-            return (
-              <View key={`${periodo}-${groupPeriodoIndex}`}>
-                <Text
-                  style={[
-                    styles.periodo,
-                    styles.fontAvenirBlack,
-                    styles.fontSize12,
-                    styles.woodSmoke,
-                  ]}>
-                  {periodo.toUpperCase()}
-                </Text>
+          return (
+            <View key={`${periodo}-${groupPeriodoIndex}`}>
+              <Text
+                style={[
+                  styles.periodo,
+                  styles.fontAvenirBlack,
+                  styles.fontSize12,
+                  styles.woodSmoke,
+                ]}>
+                {periodo.toUpperCase()}
+              </Text>
 
-                {values.map((value, i) => {
-                  const {equipe, nome} = value;
-                  const {lider, participantes} = equipe;
+              {values.map((value, i) => {
+                const {equipe, nome} = value;
+                const {lider, participantes} = equipe;
 
-                  return (
-                    <View key={`${nome}-${i}`}>
-                      <Text style={[styles.woodSmoke, styles.fontSize12]}>
-                        {nome}
+                return (
+                  <View key={`${nome}-${i}`}>
+                    <Text style={[styles.woodSmoke, styles.fontSize12]}>
+                      {nome}
+                    </Text>
+                    <View
+                      style={[styles.liderMultipleEquipe, styles.marginTop5]}>
+                      <Text
+                        style={[
+                          styles.liderEquipe,
+                          styles.fontAvenirBlack,
+                          styles.fontSize12,
+                          styles.woodSmoke,
+                          styles.marginTop5,
+                        ]}>
+                        Lider:
                       </Text>
-                      <View
-                        style={[styles.liderMultipleEquipe, styles.marginTop5]}>
-                        <Text
-                          style={[
-                            styles.liderEquipe,
-                            styles.fontAvenirBlack,
-                            styles.fontSize12,
-                            styles.woodSmoke,
-                            styles.marginTop5,
-                          ]}>
-                          Lider:
-                        </Text>
-                        <Text
-                          style={[
-                            styles.liderEquipe,
-                            styles.fontAvenirRoman,
-                            styles.fontSize12,
-                            styles.woodSmoke,
-                            styles.marginTop5,
-                          ]}>
-                          {lider}
-                        </Text>
-                      </View>
-                      <View style={styles.marginTop5}>
-                        <Text
-                          style={[
-                            styles.marginTop5,
-                            styles.fontAvenirBlack,
-                            styles.fontSize12,
-                            styles.woodSmoke,
-                          ]}>
-                          Equipe:
-                        </Text>
-                        {participantes.length === 1 ? (
-                          <View
-                            style={[
-                              styles.liderMultipleEquipe,
-                              styles.marginTop5,
-                            ]}>
-                            <Text
-                              allowFontScaling={false}
-                              style={[
-                                styles.marginTop5,
-                                styles.fontAvenirRoman,
-                                styles.fontSize12,
-                                styles.woodSmoke,
-                              ]}>
-                              {` - ${participantes[0]}`}
-                            </Text>
-                          </View>
-                        ) : (
-                          <FlatList
-                            numColumns={1}
-                            data={participantes}
-                            renderItem={({item}) => (
-                              <View style={styles.marginTop5} key={item}>
-                                <Text
-                                  style={[
-                                    styles.woodSmoke,
-                                    styles.fontAvenirRoman,
-                                    styles.fontSize12,
-                                  ]}>{`\u2022 ${item}`}</Text>
-                              </View>
-                            )}
-                            keyExtractor={(item, index) => `${item}${index}`}
-                          />
-                        )}
-                      </View>
+                      <Text
+                        style={[
+                          styles.liderEquipe,
+                          styles.fontAvenirRoman,
+                          styles.fontSize12,
+                          styles.woodSmoke,
+                          styles.marginTop5,
+                        ]}>
+                        {lider}
+                      </Text>
                     </View>
-                  );
-                })}
-              </View>
-            );
-          })}
-        </View>
-      </View>
+                    <View style={styles.marginTop5}>
+                      <Text
+                        style={[
+                          styles.marginTop5,
+                          styles.fontAvenirBlack,
+                          styles.fontSize12,
+                          styles.woodSmoke,
+                        ]}>
+                        Equipe:
+                      </Text>
+                      {participantes.length === 1 ? (
+                        <View
+                          style={[
+                            styles.liderMultipleEquipe,
+                            styles.marginTop5,
+                          ]}>
+                          <Text
+                            allowFontScaling={false}
+                            style={[
+                              styles.marginTop5,
+                              styles.fontAvenirRoman,
+                              styles.fontSize12,
+                              styles.woodSmoke,
+                            ]}>
+                            {` - ${participantes[0]}`}
+                          </Text>
+                        </View>
+                      ) : (
+                        <FlatList
+                          numColumns={1}
+                          data={participantes}
+                          renderItem={({item}) => (
+                            <View style={styles.marginTop5} key={item}>
+                              <Text
+                                style={[
+                                  styles.woodSmoke,
+                                  styles.fontAvenirRoman,
+                                  styles.fontSize12,
+                                ]}>{`\u2022 ${item}`}</Text>
+                            </View>
+                          )}
+                          keyExtractor={(item, index) => `${item}${index}`}
+                        />
+                      )}
+                    </View>
+                  </View>
+                );
+              })}
+            </View>
+          );
+        })}
+      </CardsWrappers>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  containerCards: {
-    backgroundColor: WHITE,
-    borderRadius: 8,
-    shadowColor: BLACK,
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
-    elevation: 7,
-    marginLeft: 11,
-    marginRight: 11,
-  },
-  containerTexts: {
-    marginLeft: 25,
-    marginBottom: 15,
-    marginTop: 10,
-  },
   titulo: {
     marginTop: 12,
     marginBottom: 10,
