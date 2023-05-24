@@ -31,8 +31,12 @@ const CarouselCardItem = ({item, index}: EscalaItem) => {
       </Text>
 
       {grupos.length > 1 ? (
-        grupos.map((grupo) => {
-          return <MultipleGrupos local={grupo.local} values={grupo.values} />;
+        grupos.map((grupo, grupoIndex) => {
+          return (
+            <View key={grupoIndex}>
+              <MultipleGrupos local={grupo.local} values={grupo.values} />
+            </View>
+          );
         })
       ) : (
         <SingleGrupos local={grupos[0].local} values={grupos[0].values} />

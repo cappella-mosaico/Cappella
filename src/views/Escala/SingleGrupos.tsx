@@ -20,9 +20,9 @@ const SingleGrupos = ({local, values}: Grupo) => {
     <>
       <Local local={local} />
       {groupedPeriodos.length > 1 ? (
-        groupedPeriodos.map((groupPeriodo) => {
+        groupedPeriodos.map((groupPeriodo, index) => {
           return (
-            <View style={styles.marginTop5}>
+            <View key={index} style={styles.marginTop5}>
               <CardsWrappers>
                 <Escalas
                   periodo={groupPeriodo.periodo}

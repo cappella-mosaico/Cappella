@@ -15,7 +15,7 @@ const Escalas = ({periodo, groupedEscalas}: Grupo) => {
   const styles = EscalaCarouselStyles;
 
   return (
-    <>
+    <View key={periodo}>
       <Periodo periodo={periodo} />
 
       {groupedEscalas.map((value, i) => {
@@ -67,7 +67,7 @@ const Escalas = ({periodo, groupedEscalas}: Grupo) => {
           </View>
         );
       })}
-    </>
+    </View>
   );
 };
 

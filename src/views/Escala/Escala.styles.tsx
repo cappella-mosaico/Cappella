@@ -27,7 +27,7 @@ export default StyleSheet.create({
     shadowOpacity: 0.2,
     elevation: 2,
     marginTop: 15,
-    marginBottom: 15,
+    marginBottom: 40,
   },
   botaoTexto: {
     fontFamily: FONT_GILLSANS,

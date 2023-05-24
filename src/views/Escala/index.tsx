@@ -76,10 +76,10 @@ export const Escala = () => {
   }, []);
 
   useEffect(() => {
-    if (escalaList.length > 0) {
-      setActiveMinisterio(escalaList[0].ministerio);
+    if (escalaList.length > 0 && !activeMinisterio) {
+      setActiveMinisterio(escalaList[menuIndex].ministerio);
     }
-  }, [escalaList]);
+  }, [escalaList, menuIndex, activeMinisterio]);
 
   const escalaMenuItem = ({item, index}: MenuEscalaItem) => {
     const title = (MINISTERIO as any)[item.ministerio];
@@ -112,7 +112,9 @@ export const Escala = () => {
       return 0;
     });
 
-  const menuData = [...new Map(data.map((m) => [m.ministerio, m])).values()];
+  const menuData = [
+    ...new Map(escalaList.map((m) => [m.ministerio, m])).values(),
+  ];
   let cardsData = data.filter(
     (escala) => escala.ministerio === activeMinisterio,
   );
