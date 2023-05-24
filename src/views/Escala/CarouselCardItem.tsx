@@ -11,6 +11,10 @@ import {EscalaByDay, ITEM_WIDTH} from '.';
 import {domingoCheck, formatDatePT, groupByLocal} from '../../utils/utils';
 import MultipleGrupos from './MultipleGrupos';
 import SingleGrupos from './SingleGrupos';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 interface EscalaItem {
   item: EscalaByDay;
@@ -51,7 +55,7 @@ const getStyles = (isNextDomingo: boolean) => {
       backgroundColor: isNextDomingo ? LIGHTTITLE : CHELSEACUCUMBER,
       borderRadius: 8,
       width: ITEM_WIDTH,
-      paddingBottom: 40,
+      paddingBottom: hp('2%'),
       shadowColor: BLACK,
       shadowOffset: {
         width: 0,
@@ -63,11 +67,11 @@ const getStyles = (isNextDomingo: boolean) => {
     },
     white: {
       color: WHITE,
-      fontSize: 12,
+      fontSize: wp('3%'),
       fontFamily: FONT_AVENIR_BLACK,
-      marginTop: 12,
-      marginBottom: 10,
-      marginLeft: 19,
+      marginTop: hp('2%'),
+      marginBottom: hp('2%'),
+      marginLeft: wp('4%'),
     },
   });
 };

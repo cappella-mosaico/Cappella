@@ -10,13 +10,8 @@ import {
 } from 'react-native-responsive-screen';
 
 export default StyleSheet.create({
-  local: {
-    marginTop: 12,
-    marginBottom: 10,
-    marginLeft: 19,
-  },
   liderEquipe: {
-    marginRight: 10,
+    marginRight: wp('2%'),
   },
   liderMultipleEquipe: {
     display: 'flex',
@@ -29,24 +24,24 @@ export default StyleSheet.create({
     fontFamily: FONT_AVENIR_ROMAN,
   },
   fontSize12: {
-    fontSize: 12,
+    fontSize: wp('3.3%'),
   },
   woodSmoke: {
     color: WOODSMOKE,
   },
   marginTop5: {
-    marginTop: 5,
+    marginTop: hp('0.6%'),
   },
   marginBottom5: {
-    marginBottom: 5,
+    marginBottom: hp('0.6%'),
   },
   titulo: {
-    marginTop: 12,
-    marginBottom: 10,
-    marginLeft: 19,
+    marginTop: hp('1.5%'),
+    marginBottom: hp('1%'),
+    marginLeft: wp('4%'),
   },
   periodo: {
-    marginTop: 10,
-    marginBottom: 5,
+    marginTop: hp('1%'),
+    marginBottom: hp('0.6%'),
   },
 });

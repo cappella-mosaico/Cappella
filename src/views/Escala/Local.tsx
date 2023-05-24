@@ -13,7 +13,7 @@ const Local = ({local}: Props) => {
     <Text
       allowFontScaling={false}
       style={[
-        styles.local,
+        styles.titulo,
         styles.fontAvenirBlack,
         styles.fontSize12,
         styles.woodSmoke,
