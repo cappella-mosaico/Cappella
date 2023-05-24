@@ -15,7 +15,9 @@ export const EquipeItem = ({participantes}: Props) => {
       data={participantes}
       renderItem={({item}) => (
         <View style={styles.containerEquipes} key={item}>
-          <Text style={styles.equipe}>{item}</Text>
+          <Text allowFontScaling={false} style={styles.equipe}>
+            {item}
+          </Text>
         </View>
       )}
       keyExtractor={(item) => item}

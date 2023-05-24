@@ -16,6 +16,7 @@ const SinglePeriodo = ({periodo, groupedEscalas}: Grupo) => {
   return (
     <View key={periodo}>
       <Text
+        allowFontScaling={false}
         style={[
           styles.periodo,
           styles.fontAvenirBlack,
@@ -31,9 +32,14 @@ const SinglePeriodo = ({periodo, groupedEscalas}: Grupo) => {
 
         return (
           <View key={`${nome}-${i}`}>
-            <Text style={[styles.woodSmoke, styles.fontSize12]}>{nome}</Text>
+            <Text
+              allowFontScaling={false}
+              style={[styles.woodSmoke, styles.fontSize12]}>
+              {nome}
+            </Text>
             <View style={[styles.liderMultipleEquipe, styles.marginTop5]}>
               <Text
+                allowFontScaling={false}
                 style={[
                   styles.liderEquipe,
                   styles.fontAvenirBlack,
@@ -44,6 +50,7 @@ const SinglePeriodo = ({periodo, groupedEscalas}: Grupo) => {
                 Lider:
               </Text>
               <Text
+                allowFontScaling={false}
                 style={[
                   styles.liderEquipe,
                   styles.fontAvenirRoman,
@@ -56,6 +63,7 @@ const SinglePeriodo = ({periodo, groupedEscalas}: Grupo) => {
             </View>
             <View style={styles.marginTop5}>
               <Text
+                allowFontScaling={false}
                 style={[
                   styles.marginTop5,
                   styles.fontAvenirBlack,
@@ -84,6 +92,7 @@ const SinglePeriodo = ({periodo, groupedEscalas}: Grupo) => {
                   renderItem={({item}) => (
                     <View style={styles.marginTop5} key={item}>
                       <Text
+                        allowFontScaling={false}
                         style={[
                           styles.woodSmoke,
                           styles.fontAvenirRoman,

@@ -36,6 +36,7 @@ const MultipleGrupos = ({local, values}: Grupo) => {
           return (
             <View key={`${periodo}-${groupPeriodoIndex}`}>
               <Text
+                allowFontScaling={false}
                 style={[
                   styles.periodo,
                   styles.fontAvenirBlack,
@@ -55,6 +56,7 @@ const MultipleGrupos = ({local, values}: Grupo) => {
                     {participantes.length === 1 ? (
                       <View style={styles.liderMultipleEquipe}>
                         <Text
+                          allowFontScaling={false}
                           style={[
                             styles.marginTop5,
                             styles.fontAvenirRoman,
@@ -77,6 +79,7 @@ const MultipleGrupos = ({local, values}: Grupo) => {
                     ) : (
                       <View key={`${lider}${i}`} style={styles.marginTop5}>
                         <Text
+                          allowFontScaling={false}
                           style={[
                             styles.woodSmoke,
                             styles.fontSize12,
@@ -86,6 +89,7 @@ const MultipleGrupos = ({local, values}: Grupo) => {
                         </Text>
                         <View style={styles.liderMultipleEquipe}>
                           <Text
+                            allowFontScaling={false}
                             style={[
                               styles.liderEquipe,
                               styles.fontAvenirBlack,
@@ -96,6 +100,7 @@ const MultipleGrupos = ({local, values}: Grupo) => {
                             Lider:
                           </Text>
                           <Text
+                            allowFontScaling={false}
                             style={[
                               styles.liderEquipe,
                               styles.fontAvenirBlack,
@@ -108,6 +113,7 @@ const MultipleGrupos = ({local, values}: Grupo) => {
                         </View>
                         <View style={styles.liderMultipleEquipe}>
                           <Text
+                            allowFontScaling={false}
                             style={[
                               styles.liderEquipe,
                               styles.fontAvenirBlack,
@@ -118,6 +124,7 @@ const MultipleGrupos = ({local, values}: Grupo) => {
                             Equipe:
                           </Text>
                           <Text
+                            allowFontScaling={false}
                             style={[
                               styles.liderEquipe,
                               styles.fontAvenirBlack,

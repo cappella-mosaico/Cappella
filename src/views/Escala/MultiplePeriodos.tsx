@@ -19,6 +19,7 @@ const MultiplePeriodos = ({groupPeriodo}: Grupo) => {
     <View style={styles.marginTop5}>
       <CardsWrappers>
         <Text
+          allowFontScaling={false}
           style={[
             styles.periodo,
             styles.fontAvenirBlack,
@@ -35,11 +36,14 @@ const MultiplePeriodos = ({groupPeriodo}: Grupo) => {
 
             return (
               <View key={`${nome}-${i}`}>
-                <Text style={[styles.woodSmoke, styles.fontSize12]}>
+                <Text
+                  allowFontScaling={false}
+                  style={[styles.woodSmoke, styles.fontSize12]}>
                   {nome}
                 </Text>
                 <View style={[styles.liderMultipleEquipe, styles.marginTop5]}>
                   <Text
+                    allowFontScaling={false}
                     style={[
                       styles.liderEquipe,
                       styles.fontAvenirBlack,
@@ -50,6 +54,7 @@ const MultiplePeriodos = ({groupPeriodo}: Grupo) => {
                     Lider:
                   </Text>
                   <Text
+                    allowFontScaling={false}
                     style={[
                       styles.liderEquipe,
                       styles.fontAvenirRoman,
@@ -62,6 +67,7 @@ const MultiplePeriodos = ({groupPeriodo}: Grupo) => {
                 </View>
                 <View style={styles.marginTop5}>
                   <Text
+                    allowFontScaling={false}
                     style={[
                       styles.marginTop5,
                       styles.fontAvenirBlack,
@@ -91,6 +97,7 @@ const MultiplePeriodos = ({groupPeriodo}: Grupo) => {
                       renderItem={({item}) => (
                         <View style={styles.marginTop5} key={item}>
                           <Text
+                            allowFontScaling={false}
                             style={[
                               styles.woodSmoke,
                               styles.fontAvenirRoman,
