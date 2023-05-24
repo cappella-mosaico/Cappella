@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import {Text, StyleSheet} from 'react-native';
 import {
   FONT_AVENIR_BLACK,
   FONT_AVENIR_ROMAN,
@@ -8,6 +8,8 @@ import {
 import {Escala} from '.';
 import {joinPeriodoValues} from '../../utils/utils';
 import CardsWrappers from './CardsWrappers';
+import SinglePeriodo from './SinglePeriodo';
+import MultiplePeriodos from './MultiplePeriodos';
 
 interface Grupo {
   local: string;
@@ -29,106 +31,19 @@ const SingleGrupos = ({local, values}: Grupo) => {
         ]}>
         {local.toUpperCase()}
       </Text>
-      <CardsWrappers>
-        {groupedPeriodos.map((groupPeriodo, groupPeriodoIndex) => {
-          const {periodo, groupedEscalas} = groupPeriodo;
 
-          return (
-            <View key={`${periodo}-${groupPeriodoIndex}`}>
-              <Text
-                style={[
-                  styles.periodo,
-                  styles.fontAvenirBlack,
-                  styles.fontSize12,
-                  styles.woodSmoke,
-                ]}>
-                {periodo.toUpperCase()}
-              </Text>
-
-              {groupedEscalas.map((value, i) => {
-                const {equipe, nome} = value;
-                const {lider, participantes} = equipe;
-
-                return (
-                  <View key={`${nome}-${i}`}>
-                    <Text style={[styles.woodSmoke, styles.fontSize12]}>
-                      {nome}
-                    </Text>
-                    <View
-                      style={[styles.liderMultipleEquipe, styles.marginTop5]}>
-                      <Text
-                        style={[
-                          styles.liderEquipe,
-                          styles.fontAvenirBlack,
-                          styles.fontSize12,
-                          styles.woodSmoke,
-                          styles.marginTop5,
-                        ]}>
-                        Lider:
-                      </Text>
-                      <Text
-                        style={[
-                          styles.liderEquipe,
-                          styles.fontAvenirRoman,
-                          styles.fontSize12,
-                          styles.woodSmoke,
-                          styles.marginTop5,
-                        ]}>
-                        {lider}
-                      </Text>
-                    </View>
-                    <View style={styles.marginTop5}>
-                      <Text
-                        style={[
-                          styles.marginTop5,
-                          styles.fontAvenirBlack,
-                          styles.fontSize12,
-                          styles.woodSmoke,
-                        ]}>
-                        Equipe:
-                      </Text>
-                      {participantes.length === 1 ? (
-                        <View
-                          style={[
-                            styles.liderMultipleEquipe,
-                            styles.marginTop5,
-                          ]}>
-                          <Text
-                            allowFontScaling={false}
-                            style={[
-                              styles.marginTop5,
-                              styles.fontAvenirRoman,
-                              styles.fontSize12,
-                              styles.woodSmoke,
-                            ]}>
-                            {` - ${participantes[0]}`}
-                          </Text>
-                        </View>
-                      ) : (
-                        <FlatList
-                          numColumns={1}
-                          data={participantes}
-                          renderItem={({item}) => (
-                            <View style={styles.marginTop5} key={item}>
-                              <Text
-                                style={[
-                                  styles.woodSmoke,
-                                  styles.fontAvenirRoman,
-                                  styles.fontSize12,
-                                ]}>{`\u2022 ${item}`}</Text>
-                            </View>
-                          )}
-                          keyExtractor={(item, index) => `${item}${index}`}
-                        />
-                      )}
-                    </View>
-                  </View>
-                );
-              })}
-            </View>
-          );
-        })}
-      </CardsWrappers>
+      {groupedPeriodos.length > 1 ? (
+        groupedPeriodos.map((groupPeriodo) => {
+          return <MultiplePeriodos groupPeriodo={groupPeriodo} />;
+        })
+      ) : (
+        <CardsWrappers>
+          <SinglePeriodo
+            periodo={groupedPeriodos[0].periodo}
+            groupedEscalas={groupedPeriodos[0].groupedEscalas}
+          />
+        </CardsWrappers>
+      )}
     </>
   );
 };
