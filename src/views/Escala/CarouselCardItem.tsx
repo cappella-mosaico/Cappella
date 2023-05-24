@@ -10,12 +10,9 @@ import {
   WOODSMOKE,
 } from '../../styles/styles';
 import {EscalaByDay, ITEM_WIDTH} from '.';
-import {
-  domingoCheck,
-  formatDatePT,
-  groupByLocal,
-  joinPeriodoValues,
-} from '../../utils/utils';
+import {domingoCheck, formatDatePT, groupByLocal} from '../../utils/utils';
+import MultipleGrupos from './MultipleGrupos';
+import SingleGrupos from './SingleGrupos';
 
 interface EscalaItem {
   item: EscalaByDay;
@@ -35,72 +32,13 @@ const CarouselCardItem = ({item, index}: EscalaItem) => {
         {formatDatePT(dia)}
       </Text>
 
-      {grupos.map((grupo, grupoIndex) => {
-        const {local, values} = grupo;
-        const groupedPeriodos = joinPeriodoValues(values);
-
-        return (
-          <View key={`${local}-${grupoIndex}`}>
-            <Text allowFontScaling={false} style={styles.titulo}>
-              {local.toUpperCase()}
-            </Text>
-            <View style={styles.containerCards}>
-              <View style={styles.containerTexts}>
-                {groupedPeriodos.map((groupPeriodo, groupPeriodoIndex) => {
-                  const {periodo, values} = groupPeriodo;
-
-                  return (
-                    <View key={`${periodo}-${groupPeriodoIndex}`}>
-                      <Text style={styles.periodo}>
-                        {periodo.toUpperCase()}
-                      </Text>
-
-                      {values.map((value, i) => {
-                        const {equipe, nome} = value;
-                        const {lider, participantes} = equipe;
-                        const result = participantes.join(', ');
-
-                        return (
-                          <View key={`${nome}-${i}`}>
-                            {participantes.length === 1 ? (
-                              <View style={styles.liderMultipleEquipe}>
-                                <Text style={styles.equipe}>{nome}</Text>
-                                <Text
-                                  allowFontScaling={false}
-                                  style={styles.equipe}>
-                                  {` - ${participantes[0]}`}
-                                </Text>
-                              </View>
-                            ) : (
-                              <View style={styles.espace}>
-                                <Text style={styles.inicioLider}>{nome}</Text>
-                                <View style={styles.liderMultipleEquipe}>
-                                  <Text style={styles.liderEquipe}>Lider:</Text>
-                                  <Text style={styles.liderEquipe}>
-                                    {lider}
-                                  </Text>
-                                </View>
-                                <View style={styles.liderMultipleEquipe}>
-                                  <Text style={styles.liderEquipe}>
-                                    Equipe:
-                                  </Text>
-                                  <Text style={styles.liderEquipe}>
-                                    {result}
-                                  </Text>
-                                </View>
-                              </View>
-                            )}
-                          </View>
-                        );
-                      })}
-                    </View>
-                  );
-                })}
-              </View>
-            </View>
-          </View>
-        );
-      })}
+      {grupos.length > 1 ? (
+        grupos.map((grupo) => {
+          return <MultipleGrupos local={grupo.local} values={grupo.values} />;
+        })
+      ) : (
+        <SingleGrupos local={grupos[0].local} values={grupos[0].values} />
+      )}
     </View>
   );
 };
