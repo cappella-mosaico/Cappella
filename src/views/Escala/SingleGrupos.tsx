@@ -1,15 +1,10 @@
 import React from 'react';
-import {Text, StyleSheet} from 'react-native';
-import {
-  FONT_AVENIR_BLACK,
-  FONT_AVENIR_ROMAN,
-  WOODSMOKE,
-} from '../../styles/styles';
 import {Escala} from '.';
 import {joinPeriodoValues} from '../../utils/utils';
 import CardsWrappers from './CardsWrappers';
-import SinglePeriodo from './SinglePeriodo';
-import MultiplePeriodos from './MultiplePeriodos';
+import Local from './Local';
+import Escalas from './Escalas';
+import {StyleSheet, View} from 'react-native';
 
 interface Grupo {
   local: string;
@@ -21,24 +16,23 @@ const SingleGrupos = ({local, values}: Grupo) => {
 
   return (
     <>
-      <Text
-        allowFontScaling={false}
-        style={[
-          styles.titulo,
-          styles.fontAvenirBlack,
-          styles.fontSize12,
-          styles.woodSmoke,
-        ]}>
-        {local.toUpperCase()}
-      </Text>
-
+      <Local local={local} />
       {groupedPeriodos.length > 1 ? (
         groupedPeriodos.map((groupPeriodo) => {
-          return <MultiplePeriodos groupPeriodo={groupPeriodo} />;
+          return (
+            <View style={styles.marginTop5}>
+              <CardsWrappers>
+                <Escalas
+                  periodo={groupPeriodo.periodo}
+                  groupedEscalas={groupPeriodo.groupedEscalas}
+                />
+              </CardsWrappers>
+            </View>
+          );
         })
       ) : (
         <CardsWrappers>
-          <SinglePeriodo
+          <Escalas
             periodo={groupedPeriodos[0].periodo}
             groupedEscalas={groupedPeriodos[0].groupedEscalas}
           />
@@ -49,34 +43,6 @@ const SingleGrupos = ({local, values}: Grupo) => {
 };
 
 const styles = StyleSheet.create({
-  titulo: {
-    marginTop: 12,
-    marginBottom: 10,
-    marginLeft: 19,
-  },
-  periodo: {
-    marginTop: 10,
-    marginBottom: 5,
-  },
-  liderEquipe: {
-    marginRight: 10,
-  },
-  liderMultipleEquipe: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  fontAvenirBlack: {
-    fontFamily: FONT_AVENIR_BLACK,
-  },
-  fontAvenirRoman: {
-    fontFamily: FONT_AVENIR_ROMAN,
-  },
-  fontSize12: {
-    fontSize: 12,
-  },
-  woodSmoke: {
-    color: WOODSMOKE,
-  },
   marginTop5: {
     marginTop: 5,
   },

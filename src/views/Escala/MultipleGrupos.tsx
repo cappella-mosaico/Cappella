@@ -8,6 +8,10 @@ import {
 import {Escala} from '.';
 import {joinPeriodoValues} from '../../utils/utils';
 import CardsWrappers from './CardsWrappers';
+import Local from './Local';
+import Periodo from './Periodo';
+import Participante from './Participante';
+import Lider from './Lider';
 
 interface Grupo {
   local: string;
@@ -19,32 +23,14 @@ const MultipleGrupos = ({local, values}: Grupo) => {
 
   return (
     <>
-      <Text
-        allowFontScaling={false}
-        style={[
-          styles.titulo,
-          styles.fontAvenirBlack,
-          styles.fontSize12,
-          styles.woodSmoke,
-        ]}>
-        {local.toUpperCase()}
-      </Text>
+      <Local local={local} />
       <CardsWrappers>
         {groupedPeriodos.map((groupPeriodo, groupPeriodoIndex) => {
           const {periodo, groupedEscalas} = groupPeriodo;
 
           return (
             <View key={`${periodo}-${groupPeriodoIndex}`}>
-              <Text
-                allowFontScaling={false}
-                style={[
-                  styles.periodo,
-                  styles.fontAvenirBlack,
-                  styles.fontSize12,
-                  styles.woodSmoke,
-                ]}>
-                {periodo.toUpperCase()}
-              </Text>
+              <Periodo periodo={periodo} />
 
               {groupedEscalas.map((value, i) => {
                 const {equipe, nome} = value;
@@ -65,16 +51,7 @@ const MultipleGrupos = ({local, values}: Grupo) => {
                           ]}>
                           {nome}
                         </Text>
-                        <Text
-                          allowFontScaling={false}
-                          style={[
-                            styles.marginTop5,
-                            styles.fontAvenirRoman,
-                            styles.fontSize12,
-                            styles.woodSmoke,
-                          ]}>
-                          {` - ${participantes[0]}`}
-                        </Text>
+                        <Participante participante={participantes[0]} />
                       </View>
                     ) : (
                       <View key={`${lider}${i}`} style={styles.marginTop5}>
@@ -87,30 +64,7 @@ const MultipleGrupos = ({local, values}: Grupo) => {
                           ]}>
                           {nome}
                         </Text>
-                        <View style={styles.liderMultipleEquipe}>
-                          <Text
-                            allowFontScaling={false}
-                            style={[
-                              styles.liderEquipe,
-                              styles.fontAvenirBlack,
-                              styles.fontSize12,
-                              styles.woodSmoke,
-                              styles.marginTop5,
-                            ]}>
-                            Lider:
-                          </Text>
-                          <Text
-                            allowFontScaling={false}
-                            style={[
-                              styles.liderEquipe,
-                              styles.fontAvenirBlack,
-                              styles.fontSize12,
-                              styles.woodSmoke,
-                              styles.marginTop5,
-                            ]}>
-                            {lider}
-                          </Text>
-                        </View>
+                        <Lider lider={lider} />
                         <View style={styles.liderMultipleEquipe}>
                           <Text
                             allowFontScaling={false}
@@ -149,15 +103,6 @@ const MultipleGrupos = ({local, values}: Grupo) => {
 };
 
 const styles = StyleSheet.create({
-  titulo: {
-    marginTop: 12,
-    marginBottom: 10,
-    marginLeft: 19,
-  },
-  periodo: {
-    marginTop: 10,
-    marginBottom: 5,
-  },
   liderEquipe: {
     marginRight: 10,
   },

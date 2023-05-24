@@ -6,25 +6,19 @@ import {
   WOODSMOKE,
 } from '../../styles/styles';
 import {Escala} from '.';
+import Participante from './Participante';
+import Lider from './Lider';
+import Periodo from './Periodo';
 
 interface Grupo {
   periodo: string;
   groupedEscalas: Escala[];
 }
 
-const SinglePeriodo = ({periodo, groupedEscalas}: Grupo) => {
+const Escalas = ({periodo, groupedEscalas}: Grupo) => {
   return (
-    <View key={periodo}>
-      <Text
-        allowFontScaling={false}
-        style={[
-          styles.periodo,
-          styles.fontAvenirBlack,
-          styles.fontSize12,
-          styles.woodSmoke,
-        ]}>
-        {periodo.toUpperCase()}
-      </Text>
+    <>
+      <Periodo periodo={periodo} />
 
       {groupedEscalas.map((value, i) => {
         const {equipe, nome} = value;
@@ -37,30 +31,7 @@ const SinglePeriodo = ({periodo, groupedEscalas}: Grupo) => {
               style={[styles.woodSmoke, styles.fontSize12]}>
               {nome}
             </Text>
-            <View style={[styles.liderMultipleEquipe, styles.marginTop5]}>
-              <Text
-                allowFontScaling={false}
-                style={[
-                  styles.liderEquipe,
-                  styles.fontAvenirBlack,
-                  styles.fontSize12,
-                  styles.woodSmoke,
-                  styles.marginTop5,
-                ]}>
-                Lider:
-              </Text>
-              <Text
-                allowFontScaling={false}
-                style={[
-                  styles.liderEquipe,
-                  styles.fontAvenirRoman,
-                  styles.fontSize12,
-                  styles.woodSmoke,
-                  styles.marginTop5,
-                ]}>
-                {lider}
-              </Text>
-            </View>
+            <Lider lider={lider} />
             <View style={styles.marginTop5}>
               <Text
                 allowFontScaling={false}
@@ -74,16 +45,7 @@ const SinglePeriodo = ({periodo, groupedEscalas}: Grupo) => {
               </Text>
               {participantes.length === 1 ? (
                 <View style={[styles.liderMultipleEquipe, styles.marginTop5]}>
-                  <Text
-                    allowFontScaling={false}
-                    style={[
-                      styles.marginTop5,
-                      styles.fontAvenirRoman,
-                      styles.fontSize12,
-                      styles.woodSmoke,
-                    ]}>
-                    {` - ${participantes[0]}`}
-                  </Text>
+                  <Participante participante={participantes[0]} />
                 </View>
               ) : (
                 <FlatList
@@ -107,11 +69,16 @@ const SinglePeriodo = ({periodo, groupedEscalas}: Grupo) => {
           </View>
         );
       })}
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
+  titulo: {
+    marginTop: 12,
+    marginBottom: 10,
+    marginLeft: 19,
+  },
   periodo: {
     marginTop: 10,
     marginBottom: 5,
@@ -140,4 +107,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SinglePeriodo;
+export default Escalas;
