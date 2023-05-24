@@ -4,10 +4,8 @@ import {
   BLACK,
   CHELSEACUCUMBER,
   FONT_AVENIR_BLACK,
-  FONT_AVENIR_ROMAN,
   LIGHTTITLE,
   WHITE,
-  WOODSMOKE,
 } from '../../styles/styles';
 import {EscalaByDay, ITEM_WIDTH} from '.';
 import {domingoCheck, formatDatePT, groupByLocal} from '../../utils/utils';
@@ -59,59 +57,6 @@ const getStyles = (isNextDomingo: boolean) => {
       shadowRadius: 4.65,
       elevation: 7,
     },
-    containerCards: {
-      backgroundColor: WHITE,
-      borderRadius: 8,
-      shadowColor: BLACK,
-      shadowOffset: {
-        width: 0,
-        height: 3,
-      },
-      shadowOpacity: 0.29,
-      shadowRadius: 4.65,
-      elevation: 7,
-      marginLeft: 11,
-      marginRight: 11,
-    },
-    containerTexts: {
-      marginLeft: 25,
-      marginBottom: 15,
-      marginTop: 10,
-    },
-    titulo: {
-      color: WOODSMOKE,
-      fontSize: 12,
-      fontFamily: FONT_AVENIR_BLACK,
-      marginTop: 12,
-      marginBottom: 10,
-      marginLeft: 19,
-    },
-    periodo: {
-      color: WOODSMOKE,
-      fontSize: 12,
-      fontFamily: FONT_AVENIR_BLACK,
-      marginTop: 10,
-    },
-    equipe: {
-      color: WOODSMOKE,
-      fontSize: 12,
-    },
-    liderEquipe: {
-      color: WOODSMOKE,
-      fontFamily: FONT_AVENIR_ROMAN,
-      fontSize: 12,
-      marginRight: 10,
-    },
-    inicioLider: {
-      color: WOODSMOKE,
-      fontSize: 12,
-      fontFamily: FONT_AVENIR_BLACK,
-    },
-    liderMultipleEquipe: {
-      display: 'flex',
-      flexDirection: 'row',
-      marginTop: 5,
-    },
     white: {
       color: WHITE,
       fontSize: 12,
@@ -119,9 +64,6 @@ const getStyles = (isNextDomingo: boolean) => {
       marginTop: 12,
       marginBottom: 10,
       marginLeft: 19,
-    },
-    espace: {
-      marginTop: 5,
     },
   });
 };

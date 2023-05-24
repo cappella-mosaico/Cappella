@@ -1,14 +1,10 @@
 import React from 'react';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
-import {
-  FONT_AVENIR_BLACK,
-  FONT_AVENIR_ROMAN,
-  WOODSMOKE,
-} from '../../styles/styles';
+import {View, Text, FlatList} from 'react-native';
 import {Escala} from '.';
 import Participante from './Participante';
 import Lider from './Lider';
 import Periodo from './Periodo';
+import EscalaCarouselStyles from './EscalaCarousel.styles';
 
 interface Grupo {
   periodo: string;
@@ -16,6 +12,8 @@ interface Grupo {
 }
 
 const Escalas = ({periodo, groupedEscalas}: Grupo) => {
+  const styles = EscalaCarouselStyles;
+
   return (
     <>
       <Periodo periodo={periodo} />
@@ -72,39 +70,5 @@ const Escalas = ({periodo, groupedEscalas}: Grupo) => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  titulo: {
-    marginTop: 12,
-    marginBottom: 10,
-    marginLeft: 19,
-  },
-  periodo: {
-    marginTop: 10,
-    marginBottom: 5,
-  },
-  liderEquipe: {
-    marginRight: 10,
-  },
-  liderMultipleEquipe: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  fontAvenirBlack: {
-    fontFamily: FONT_AVENIR_BLACK,
-  },
-  fontAvenirRoman: {
-    fontFamily: FONT_AVENIR_ROMAN,
-  },
-  fontSize12: {
-    fontSize: 12,
-  },
-  woodSmoke: {
-    color: WOODSMOKE,
-  },
-  marginTop5: {
-    marginTop: 5,
-  },
-});
 
 export default Escalas;

@@ -1,12 +1,14 @@
 import React from 'react';
-import {Text, StyleSheet} from 'react-native';
-import {FONT_AVENIR_ROMAN, WOODSMOKE} from '../../styles/styles';
+import {Text} from 'react-native';
+import EscalaCarouselStyles from './EscalaCarousel.styles';
 
 interface Props {
   participante: string;
 }
 
 const Participante = ({participante}: Props) => {
+  const styles = EscalaCarouselStyles;
+
   return (
     <Text
       allowFontScaling={false}
@@ -20,20 +22,5 @@ const Participante = ({participante}: Props) => {
     </Text>
   );
 };
-
-const styles = StyleSheet.create({
-  fontAvenirRoman: {
-    fontFamily: FONT_AVENIR_ROMAN,
-  },
-  fontSize12: {
-    fontSize: 12,
-  },
-  woodSmoke: {
-    color: WOODSMOKE,
-  },
-  marginTop5: {
-    marginTop: 5,
-  },
-});
 
 export default Participante;

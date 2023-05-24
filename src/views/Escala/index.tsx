@@ -1,24 +1,19 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
   TouchableOpacity,
   View,
   Text,
   Dimensions,
 } from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
 
 import {MINISTERIO} from './data/Escala';
 import {ContainerPage} from '../../components/ContainerPage';
-import {FONT_GILLSANS, WAIKAWAGREY, WHITE} from '../../styles/styles';
 import CarouselCardItem from './CarouselCardItem';
 import {BACKEND_URL, createSetFromArray} from '../../utils/utils';
 import {Aguarde} from '../../components/Aguarde';
+import EscalaStyles from './Escala.styles';
 
 export interface Equipe {
   nome: string;
@@ -50,6 +45,7 @@ export const SLIDER_WIDTH = Dimensions.get('window').width + 95;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 
 export const Escala = () => {
+  const styles = EscalaStyles;
   const isCarousel = useRef(null);
   const [isLoading, setLoading] = useState(true);
   const [menuIndex, setMenuIndex] = useState(0);
@@ -175,47 +171,3 @@ export const Escala = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
-  container: {
-    alignItems: 'center',
-  },
-  botaoContainer: {
-    backgroundColor: WHITE,
-    width: 160,
-    height: 50,
-    borderRadius: 10,
-    borderColor: WAIKAWAGREY,
-    borderWidth: 1,
-    justifyContent: 'center',
-    shadowOffset: {
-      width: 0.2,
-      height: 0.2,
-    },
-    shadowOpacity: 0.2,
-    elevation: 2,
-    marginTop: 15,
-    marginBottom: 15,
-  },
-  botaoTexto: {
-    fontFamily: FONT_GILLSANS,
-    fontSize: 16,
-    color: WAIKAWAGREY,
-    textAlign: 'center',
-  },
-  dotStyle: {
-    width: 10,
-    height: 10,
-    marginTop: -9.9,
-    borderRadius: 5,
-    marginHorizontal: 0,
-  },
-  aguarde: {
-    alignItems: 'center',
-    marginBottom: hp('4%'),
-    marginTop: hp('15%'),
-  },
-});

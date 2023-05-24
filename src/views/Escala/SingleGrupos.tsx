@@ -4,7 +4,8 @@ import {joinPeriodoValues} from '../../utils/utils';
 import CardsWrappers from './CardsWrappers';
 import Local from './Local';
 import Escalas from './Escalas';
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
+import EscalaCarouselStyles from './EscalaCarousel.styles';
 
 interface Grupo {
   local: string;
@@ -12,6 +13,7 @@ interface Grupo {
 }
 
 const SingleGrupos = ({local, values}: Grupo) => {
+  const styles = EscalaCarouselStyles;
   const groupedPeriodos = joinPeriodoValues(values);
 
   return (
@@ -41,11 +43,5 @@ const SingleGrupos = ({local, values}: Grupo) => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  marginTop5: {
-    marginTop: 5,
-  },
-});
 
 export default SingleGrupos;

@@ -1,10 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {
-  FONT_AVENIR_BLACK,
-  FONT_AVENIR_ROMAN,
-  WOODSMOKE,
-} from '../../styles/styles';
+import {View, Text} from 'react-native';
 import {Escala} from '.';
 import {joinPeriodoValues} from '../../utils/utils';
 import CardsWrappers from './CardsWrappers';
@@ -12,6 +7,7 @@ import Local from './Local';
 import Periodo from './Periodo';
 import Participante from './Participante';
 import Lider from './Lider';
+import EscalaCarouselStyles from './EscalaCarousel.styles';
 
 interface Grupo {
   local: string;
@@ -19,6 +15,7 @@ interface Grupo {
 }
 
 const MultipleGrupos = ({local, values}: Grupo) => {
+  const styles = EscalaCarouselStyles;
   const groupedPeriodos = joinPeriodoValues(values);
 
   return (
@@ -101,30 +98,5 @@ const MultipleGrupos = ({local, values}: Grupo) => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  liderEquipe: {
-    marginRight: 10,
-  },
-  liderMultipleEquipe: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  fontAvenirBlack: {
-    fontFamily: FONT_AVENIR_BLACK,
-  },
-  fontAvenirRoman: {
-    fontFamily: FONT_AVENIR_ROMAN,
-  },
-  fontSize12: {
-    fontSize: 12,
-  },
-  woodSmoke: {
-    color: WOODSMOKE,
-  },
-  marginTop5: {
-    marginTop: 5,
-  },
-});
 
 export default MultipleGrupos;

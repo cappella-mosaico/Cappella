@@ -1,12 +1,14 @@
 import React from 'react';
-import {Text, StyleSheet, View} from 'react-native';
-import {FONT_AVENIR_BLACK, WOODSMOKE} from '../../styles/styles';
+import {Text, View} from 'react-native';
+import EscalaCarouselStyles from './EscalaCarousel.styles';
 
 interface Props {
   lider: string;
 }
 
 const Lider = ({lider}: Props) => {
+  const styles = EscalaCarouselStyles;
+
   return (
     <View style={[styles.liderMultipleEquipe, styles.marginTop5]}>
       <Text
@@ -34,27 +36,5 @@ const Lider = ({lider}: Props) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  liderMultipleEquipe: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  liderEquipe: {
-    marginRight: 10,
-  },
-  fontAvenirBlack: {
-    fontFamily: FONT_AVENIR_BLACK,
-  },
-  fontSize12: {
-    fontSize: 12,
-  },
-  woodSmoke: {
-    color: WOODSMOKE,
-  },
-  marginTop5: {
-    marginTop: 5,
-  },
-});
 
 export default Lider;
