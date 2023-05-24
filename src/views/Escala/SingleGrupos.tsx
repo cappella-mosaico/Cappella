@@ -31,7 +31,7 @@ const SingleGrupos = ({local, values}: Grupo) => {
       </Text>
       <CardsWrappers>
         {groupedPeriodos.map((groupPeriodo, groupPeriodoIndex) => {
-          const {periodo, values} = groupPeriodo;
+          const {periodo, groupedEscalas} = groupPeriodo;
 
           return (
             <View key={`${periodo}-${groupPeriodoIndex}`}>
@@ -45,7 +45,7 @@ const SingleGrupos = ({local, values}: Grupo) => {
                 {periodo.toUpperCase()}
               </Text>
 
-              {values.map((value, i) => {
+              {groupedEscalas.map((value, i) => {
                 const {equipe, nome} = value;
                 const {lider, participantes} = equipe;
 

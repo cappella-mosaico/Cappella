@@ -120,7 +120,7 @@ export const joinPeriodoValues = (
   escalas: Escala[],
 ): {
   periodo: string;
-  values: Escala[];
+  groupedEscalas: Escala[];
 }[] => {
   const grouped: {
     [key: string]: Escala[];
@@ -136,8 +136,8 @@ export const joinPeriodoValues = (
     grouped[periodo].push(rest as Escala);
   });
 
-  return Object.entries(grouped).map(([periodo, values]) => ({
+  return Object.entries(grouped).map(([periodo, groupedEscalas]) => ({
     periodo,
-    values,
+    groupedEscalas,
   }));
 };

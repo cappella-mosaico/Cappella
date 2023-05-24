@@ -31,7 +31,7 @@ const MultipleGrupos = ({local, values}: Grupo) => {
       </Text>
       <CardsWrappers>
         {groupedPeriodos.map((groupPeriodo, groupPeriodoIndex) => {
-          const {periodo, values} = groupPeriodo;
+          const {periodo, groupedEscalas} = groupPeriodo;
 
           return (
             <View key={`${periodo}-${groupPeriodoIndex}`}>
@@ -45,7 +45,7 @@ const MultipleGrupos = ({local, values}: Grupo) => {
                 {periodo.toUpperCase()}
               </Text>
 
-              {values.map((value, i) => {
+              {groupedEscalas.map((value, i) => {
                 const {equipe, nome} = value;
                 const {lider, participantes} = equipe;
                 const result = participantes.join(', ');
@@ -75,7 +75,7 @@ const MultipleGrupos = ({local, values}: Grupo) => {
                         </Text>
                       </View>
                     ) : (
-                      <View style={styles.marginTop5}>
+                      <View key={`${lider}${i}`} style={styles.marginTop5}>
                         <Text
                           style={[
                             styles.woodSmoke,
