@@ -5,19 +5,23 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-import {FONT_AVENIR_ROMAN, PAMPAS, PIPER} from '../../styles/styles';
+import {FONT_AVENIR_ROMAN, PAMPAS, PIPER} from '../styles/styles';
 
-export const SemEvento = () => {
+interface Props {
+  texto: string;
+}
+
+export const SemItem = ({texto}: Props) => {
   const styles = getStyles();
 
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../assets/images/semEventos.png')}
+        source={require('../assets/images/semEventos.png')}
         style={styles.imagem}
         resizeMode="contain"
       />
-      <Text style={styles.semEventos}>Nenhum evento programado</Text>
+      <Text style={styles.semItem}>{texto}</Text>
     </View>
   );
 };
@@ -29,7 +33,7 @@ const getStyles = () => {
       alignItems: 'center',
       backgroundColor: PAMPAS,
     },
-    semEventos: {
+    semItem: {
       color: PIPER,
       fontSize: wp('5%'),
       fontFamily: FONT_AVENIR_ROMAN,

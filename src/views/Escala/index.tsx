@@ -14,6 +14,7 @@ import CarouselCardItem from './CarouselCardItem';
 import {BACKEND_URL, createSetFromArray} from '../../utils/utils';
 import {Aguarde} from '../../components/Aguarde';
 import EscalaStyles from './Escala.styles';
+import {SemItem} from '../../components/SemItem';
 
 export interface Equipe {
   nome: string;
@@ -136,37 +137,43 @@ export const Escala = () => {
           </View>
         ) : (
           <View style={styles.container}>
-            <Carousel
-              firstItem={menuIndex}
-              layout="default"
-              layoutCardOffset={9}
-              data={menuData}
-              renderItem={escalaMenuItem}
-              sliderWidth={400}
-              itemWidth={160}
-              useScrollView={true}
-              onSnapToItem={(index) => setMenuIndex(index)}
-            />
-            <Carousel
-              layout="default"
-              layoutCardOffset={9}
-              ref={isCarousel}
-              data={escalasByDay}
-              renderItem={CarouselCardItem}
-              sliderWidth={SLIDER_WIDTH}
-              itemWidth={ITEM_WIDTH}
-              onSnapToItem={(i) => setCardIndex(i)}
-              useScrollView={true}
-            />
-            <Pagination
-              dotsLength={escalasByDay.length}
-              activeDotIndex={cardIndex}
-              carouselRef={isCarousel}
-              dotStyle={styles.dotStyle}
-              inactiveDotOpacity={0.4}
-              inactiveDotScale={0.6}
-              tappableDots={true}
-            />
+            {escalaList?.length ? (
+              <>
+                <Carousel
+                  firstItem={menuIndex}
+                  layout="default"
+                  layoutCardOffset={9}
+                  data={menuData}
+                  renderItem={escalaMenuItem}
+                  sliderWidth={400}
+                  itemWidth={160}
+                  useScrollView={true}
+                  onSnapToItem={(index) => setMenuIndex(index)}
+                />
+                <Carousel
+                  layout="default"
+                  layoutCardOffset={9}
+                  ref={isCarousel}
+                  data={escalasByDay}
+                  renderItem={CarouselCardItem}
+                  sliderWidth={SLIDER_WIDTH}
+                  itemWidth={ITEM_WIDTH}
+                  onSnapToItem={(i) => setCardIndex(i)}
+                  useScrollView={true}
+                />
+                <Pagination
+                  dotsLength={escalasByDay.length}
+                  activeDotIndex={cardIndex}
+                  carouselRef={isCarousel}
+                  dotStyle={styles.dotStyle}
+                  inactiveDotOpacity={0.4}
+                  inactiveDotScale={0.6}
+                  tappableDots={true}
+                />
+              </>
+            ) : (
+              <SemItem texto="Nenhuma escala programada" />
+            )}
           </View>
         )}
       </ContainerPage>
