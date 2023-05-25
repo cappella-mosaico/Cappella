@@ -1,13 +1,16 @@
 import React from 'react';
-import {Text, View} from 'react-native';
-import EscalaCarouselStyles from './EscalaCarousel.styles';
+import {Text, View, useWindowDimensions} from 'react-native';
+import getStyles from './EscalaCarousel.styles';
+import {getSize} from '../../utils/utils';
 
 interface Props {
   lider: string;
 }
 
 const Lider = ({lider}: Props) => {
-  const styles = EscalaCarouselStyles;
+  const {height} = useWindowDimensions();
+  const size = getSize(height);
+  const styles = getStyles(size);
 
   return (
     <View style={[styles.liderMultipleEquipe, styles.marginTop5]}>

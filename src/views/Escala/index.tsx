@@ -5,16 +5,17 @@ import {
   View,
   Text,
   Dimensions,
+  useWindowDimensions,
 } from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 
 import {MINISTERIO} from './data/Escala';
 import {ContainerPage} from '../../components/ContainerPage';
 import CarouselCardItem from './CarouselCardItem';
-import {BACKEND_URL, createSetFromArray} from '../../utils/utils';
+import {BACKEND_URL, createSetFromArray, getSize} from '../../utils/utils';
 import {Aguarde} from '../../components/Aguarde';
-import EscalaStyles from './Escala.styles';
 import {SemItem} from '../../components/SemItem';
+import getStyles from './Escala.styles';
 
 export interface Equipe {
   nome: string;
@@ -46,7 +47,9 @@ export const SLIDER_WIDTH = Dimensions.get('window').width + 95;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 
 export const Escala = () => {
-  const styles = EscalaStyles;
+  const {height} = useWindowDimensions();
+  const size = getSize(height);
+  const styles = getStyles(size);
   const isCarousel = useRef(null);
   const [isLoading, setLoading] = useState(true);
   const [menuIndex, setMenuIndex] = useState(0);
@@ -130,7 +133,7 @@ export const Escala = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <ContainerPage titulo={'ESCALAS'}>
+      <ContainerPage>
         {isLoading ? (
           <View style={styles.aguarde}>
             <Aguarde />

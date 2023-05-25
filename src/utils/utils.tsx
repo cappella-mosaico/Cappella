@@ -1,4 +1,4 @@
-import {Equipe, Escala} from '../views/Escala';
+import {Escala} from '../views/Escala';
 
 export const getSize = (height: number) => {
   let size = 'xsmall';
@@ -18,6 +18,21 @@ export const getSize = (height: number) => {
   }
 
   return size;
+};
+
+export const isSmall = (size: string) => {
+  switch (size) {
+    case 'small':
+    case 'medium':
+    case 'large':
+      return true;
+    case 'xlarge':
+    case 'xxlarge':
+    case 'xxxlarge':
+      return false;
+    default:
+      break;
+  }
 };
 
 export const validURL = (str: string) => {

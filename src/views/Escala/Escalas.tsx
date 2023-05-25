@@ -1,10 +1,11 @@
 import React from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, useWindowDimensions} from 'react-native';
 import {Escala} from '.';
 import Participante from './Participante';
 import Lider from './Lider';
 import Periodo from './Periodo';
-import EscalaCarouselStyles from './EscalaCarousel.styles';
+import getStyles from './EscalaCarousel.styles';
+import {getSize} from '../../utils/utils';
 
 interface Grupo {
   periodo: string;
@@ -12,7 +13,9 @@ interface Grupo {
 }
 
 const Escalas = ({periodo, groupedEscalas}: Grupo) => {
-  const styles = EscalaCarouselStyles;
+  const {height} = useWindowDimensions();
+  const size = getSize(height);
+  const styles = getStyles(size);
 
   return (
     <View key={periodo}>

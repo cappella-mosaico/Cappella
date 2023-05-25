@@ -1,13 +1,13 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, useWindowDimensions} from 'react-native';
 import {Escala} from '.';
-import {joinPeriodoValues} from '../../utils/utils';
+import {getSize, joinPeriodoValues} from '../../utils/utils';
 import CardsWrappers from './CardsWrappers';
 import Local from './Local';
 import Periodo from './Periodo';
 import Participante from './Participante';
 import Lider from './Lider';
-import EscalaCarouselStyles from './EscalaCarousel.styles';
+import getStyles from './EscalaCarousel.styles';
 
 interface Grupo {
   local: string;
@@ -15,7 +15,9 @@ interface Grupo {
 }
 
 const MultipleGrupos = ({local, values}: Grupo) => {
-  const styles = EscalaCarouselStyles;
+  const {height} = useWindowDimensions();
+  const size = getSize(height);
+  const styles = getStyles(size);
   const groupedPeriodos = joinPeriodoValues(values);
 
   return (
