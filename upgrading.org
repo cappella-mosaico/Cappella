@@ -42,6 +42,7 @@ smooth
 ** A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
 https://github.com/software-mansion/react-native-gesture-handler/issues/2168
 Nice. Upgrading the compileSdk and targetSdk from 31 to 33 fixed the issue, kudos to this [[https://github.com/software-mansion/react-native-gesture-handler/issues/2168#issuecomment-1546998935][comment]].
+
 * react-native 0.69.0
 ** Error: ENOENT: no such file or directory, scandir 'node_modules'
 I removed the node_modules folder and run an yarn install again but it didn't work. So I ran the run-android command with a --no-jetifier flag and it seem to have worked
@@ -50,3 +51,8 @@ I removed the node_modules folder and run an yarn install again but it didn't wo
    Removing this lib from our project fixed all the issues I was having, but it completely breaks the 'Financeiro' screen. The following error was also fixed: /ERROR  Invariant Violation: Module AppRegistry is not a registered callable module (calling runApplication). A frequent cause of the error is that the application entry file path is incorrect. This can also happen when the JS bundle is corrupt or there is an early initialization error when loading React Native./
    There's a bunch of ViewPropTypes [[https://github.com/meliorence/react-native-snap-carousel/issues?q=is%3Aissue+is%3Aopen+ViewPropTypes][open issues for the repo]]  and I don't think they are going to be addressed. My last resource came from [[https://github.com/meliorence/react-native-snap-carousel/issues/981#issuecomment-1528901361][one of the comments]] in one of those issues. Which is using this other lib [[https://www.npmjs.com/package/react-native-reanimated-carousel][react-native-reanimated-carousel]] that is currently maintained and hopefully keeps the same interface.
 2. <2023-05-19 sex 21:06> HELL YEAH. After a small adaptation I managed to get the new Carousel working 🕺
+IOS: 
+First problem:  Please specify "higher minimum deployment target" dependency - solution found here - https://github.com/CocoaPods/CocoaPods/issues/7304#issuecomment-491065166
+Basically I had to go to ios/Podfile and update - from platform :ios, '10.0' - to platform :ios, '13.0'
+Second problem: No visible @interface for 'RCTBundleURLProvider' declares the selector 'jsBundleURLForBundleRoot:fallbackResource:' - solution found here https://stackoverflow.com/a/73048366 - 
+on ios/Cappella/AppDelegate.m, replace return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil]; to return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"]; 
