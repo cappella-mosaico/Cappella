@@ -7,6 +7,7 @@ import {RootStackParamList} from '../../../App';
 import {Agenda} from '../Agenda';
 import {Contato} from '../Contato';
 import {Financas} from '../Financas';
+import {Escala} from '../Escala';
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'DetalhesItem'>;
 
@@ -28,6 +29,8 @@ export const DetalhesItem = ({route}: Props) => {
       return <Financas titulo={titulo} />;
     case 'contato':
       return <Contato />;
+    case 'escala':
+      return <Escala />;
     default:
       break;
   }

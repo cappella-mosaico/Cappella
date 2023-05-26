@@ -1,43 +1,29 @@
 useful https://react-native-community.github.io/upgrade-helper/?from=0.64.4&to=0.71.8
 
-* react-native 0.65.0
-** conflict between node lib versions
- stop using npm install and start using yarn install
-** Cannot run Project.afterEvaluate(Closure) when the project is already evaluated.
- this has been "fixed" on versions of react-native >=0.65
-** Unexpected token '?'
- this happened when I tried to jump to react-native 0.70.0
-** Failed to transform react-native-reanimated-65-jsc.aar (project :react-native-reanimated) to match attributes {artifactType=android-aar-metadata}.
- https://stackoverflow.com/a/69077685/1851150
- yarn add react-native-reanimated@2.3.0-alpha.3
-** attempt to invoke virtual method 'java.lang.Object java.lang.ref.WeakReference.get()'on a null object reference
- https://github.com/software-mansion/react-native-reanimated/issues/2369
- https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation/#android
- in the end I've fixed it by upgrading the reanimated version to `2.3.0-alpha.2` as opposed to `2.3.0-alpha.3`
+* conflict between node lib versions
+stop using npm install and start using yarn install
+* Cannot run Project.afterEvaluate(Closure) when the project is already evaluated.
+this has been "fixed" on versions of react-native >=0.65
+* Unexpected token '?'
+this happened when I tried to jump to react-native 0.70.0
+* Failed to transform react-native-reanimated-65-jsc.aar (project :react-native-reanimated) to match attributes {artifactType=android-aar-metadata}.
+https://stackoverflow.com/a/69077685/1851150
+yarn add react-native-reanimated@2.3.0-alpha.3
+* attempt to invoke virtual method 'java.lang.Object java.lang.ref.WeakReference.get()'on a null object reference
+https://github.com/software-mansion/react-native-reanimated/issues/2369
+https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation/#android
+in the end I've fixed it by upgrading the reanimated version to `2.3.0-alpha.2` as opposed to `2.3.0-alpha.3`
 
-* react-native 0.66.0
-** Failed to transform react-native-reanimated-66-jsc.aar (project :react-native-reanimated) to match attributes {artifactType=android-aar-metadata}
- [[https://stackoverflow.com/a/69509098]["This issue has resolved in react-native-reanimated@2.3.0-beta.2 release."]]
+### this was enough to upgrade react-native to 0.65.0 /\
 
-** attempt to invoke virtual method 'java.lang.Object java.lang.ref.WeakReference.get()'on a null object reference
- yes, I got this a second time now. What I did was to upgrade react-native-reacnimated to its latest stable release, 2.17.0 and it seem to have worked. I'm getting a kind of annoying warning (below) showing up when the app first loads, but I think this is only during debug.
- https://github.com/software-mansion/react-native-reanimated/releases
+* Failed to transform react-native-reanimated-66-jsc.aar (project :react-native-reanimated) to match attributes {artifactType=android-aar-metadata}
+[[https://stackoverflow.com/a/69509098]["This issue has resolved in react-native-reanimated@2.3.0-beta.2 release."]]
 
-** new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method
- that didn't work: https://bugsfixing.com/solved-new-nativeeventemitter-was-called-with-a-non-null-argument-without-the-required-addlistener-method/
- :/ it might be happening even for non-debug, I'm not so sure.
- LogBox at the App.js hid the warning for good :) https://github.com/michalchudziak/react-native-geolocation/issues/195#issuecomment-1260049366
-* react-native 0.67.0
-smooth
-* react-native 0.68.0
-1. I'm getting this warning /ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'./  22 times.
-2. It seems like the ViewPropTypes is not directly used by our code, but by libs that we use and that are outdated. I'll leverage the [[updater too][updater tool]] to see if I can get rid of any.
-3. Using the tool, the change I made was to @react-native-masked-view/masked-view upgrading it to 0.2.0 and renaming the "community" part of the package. My plan is to use it as a canary to check if we can drop to 21 warnings but it didn't work. I'll try to upgrade to the most recent version of the package.
-4. <2023-05-19 sex 06:29> the warnings won't go away, but at least the package is updated :)
-5. <2023-05-19 sex 06:38> still getting the warnings but now I upgraded '@react-native-async-storage/async-storage', '@react-native-clipboard/clipboard' and '@react-native-masked-view/masked-view'.
-6. <2023-05-19 sex 06:54> I upgraded a bunch of libs to their recommended versions on 0.68.0, but I'm still getting the warnings. I saw they were indeed added into 0.68.0. This github issue might help https://github.com/facebook/react-native/issues/33557 and this [[https://github.com/facebook/react-native/issues/33557#issuecomment-1114498902][comment]] in particular sounds based.
-7. <2023-05-19 sex 07:02> Ok, these warnings can't be solved by the current recommended versions of the libs for this package; So I'll also ignore them via LogBox and come back to it once we get everything upgraded.
-8. <2023-05-19 sex 07:10> back to upgrading libs using the upgrader, I downgraded reanimated to keep it happy and now every one of them is up to date with 0.68.0 but one: react-native-gesture-handler. Upgrading it will cause the error below:
-** A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
-https://github.com/software-mansion/react-native-gesture-handler/issues/2168
-Nice. Upgrading the compileSdk and targetSdk from 31 to 33 fixed the issue, kudos to this [[https://github.com/software-mansion/react-native-gesture-handler/issues/2168#issuecomment-1546998935][comment]].
+* attempt to invoke virtual method 'java.lang.Object java.lang.ref.WeakReference.get()'on a null object reference
+yes, I got this a second time now. What I did was to upgrade react-native-reacnimated to its latest stable release, 2.17.0 and it seem to have worked. I'm getting a kind of annoying warning (below) showing up when the app first loads, but I think this is only during debug.
+https://github.com/software-mansion/react-native-reanimated/releases
+
+* new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method
+that didn't work: https://bugsfixing.com/solved-new-nativeeventemitter-was-called-with-a-non-null-argument-without-the-required-addlistener-method/
+:/ it might be happening even for non-debug, I'm not so sure.
+LogBox at the App.js hid the warning for good :) https://github.com/michalchudziak/react-native-geolocation/issues/195#issuecomment-1260049366

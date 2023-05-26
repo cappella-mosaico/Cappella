@@ -2,10 +2,13 @@ import React, {useState} from 'react';
 import {
   Alert,
   Button,
-  SafeAreaView,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
   StyleSheet,
   Text,
   TextInput,
+  TouchableWithoutFeedback,
   View,
   useWindowDimensions,
 } from 'react-native';
@@ -24,9 +27,10 @@ import {TextInputMask} from 'react-native-masked-text';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import CheckBox from 'expo-checkbox';
 import {isValidCPF, isValidEmail} from './formValidators';
-import {ScrollView} from 'react-native-gesture-handler';
+// import {ScrollView} from 'react-native-gesture-handler';
 import {BACKEND_URL, getSize} from '../../utils/utils';
 import {IRON} from '../../styles/styles';
+import {ScrollView} from 'react-native-gesture-handler';
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'EventoForm'>;
 type ProfileScreenNavigationProp = NativeStackNavigationProp<
@@ -63,6 +67,7 @@ export const EventoForm = ({route}: Props) => {
     control,
     handleSubmit,
     formState: {errors},
+    setFocus,
   } = useForm({
     defaultValues: {
       nome: '',
@@ -114,158 +119,175 @@ export const EventoForm = ({route}: Props) => {
   };
 
   return (
-    <SafeAreaView>
-      <ContainerPage titulo={'EVENTOS'}>
-        <ScrollView style={styles.containerScrollView}>
-          <EventoDescPadrao evento={evento} />
-          <View style={styles.container}>
-            <Controller
-              control={control}
-              rules={{
-                required: true,
-              }}
-              render={({field: {onChange, onBlur, value}}) => (
-                <TextInput
-                  style={styles.input}
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  placeholder="Nome"
-                  placeholderTextColor={IRON}
-                />
-              )}
-              name="nome"
-            />
-            {errors.nome && <Text>O campo Nome é obrigatório.</Text>}
-            <Controller
-              control={control}
-              rules={{
-                required: true,
-              }}
-              render={({field: {onChange, onBlur, value}}) => (
-                <TextInputMask
-                  style={styles.input}
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  placeholder="Telefone"
-                  placeholderTextColor={IRON}
-                  options={{
-                    maskType: 'BRL',
-                    withDDD: true,
-                    dddMask: '(99) ',
-                  }}
-                  type={'cel-phone'}
-                />
-              )}
-              name="telefone"
-            />
-            {errors.telefone && <Text>O campo Telefone é obrigatório.</Text>}
-            <Controller
-              control={control}
-              rules={{
-                required: true,
-                validate: (email) => isValidEmail(email),
-              }}
-              render={({field: {onChange, onBlur, value}}) => (
-                <TextInput
-                  style={styles.input}
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  placeholder="Email"
-                  placeholderTextColor={IRON}
-                  keyboardType="email-address"
-                  autoCapitalize="none"
-                />
-              )}
-              name="email"
-            />
-            {errors.email && <Text>Email Inválido!</Text>}
-            <Controller
-              control={control}
-              rules={{
-                required: true,
-                validate: (cpf) => isValidCPF(cpf),
-              }}
-              render={({field: {onChange, onBlur, value}}) => (
-                <TextInputMask
-                  type={'cpf'}
-                  style={styles.input}
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  placeholder="CPF"
-                  placeholderTextColor={IRON}
-                />
-              )}
-              name="cpf"
-            />
-            {errors.cpf && <Text>CPF Inválido!</Text>}
-            <Controller
-              control={control}
-              rules={{
-                required: true,
-              }}
-              render={({field: {onChange, onBlur, value}}) => (
-                <TextInputMask
-                  type={'only-numbers'}
-                  style={styles.input}
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  placeholder="Idade"
-                  placeholderTextColor={IRON}
-                />
-              )}
-              name="idade"
-            />
-            {errors.idade && <Text>O campo Idade é obrigatório.</Text>}
-            <View style={styles.toggleDependentes}>
-              <CheckBox
-                disabled={false}
-                value={Boolean(dependentes.length)}
-                onValueChange={(newValue) => {
-                  newValue ? handleAddClick() : setDependentes([]);
+    <ContainerPage titulo={'EVENTOS'}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.container}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <ScrollView style={styles.containerScrollView}>
+            <EventoDescPadrao evento={evento} />
+            <View style={styles.container}>
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
                 }}
-              />
-              <Text style={styles.textDependente}>Tem Dependente?</Text>
-            </View>
-
-            {dependentes?.length > 0 &&
-              dependentes.map((dependente, index) => (
-                <View style={styles.dependente} key={index}>
+                render={({field: {onChange, onBlur, value}}) => (
                   <TextInput
-                    style={styles.inputDependente}
-                    onChangeText={(e) => {
-                      dependente.nome = e;
-                      setDependentes([...dependentes]);
-                    }}
-                    value={dependente.nome}
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
                     placeholder="Nome"
                     placeholderTextColor={IRON}
+                    onSubmitEditing={() => setFocus('telefone')}
+                    blurOnSubmit={false}
                   />
+                )}
+                name="nome"
+              />
+              {errors.nome && <Text>O campo Nome é obrigatório.</Text>}
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({field: {onChange, onBlur, value}}) => (
+                  <TextInputMask
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                    placeholder="Telefone"
+                    placeholderTextColor={IRON}
+                    options={{
+                      maskType: 'BRL',
+                      withDDD: true,
+                      dddMask: '(99) ',
+                    }}
+                    type={'cel-phone'}
+                    onSubmitEditing={() => setFocus('email')}
+                    blurOnSubmit={false}
+                  />
+                )}
+                name="telefone"
+              />
+              {errors.telefone && <Text>O campo Telefone é obrigatório.</Text>}
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                  validate: (email) => isValidEmail(email),
+                }}
+                render={({field: {onChange, onBlur, value}}) => (
+                  <TextInput
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                    placeholder="Email"
+                    placeholderTextColor={IRON}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    onSubmitEditing={() => setFocus('cpf')}
+                    blurOnSubmit={false}
+                  />
+                )}
+                name="email"
+              />
+              {errors.email && <Text>Email Inválido!</Text>}
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                  validate: (cpf) => isValidCPF(cpf),
+                }}
+                render={({field: {onChange, onBlur, value}}) => (
+                  <TextInputMask
+                    type={'cpf'}
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                    placeholder="CPF"
+                    placeholderTextColor={IRON}
+                    onSubmitEditing={() => setFocus('idade')}
+                    blurOnSubmit={false}
+                  />
+                )}
+                name="cpf"
+              />
+              {errors.cpf && <Text>CPF Inválido!</Text>}
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({field: {onChange, onBlur, value}}) => (
                   <TextInputMask
                     type={'only-numbers'}
-                    style={styles.inputIdade}
-                    onChangeText={(e) => {
-                      dependente.idade = e;
-                      setDependentes([...dependentes]);
-                    }}
-                    value={dependente.idade}
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
                     placeholder="Idade"
                     placeholderTextColor={IRON}
+                    onSubmitEditing={() => setFocus('dependentes')}
+                    blurOnSubmit={false}
                   />
-                  <Button title="+" onPress={() => handleAddClick()} />
-                  <Button title="-" onPress={() => handleRemoveClick(index)} />
-                </View>
-              ))}
+                )}
+                name="idade"
+              />
+              {errors.idade && <Text>O campo Idade é obrigatório.</Text>}
+              <View style={styles.toggleDependentes}>
+                <CheckBox
+                  disabled={false}
+                  value={Boolean(dependentes.length)}
+                  onValueChange={(newValue) => {
+                    newValue ? handleAddClick() : setDependentes([]);
+                  }}
+                />
+                <Text style={styles.textDependente}>Tem Dependente?</Text>
+              </View>
 
-            <Button title="Enviar" onPress={handleSubmit(onSubmit)} />
-          </View>
-        </ScrollView>
-      </ContainerPage>
-    </SafeAreaView>
+              {dependentes?.length > 0 &&
+                dependentes.map((dependente, index) => (
+                  <View style={styles.dependente} key={index}>
+                    <TextInput
+                      style={styles.inputDependente}
+                      onChangeText={(e) => {
+                        dependente.nome = e;
+                        setDependentes([...dependentes]);
+                      }}
+                      value={dependente.nome}
+                      placeholder="Nome"
+                      placeholderTextColor={IRON}
+                    />
+                    <TextInputMask
+                      type={'only-numbers'}
+                      style={styles.inputIdade}
+                      onChangeText={(e) => {
+                        dependente.idade = e;
+                        setDependentes([...dependentes]);
+                      }}
+                      value={dependente.idade}
+                      placeholder="Idade"
+                      placeholderTextColor={IRON}
+                    />
+                    <Button title="+ " onPress={() => handleAddClick()} />
+                    <Button
+                      title=" -"
+                      onPress={() => handleRemoveClick(index)}
+                    />
+                  </View>
+                ))}
+
+              <Button title="Enviar" onPress={handleSubmit(onSubmit)} />
+            </View>
+          </ScrollView>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    </ContainerPage>
   );
 };
 
@@ -319,7 +341,7 @@ const getStyles = (size: string) => {
       backgroundColor: 'white',
       fontSize: wp('3.5%'),
       height: hp('5.75%'),
-      width: wp('45%'),
+      width: wp('40%'),
       padding: wp('3%'),
       borderRadius: 4,
       margin: wp('3%'),
@@ -329,7 +351,7 @@ const getStyles = (size: string) => {
       backgroundColor: 'white',
       fontSize: wp('3.5%'),
       height: hp('5.75%'),
-      width: wp('26%'),
+      width: wp('15%'),
       padding: wp('3%'),
       borderRadius: 4,
       margin: wp('3%'),
