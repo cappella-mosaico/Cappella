@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
@@ -19,40 +19,11 @@ import {
 // import {FINANCEIROS} from './data/Financas';
 import CarouselCardItem from './CarouselCardItem';
 import {BACKEND_URL} from '../../utils/utils';
+import { ITEM_WIDTH, SLIDER_WIDTH } from './common';
 
 interface Props {
   titulo: string;
 }
-
-export interface Financeiro {
-  anoMes: number[];
-  entradas: number;
-  saidas: number;
-  orcado: number;
-}
-export interface FinancasPorAno {
-  ano: number;
-  meses: Financeiro[];
-}
-
-export const SLIDER_WIDTH = Dimensions.get('window').width + 95;
-export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
-
-export const months = [
-  undefined,
-  'Jan',
-  'Fev',
-  'Mar',
-  'Abr',
-  'Mai',
-  'Jun',
-  'Jul',
-  'Ago',
-  'Set',
-  'Out',
-  'Nov',
-  'Dez',
-];
 
 export const Financas = ({titulo}: Props) => {
   const styles = getStyles();
