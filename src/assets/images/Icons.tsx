@@ -34,3 +34,8 @@ export const IconFinancas = `
 <svg xmlns="http://www.w3.org/2000/svg" width="68" viewBox="0 0 64 65">
   <text id="S" transform="translate(0 50)" fill="#df8c5b" font-size="62" font-family="Liturgica-Medium, Liturgica" font-weight="500"><tspan x="0" y="0">S</tspan></text>
 </svg>`;
+
+export const IconEscala = `
+<svg xmlns="http://www.w3.org/2000/svg" width="68" viewBox="0 0 64 65">
+  <text id="G" transform="translate(0 50)" fill="#df8c5b" font-size="62" font-family="Liturgica-Medium, Liturgica" font-weight="500"><tspan x="0" y="0">G</tspan></text>
+</svg>`;

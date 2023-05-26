@@ -34,12 +34,16 @@ export const TITLE = '#1E98A8';
 export const LIGHTTITLE = '#78C1CA';
 export const COLORCOMUNIDADE = '#F3F5EC';
 export const WOODSMOKE = '#2F3436';
+export const WAIKAWAGREY = '#657188';
+export const CHELSEACUCUMBER = '#92B356';
 
 // TIPOGRAFIA
 export const FONT_AVENIR_BLACK = 'AvenirLTStd-Black';
 export const FONT_AVENIR_BOOK = 'AvenirLTStd-Book';
 export const FONT_AVENIR_ROMAN = 'AvenirLTStd-Roman';
 export const FONT_GEORGIA = 'georgia';
+export const FONT_GEORGIA_BOLD = 'georgia-bold';
+export const FONT_GILLSANS = 'GillSans';
 
 // MEDIDAS
 export const SIZE_XXX_LARGE = 36;
