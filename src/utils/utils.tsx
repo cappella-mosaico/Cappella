@@ -80,18 +80,28 @@ export const formatDate = (date: Date) => {
   )}-${padTo2Digits(date.getDate())}`;
 };
 
-export function formatDatePT(dateString: string): string {
-  const options: Intl.DateTimeFormatOptions = {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  };
-  const date = new Date(dateString.concat('T00:00'));
-  const formattedDate = date.toLocaleDateString('pt-BR', options);
-  const capitalizedMonth = formattedDate.replace(/(\b\w)/gi, (match) =>
-    match.toUpperCase(),
-  );
-  return capitalizedMonth;
+export function formatDatePT(dateString: String) {
+  const months = [
+    'Janeiro',
+    'Fevereiro',
+    'Março',
+    'Abril',
+    'Maio',
+    'Junho',
+    'Julho',
+    'Agosto',
+    'Setembro',
+    'Outubro',
+    'Novembro',
+    'Dezembro',
+  ];
+
+  const [year, month, day] = dateString.split('-');
+  const formattedDate = `${parseInt(day, 10)} de ${
+    months[parseInt(month, 10) - 1]
+  } de ${year}`;
+
+  return formattedDate;
 }
 
 export const createSetFromArray = (
