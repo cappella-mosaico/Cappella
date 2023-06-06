@@ -8,7 +8,12 @@ import {
   WHITE,
 } from '../../styles/styles';
 import {EscalaByDay, ITEM_WIDTH} from '.';
-import {domingoCheck, formatDatePT, groupByLocal} from '../../utils/utils';
+import {
+  checkInicioFimDifferent,
+  domingoCheck,
+  formatDatePT,
+  groupByLocal,
+} from '../../utils/utils';
 import MultipleGrupos from './MultipleGrupos';
 import SingleGrupos from './SingleGrupos';
 import {
@@ -23,15 +28,24 @@ interface EscalaItem {
 
 const CarouselCardItem = ({item, index}: EscalaItem) => {
   const {dia, escalas} = item;
-  const isNextDomingo = domingoCheck(dia);
-  const styles = getStyles(isNextDomingo);
+  const domingo = domingoCheck(dia);
+  const isSemanal = checkInicioFimDifferent(escalas);
+  const styles = getStyles(
+    isSemanal ? domingo === 'pastSunday' : domingo === 'nextSunday',
+  );
   const grupos = groupByLocal(escalas);
 
   return (
     <View style={styles.container} key={index}>
       <Text allowFontScaling={false} style={styles.white}>
-        {isNextDomingo ? 'NESTE DOMINGO' : 'PROXIMA SEMANA'} -{' '}
-        {formatDatePT(dia)}
+        {isSemanal
+          ? domingo === 'pastSunday'
+            ? 'NESTA SEMANA - DOMINGO'
+            : 'PROXIMA SEMANA'
+          : domingo === 'nextSunday'
+          ? 'NESTE DOMINGO'
+          : 'SEMANA SEGUINTE'}{' '}
+        - {formatDatePT(dia)}
       </Text>
 
       {grupos.length > 1 ? (

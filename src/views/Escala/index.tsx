@@ -12,7 +12,12 @@ import Carousel, {Pagination} from 'react-native-snap-carousel';
 import {MINISTERIO} from './data/Escala';
 import {ContainerPage} from '../../components/ContainerPage';
 import CarouselCardItem from './CarouselCardItem';
-import {BACKEND_URL, createSetFromArray, getSize} from '../../utils/utils';
+import {
+  BACKEND_URL,
+  compareDate,
+  createSetFromArray,
+  getSize,
+} from '../../utils/utils';
 import {Aguarde} from '../../components/Aguarde';
 import {SemItem} from '../../components/SemItem';
 import getStyles from './Escala.styles';
@@ -28,6 +33,7 @@ export interface Escala {
   ministerio: string;
   nome: string;
   inicio: string;
+  fim: string;
   equipe: Equipe;
   local: string;
   periodo: string;
@@ -105,7 +111,18 @@ export const Escala = () => {
   };
 
   const data = escalaList
-    .filter((escala) => new Date(escala.inicio) >= new Date())
+    .filter((escala) => {
+      const isSemanal = !compareDate(
+        new Date(escala.inicio),
+        new Date(escala.fim),
+      );
+
+      if (!isSemanal) {
+        return compareDate(new Date(escala.inicio), new Date());
+      } else {
+        return new Date(escala.fim) >= new Date();
+      }
+    })
     .sort((a: Escala, b: Escala) => {
       if (new Date(a.inicio) < new Date(b.inicio)) {
         return -1;

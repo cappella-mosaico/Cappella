@@ -53,20 +53,29 @@ export const BACKEND_URL = 'https://admin.ipmosaico.com:9090';
 const getNextSunday = (date = new Date()) => {
   const dateCopy = new Date(date.getTime());
 
-  const nextMonday = new Date(
+  const nextSunday = new Date(
     dateCopy.setDate(dateCopy.getDate() + ((7 - dateCopy.getDay()) % 7 || 7)),
   );
 
-  return nextMonday;
+  return nextSunday;
 };
 
 export const domingoCheck = (nextEscala: string) => {
-  const nextSunday = formatDate(getNextSunday(new Date()));
+  const today = new Date();
+
+  if (
+    new Date(nextEscala).toDateString() === new Date().toDateString() &&
+    today.getDay() === 0
+  ) {
+    return false;
+  }
+
+  const nextSunday = formatDate(getNextSunday(today));
 
   if (nextEscala === nextSunday) {
-    return true;
+    return 'nextSunday';
   } else {
-    return false;
+    return nextEscala > nextSunday ? 'sundayAfter' : 'pastSunday';
   }
 };
 
@@ -80,18 +89,28 @@ export const formatDate = (date: Date) => {
   )}-${padTo2Digits(date.getDate())}`;
 };
 
-export function formatDatePT(dateString: string): string {
-  const options: Intl.DateTimeFormatOptions = {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  };
-  const date = new Date(dateString.concat('T00:00'));
-  const formattedDate = date.toLocaleDateString('pt-BR', options);
-  const capitalizedMonth = formattedDate.replace(/(\b\w)/gi, (match) =>
-    match.toUpperCase(),
-  );
-  return capitalizedMonth;
+export function formatDatePT(dateString: string) {
+  const months = [
+    'Janeiro',
+    'Fevereiro',
+    'Março',
+    'Abril',
+    'Maio',
+    'Junho',
+    'Julho',
+    'Agosto',
+    'Setembro',
+    'Outubro',
+    'Novembro',
+    'Dezembro',
+  ];
+
+  const [year, month, day] = dateString.split('-');
+  const formattedDate = `${parseInt(day, 10)} de ${
+    months[parseInt(month, 10) - 1]
+  } de ${year}`;
+
+  return formattedDate;
 }
 
 export const createSetFromArray = (
@@ -156,3 +175,38 @@ export const joinPeriodoValues = (
     groupedEscalas,
   }));
 };
+
+export function compareDate(dateInicio: Date, dateFim: Date) {
+  // Extract the day, month, and year from the input date
+  const inputDay = dateInicio.getDate();
+  const inputMonth = dateInicio.getMonth();
+  const inputYear = dateInicio.getFullYear();
+
+  // Extract the day, month, and year from the current date
+  const currentDay = dateFim.getDate();
+  const currentMonth = dateFim.getMonth();
+  const currentYear = dateFim.getFullYear();
+
+  // Compare the day, month, and year
+  if (
+    inputYear > currentYear ||
+    (inputYear === currentYear && inputMonth > currentMonth) ||
+    (inputYear === currentYear &&
+      inputMonth === currentMonth &&
+      inputDay >= currentDay)
+  ) {
+    // The input date is in the present or future
+    return true;
+  } else {
+    // The input date is in the past
+    return false;
+  }
+}
+
+export function checkInicioFimDifferent(escalas: Escala[]) {
+  for (let i = 0; i < escalas.length; i++) {
+    const obj = escalas[i];
+
+    return !compareDate(new Date(obj.inicio), new Date(obj.fim));
+  }
+}

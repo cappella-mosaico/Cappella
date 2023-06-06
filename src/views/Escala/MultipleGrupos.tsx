@@ -8,6 +8,7 @@ import Periodo from './Periodo';
 import Participante from './Participante';
 import Lider from './Lider';
 import getStyles from './EscalaCarousel.styles';
+import {MINISTERIO} from './data/Escala';
 
 interface Grupo {
   local: string;
@@ -38,7 +39,31 @@ const MultipleGrupos = ({local, values}: Grupo) => {
 
                 return (
                   <View key={`${nome}-${i}`}>
-                    {participantes.length === 1 ? (
+                    {value.ministerio === MINISTERIO.MOSAIKIDS ? (
+                      <View style={styles.liderMultipleEquipe}>
+                        <Text
+                          allowFontScaling={false}
+                          style={[
+                            styles.marginTop5,
+                            styles.fontAvenirRoman,
+                            styles.fontSize12,
+                            styles.woodSmoke,
+                          ]}>
+                          {`${nome}: `}
+                        </Text>
+                        <Text
+                          allowFontScaling={false}
+                          style={[
+                            styles.liderEquipe,
+                            styles.fontAvenirRoman,
+                            styles.fontSize12,
+                            styles.woodSmoke,
+                            styles.marginTop5,
+                          ]}>
+                          {result}
+                        </Text>
+                      </View>
+                    ) : participantes.length === 1 ? (
                       <View style={styles.liderMultipleEquipe}>
                         <Text
                           allowFontScaling={false}
