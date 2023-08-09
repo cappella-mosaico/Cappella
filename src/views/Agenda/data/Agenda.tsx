@@ -1,38 +1,14 @@
-import {
-  BEIGE,
-  DARKBEIGE,
-  BLUE,
-  GREEN,
-  LIGHTTITLE,
-  LIGHTBLUE,
-  DARKGREEN,
-} from '../../../styles/styles';
-
 export const FALLBACK = [
-  {
-    dia: 'domingo',
-    data: [
-      {
-        backgroundColor: BEIGE,
-        color: LIGHTTITLE,
-        atividade: 'escola dominical',
-        horario: '10:00',
-      },
-      {
-        backgroundColor: DARKBEIGE,
-        color: LIGHTTITLE,
-        atividade: 'culto noturno',
-        horario: '19:00',
-      },
-    ],
-  },
   {
     dia: 'segunda',
     data: [
       {
-        backgroundColor: BLUE,
-        color: LIGHTBLUE,
-        atividade: 'ensaio do coral',
+        atividade:
+          'GF - Oração e Comunhão - Líderes: Ângela e Walvir - Local: Casa dos Membros (Rodízio)',
+        horario: '19:30',
+      },
+      {
+        atividade: 'Ensaio do Coral',
         horario: '20:00',
       },
     ],
@@ -41,9 +17,13 @@ export const FALLBACK = [
     dia: 'terça',
     data: [
       {
-        backgroundColor: GREEN,
-        color: BLUE,
-        atividade: 'reunião dos jovens',
+        atividade:
+          'GF - A Verdadeira República - Líderes: Paulo Vitor, Daniel e Carol - Local: IP Mosaico',
+        horario: '20:00',
+      },
+      {
+        atividade:
+          'GF - Irmãos na Obra - Líderes: Túlio e Albertim - Local: Casa do Túlio e da Ana',
         horario: '20:00',
       },
     ],
@@ -52,9 +32,18 @@ export const FALLBACK = [
     dia: 'quarta',
     data: [
       {
-        backgroundColor: DARKGREEN,
-        color: BLUE,
-        atividade: 'estudo bíblico reunião de oração',
+        atividade:
+          'GF - Gileade - Líderes: Ruither e Jairo - Local: IP Mosaico',
+        horario: '20:00',
+      },
+    ],
+  },
+  {
+    dia: 'quinta',
+    data: [
+      {
+        atividade:
+          'GF - Conectados - Líderes: Marcos e Sandra, Haig e Grace - Local: Casa dos líderes',
         horario: '20:00',
       },
     ],

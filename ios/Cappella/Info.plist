@@ -38,7 +38,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Liturgica-Bold.ttf</string>
@@ -54,6 +54,7 @@
 		<string>AvenirLTStd-Black.ttf</string>
 		<string>AvenirLTStd-Book.ttf</string>
 		<string>AvenirLTStd-Roman.ttf</string>
+		<string>georgia.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
