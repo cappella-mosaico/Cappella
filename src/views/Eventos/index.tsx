@@ -11,7 +11,7 @@ export interface Evento {
   id: number;
   titulo: string;
   dataInicial: Date;
-  dataFim?: Date;
+  dataFinal: Date;
   imagem: string;
   sobre: string;
   valor: string;
