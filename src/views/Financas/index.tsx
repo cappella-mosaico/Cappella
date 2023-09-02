@@ -84,9 +84,7 @@ export const Financas = ({titulo}: Props) => {
     return (
       <View style={styles.containerCarousel}>
         <Carousel
-          loop
           width={ITEM_WIDTH}
-          // height={hp}
           data={financasAgrupadas.reverse()}
           renderItem={CarouselCardItem}
         />
