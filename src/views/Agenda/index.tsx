@@ -47,16 +47,17 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: 'center',
+    height: hp('80%'),
   },
   containerList: {
     marginTop: hp('5%'),
   },
   dia: {
     color: BLUE,
-    fontSize: wp('4.8%'),
+    fontSize: wp('3.8%'),
     fontFamily: FONT_AVENIR_BLACK,
     marginTop: hp('1%'),
-    marginBottom: hp('1%'),
+    marginBottom: hp('3%'),
     marginRight: wp('3%'),
     alignSelf: 'flex-end',
   },

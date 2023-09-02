@@ -5,13 +5,13 @@ import {Aguarde} from '../../components/Aguarde';
 import {ContainerPage} from '../../components/ContainerPage';
 import {BACKEND_URL} from '../../utils/utils';
 import {EventoItem} from './eventoItem';
-import {SemEvento} from './semEvento';
+import {SemItem} from '../../components/SemItem';
 // import {EVENTOS} from './data/Evento';
 export interface Evento {
   id: number;
   titulo: string;
   dataInicial: Date;
-  dataFim?: Date;
+  dataFinal: Date;
   imagem: string;
   sobre: string;
   valor: string;
@@ -68,7 +68,7 @@ export const Eventos = () => {
                 eventos.filter((e) => new Date(e.dataInicial) >= new Date()),
               )
             ) : (
-              <SemEvento />
+              <SemItem texto="Nenhum evento programado" />
             )}
           </View>
         )}
