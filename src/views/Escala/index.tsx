@@ -145,6 +145,7 @@ export const Escala = () => {
       escalas,
     }),
   );
+  const width = Dimensions.get('window').width;
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -158,36 +159,24 @@ export const Escala = () => {
             {escalaList?.length ? (
               <>
                 <Carousel
-                  width={160}
-                  data={menuData}
-                  renderItem={escalaMenuItem}
-                />
-                <Carousel
-                  width={ITEM_WIDTH}
-                  data={escalasByDay}
-                  renderItem={CarouselCardItem}
-                />
-                {/* <Carousel
-                  firstItem={menuIndex}
-                  layout="default"
-                  layoutCardOffset={9}
-                  data={menuData}
-                  renderItem={escalaMenuItem}
-                  sliderWidth={400}
-                  itemWidth={160}
-                  useScrollView={true}
+                  loop
+                  width={ITEM_WIDTH / 2}
+                  height={width / 4}
+                  autoPlay={false}
+                  data={[...menuData]}
+                  scrollAnimationDuration={1000}
                   onSnapToItem={(index) => setMenuIndex(index)}
+                  renderItem={escalaMenuItem}
                 />
                 <Carousel
-                  layout="default"
-                  layoutCardOffset={9}
-                  ref={isCarousel}
-                  data={escalasByDay}
+                  loop
+                  width={ITEM_WIDTH}
+                  autoPlay={false}
+                  data={[...escalasByDay]}
+                  scrollAnimationDuration={1000}
+                  onSnapToItem={(index) => console.log('current index:', index)}
                   renderItem={CarouselCardItem}
-                  sliderWidth={SLIDER_WIDTH}
-                  itemWidth={ITEM_WIDTH}
-                  useScrollView={true}
-                /> */}
+                />
               </>
             ) : (
               <SemItem texto="Nenhuma escala programada" />
