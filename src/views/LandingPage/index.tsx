@@ -49,24 +49,35 @@ const DATA = [
     textoCard: 'contribua',
     titulo: 'CONTRIBUA',
     imagem: IconContribua,
+    url: '',
   },
   {
     id: 'agenda',
     textoCard: 'agenda',
     titulo: 'AGENDA',
     imagem: IconAgenda,
+    url: '',
   },
   {
     id: 'financas',
     textoCard: 'finanças',
     titulo: 'FINANÇAS',
     imagem: IconFinancas,
+    url: '',
   },
   {
     id: 'eventos',
     textoCard: 'eventos',
     titulo: 'eventos',
     imagem: IconComunidade,
+    url: '',
+  },
+  {
+    id: 'escala',
+    textoCard: 'escala',
+    titulo: 'ESCALA',
+    imagem: IconEscala,
+    url: '',
   },
   {
     id: 'escala',
@@ -80,5 +91,6 @@ const DATA = [
     textoCard: 'conheça a mosaico',
     titulo: 'MOSAICO',
     imagem: IconIgreja,
+    url: '',
   },
 ];

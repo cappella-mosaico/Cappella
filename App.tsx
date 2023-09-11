@@ -14,7 +14,7 @@ import {EventoDesc} from './src/views/Eventos/eventoDesc';
 import {EventoForm} from './src/views/Eventos/eventoForm';
 import { LogBox  } from 'react-native';
 
-LogBox.ignoreLogs(['new NativeEventEmitter'])
+LogBox.ignoreLogs(['new NativeEventEmitter']);
 
 export type RootStackParamList = {
   Home: undefined;

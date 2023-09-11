@@ -73,15 +73,15 @@ PODS:
   - fmt (6.2.1)
   - glog (0.3.5)
   - libevent (2.1.12)
-  - OneSignal (3.12.6):
-    - OneSignal/OneSignalCore (= 3.12.6)
-    - OneSignal/OneSignalExtension (= 3.12.6)
-    - OneSignal/OneSignalOutcomes (= 3.12.6)
-  - OneSignal/OneSignalCore (3.12.6)
-  - OneSignal/OneSignalExtension (3.12.6):
+  - OneSignal (3.12.7):
+    - OneSignal/OneSignalCore (= 3.12.7)
+    - OneSignal/OneSignalExtension (= 3.12.7)
+    - OneSignal/OneSignalOutcomes (= 3.12.7)
+  - OneSignal/OneSignalCore (3.12.7)
+  - OneSignal/OneSignalExtension (3.12.7):
     - OneSignal/OneSignalCore
     - OneSignal/OneSignalOutcomes
-  - OneSignal/OneSignalOutcomes (3.12.6):
+  - OneSignal/OneSignalOutcomes (3.12.7):
     - OneSignal/OneSignalCore
   - OneSignalXCFramework (3.5.3)
   - OpenSSL-Universal (1.1.1100)
@@ -611,7 +611,7 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 3d02b25ca00c2d456734d0bcff864cbc62f6ae1a
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
-  OneSignal: 009d1c9cc54b305abb7a2a1011405440ce36723f
+  OneSignal: 65c17edb3d9d26e355249f97340c1386d87e168c
   OneSignalXCFramework: 4e08d8353adec161c3d9174e2572c849e1225c9f
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: b9d9fe1fc70114b751c076104e52f3b1b5e5a95a

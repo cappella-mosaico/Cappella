@@ -1,28 +1,24 @@
 we should keep ourselves in the supported releases described here https://github.com/reactwg/react-native-releases#which-versions-are-currently-supported
 useful react-native upgrade tool: https://react-native-community.github.io/upgrade-helper/?from=0.64.4&to=0.71.8
 
-* react-native 0.65.0
-** conflict between node lib versions
- stop using npm install and start using yarn install
-** Cannot run Project.afterEvaluate(Closure) when the project is already evaluated.
- this has been "fixed" on versions of react-native >=0.65
-** Unexpected token '?'
- this happened when I tried to jump to react-native 0.70.0
-** Failed to transform react-native-reanimated-65-jsc.aar (project :react-native-reanimated) to match attributes {artifactType=android-aar-metadata}.
- https://stackoverflow.com/a/69077685/1851150
- yarn add react-native-reanimated@2.3.0-alpha.3
-** attempt to invoke virtual method 'java.lang.Object java.lang.ref.WeakReference.get()'on a null object reference
- https://github.com/software-mansion/react-native-reanimated/issues/2369
- https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation/#android
- in the end I've fixed it by upgrading the reanimated version to `2.3.0-alpha.2` as opposed to `2.3.0-alpha.3`
+* conflict between node lib versions
+stop using npm install and start using yarn install
+* Cannot run Project.afterEvaluate(Closure) when the project is already evaluated.
+this has been "fixed" on versions of react-native >=0.65
+* Unexpected token '?'
+this happened when I tried to jump to react-native 0.70.0
+* Failed to transform react-native-reanimated-65-jsc.aar (project :react-native-reanimated) to match attributes {artifactType=android-aar-metadata}.
+https://stackoverflow.com/a/69077685/1851150
+yarn add react-native-reanimated@2.3.0-alpha.3
+* attempt to invoke virtual method 'java.lang.Object java.lang.ref.WeakReference.get()'on a null object reference
+https://github.com/software-mansion/react-native-reanimated/issues/2369
+https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation/#android
+in the end I've fixed it by upgrading the reanimated version to `2.3.0-alpha.2` as opposed to `2.3.0-alpha.3`
 
-* react-native 0.66.0
-** Failed to transform react-native-reanimated-66-jsc.aar (project :react-native-reanimated) to match attributes {artifactType=android-aar-metadata}
- [[https://stackoverflow.com/a/69509098]["This issue has resolved in react-native-reanimated@2.3.0-beta.2 release."]]
+### this was enough to upgrade react-native to 0.65.0 /\
 
-** attempt to invoke virtual method 'java.lang.Object java.lang.ref.WeakReference.get()'on a null object reference
- yes, I got this a second time now. What I did was to upgrade react-native-reacnimated to its latest stable release, 2.17.0 and it seem to have worked. I'm getting a kind of annoying warning (below) showing up when the app first loads, but I think this is only during debug.
- https://github.com/software-mansion/react-native-reanimated/releases
+* Failed to transform react-native-reanimated-66-jsc.aar (project :react-native-reanimated) to match attributes {artifactType=android-aar-metadata}
+[[https://stackoverflow.com/a/69509098]["This issue has resolved in react-native-reanimated@2.3.0-beta.2 release."]]
 
 ** new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method
  that didn't work: https://bugsfixing.com/solved-new-nativeeventemitter-was-called-with-a-non-null-argument-without-the-required-addlistener-method/
