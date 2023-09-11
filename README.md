@@ -7,7 +7,7 @@ npx react-native link
 ## OSX only
 npx pod-install (or cd ios && pod install)
 
-watchman watch-del-all && react-native start --reset-cache
+watchman watch-del-all && npx react-native start --reset-cache
 
-react-native run-ios
-react-native run-android
+npx react-native run-ios
+npx react-native run-android
