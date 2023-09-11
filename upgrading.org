@@ -1,28 +1,24 @@
 we should keep ourselves in the supported releases described here https://github.com/reactwg/react-native-releases#which-versions-are-currently-supported
 useful react-native upgrade tool: https://react-native-community.github.io/upgrade-helper/?from=0.64.4&to=0.71.8
 
-* react-native 0.65.0
-** conflict between node lib versions
- stop using npm install and start using yarn install
-** Cannot run Project.afterEvaluate(Closure) when the project is already evaluated.
- this has been "fixed" on versions of react-native >=0.65
-** Unexpected token '?'
- this happened when I tried to jump to react-native 0.70.0
-** Failed to transform react-native-reanimated-65-jsc.aar (project :react-native-reanimated) to match attributes {artifactType=android-aar-metadata}.
- https://stackoverflow.com/a/69077685/1851150
- yarn add react-native-reanimated@2.3.0-alpha.3
-** attempt to invoke virtual method 'java.lang.Object java.lang.ref.WeakReference.get()'on a null object reference
- https://github.com/software-mansion/react-native-reanimated/issues/2369
- https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation/#android
- in the end I've fixed it by upgrading the reanimated version to `2.3.0-alpha.2` as opposed to `2.3.0-alpha.3`
+* conflict between node lib versions
+stop using npm install and start using yarn install
+* Cannot run Project.afterEvaluate(Closure) when the project is already evaluated.
+this has been "fixed" on versions of react-native >=0.65
+* Unexpected token '?'
+this happened when I tried to jump to react-native 0.70.0
+* Failed to transform react-native-reanimated-65-jsc.aar (project :react-native-reanimated) to match attributes {artifactType=android-aar-metadata}.
+https://stackoverflow.com/a/69077685/1851150
+yarn add react-native-reanimated@2.3.0-alpha.3
+* attempt to invoke virtual method 'java.lang.Object java.lang.ref.WeakReference.get()'on a null object reference
+https://github.com/software-mansion/react-native-reanimated/issues/2369
+https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation/#android
+in the end I've fixed it by upgrading the reanimated version to `2.3.0-alpha.2` as opposed to `2.3.0-alpha.3`
 
-* react-native 0.66.0
-** Failed to transform react-native-reanimated-66-jsc.aar (project :react-native-reanimated) to match attributes {artifactType=android-aar-metadata}
- [[https://stackoverflow.com/a/69509098]["This issue has resolved in react-native-reanimated@2.3.0-beta.2 release."]]
+### this was enough to upgrade react-native to 0.65.0 /\
 
-** attempt to invoke virtual method 'java.lang.Object java.lang.ref.WeakReference.get()'on a null object reference
- yes, I got this a second time now. What I did was to upgrade react-native-reacnimated to its latest stable release, 2.17.0 and it seem to have worked. I'm getting a kind of annoying warning (below) showing up when the app first loads, but I think this is only during debug.
- https://github.com/software-mansion/react-native-reanimated/releases
+* Failed to transform react-native-reanimated-66-jsc.aar (project :react-native-reanimated) to match attributes {artifactType=android-aar-metadata}
+[[https://stackoverflow.com/a/69509098]["This issue has resolved in react-native-reanimated@2.3.0-beta.2 release."]]
 
 ** new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method
  that didn't work: https://bugsfixing.com/solved-new-nativeeventemitter-was-called-with-a-non-null-argument-without-the-required-addlistener-method/
@@ -42,6 +38,7 @@ smooth
 ** A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
 https://github.com/software-mansion/react-native-gesture-handler/issues/2168
 Nice. Upgrading the compileSdk and targetSdk from 31 to 33 fixed the issue, kudos to this [[https://github.com/software-mansion/react-native-gesture-handler/issues/2168#issuecomment-1546998935][comment]].
+
 * react-native 0.69.0
 ** Error: ENOENT: no such file or directory, scandir 'node_modules'
 I removed the node_modules folder and run an yarn install again but it didn't work. So I ran the run-android command with a --no-jetifier flag and it seem to have worked
@@ -66,5 +63,8 @@ people is saying this is related to node version. But I'm sure I'm running node 
 #+END_SRC
 2. <2023-05-20 sáb 07:40> It seems like I figured it out. There was two react-native versions being executed when I typed ~react-native start~. By typing it like that it would use the react-native globally installed on my local environment and it would fail with above error. Starting it with ~npx react-native start~ works because it starts the Metro from within the project's node_modules, which is what we want. The "engines" blocks is unnecessary. I'm not sure why the globally installed version of react-native wouldn't work, or why its Metro was using an obsolete version of node, but I'm ok with simply moving on. 
 
-
-
+IOS: 
+First problem:  Please specify "higher minimum deployment target" dependency - solution found here - https://github.com/CocoaPods/CocoaPods/issues/7304#issuecomment-491065166
+Basically I had to go to ios/Podfile and update - from platform :ios, '10.0' - to platform :ios, '13.0'
+Second problem: No visible @interface for 'RCTBundleURLProvider' declares the selector 'jsBundleURLForBundleRoot:fallbackResource:' - solution found here https://stackoverflow.com/a/73048366 - 
+on ios/Cappella/AppDelegate.m, replace return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil]; to return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"]; 

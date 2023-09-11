@@ -1,0 +1,93 @@
+import React from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import {
+  BLACK,
+  CHELSEACUCUMBER,
+  FONT_AVENIR_BLACK,
+  LIGHTTITLE,
+  WHITE,
+} from '../../styles/styles';
+import {EscalaByDay, ITEM_WIDTH} from '.';
+import {
+  checkInicioFimDifferent,
+  domingoCheck,
+  formatDatePT,
+  groupByLocal,
+} from '../../utils/utils';
+import MultipleGrupos from './MultipleGrupos';
+import SingleGrupos from './SingleGrupos';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
+
+interface EscalaItem {
+  item: EscalaByDay;
+  index: number;
+}
+
+const CarouselCardItem = ({item, index}: EscalaItem) => {
+  const {dia, escalas} = item;
+  const domingo = domingoCheck(dia);
+  const isSemanal = checkInicioFimDifferent(escalas);
+  const styles = getStyles(
+    isSemanal ? domingo === 'pastSunday' : domingo === 'nextSunday',
+  );
+  const grupos = groupByLocal(escalas);
+
+  return (
+    <View style={styles.container} key={index}>
+      <Text allowFontScaling={false} style={styles.white}>
+        {isSemanal
+          ? domingo === 'pastSunday'
+            ? 'NESTA SEMANA - DOMINGO'
+            : 'PROXIMA SEMANA'
+          : domingo === 'nextSunday'
+          ? 'NESTE DOMINGO'
+          : 'SEMANA SEGUINTE'}{' '}
+        - {formatDatePT(dia)}
+      </Text>
+
+      {grupos.length > 1 ? (
+        grupos.map((grupo, grupoIndex) => {
+          return (
+            <View key={grupoIndex}>
+              <MultipleGrupos local={grupo.local} values={grupo.values} />
+            </View>
+          );
+        })
+      ) : (
+        <SingleGrupos local={grupos[0].local} values={grupos[0].values} />
+      )}
+    </View>
+  );
+};
+
+const getStyles = (isNextDomingo: boolean) => {
+  return StyleSheet.create({
+    container: {
+      backgroundColor: isNextDomingo ? LIGHTTITLE : CHELSEACUCUMBER,
+      borderRadius: 8,
+      width: ITEM_WIDTH,
+      paddingBottom: hp('2%'),
+      shadowColor: BLACK,
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      },
+      shadowOpacity: 0.29,
+      shadowRadius: 4.65,
+      elevation: 7,
+    },
+    white: {
+      color: WHITE,
+      fontSize: wp('3%'),
+      fontFamily: FONT_AVENIR_BLACK,
+      marginTop: hp('2%'),
+      marginBottom: hp('2%'),
+      marginLeft: wp('4%'),
+    },
+  });
+};
+
+export default CarouselCardItem;

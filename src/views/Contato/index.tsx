@@ -46,6 +46,7 @@ interface Contato {
   email: string;
   localizacao: string;
   missao: string;
+  horarios: string;
   pastor: string;
 }
 
@@ -54,13 +55,15 @@ export const Contato = () => {
   const logo = require('../../assets/images/mosaico.png');
   const [collapsed, setCollapsed] = useState(true);
 
-  const containerMissao = (missao: string) => {
+  const containerMissao = (missao: string, horarios: string) => {
     return (
       <View style={styles.containerMissao}>
         <Image source={logo} style={styles.imagem} resizeMode="contain" />
-        <Text allowFontScaling={false} style={styles.missao}>
-          {missao}
-        </Text>
+        <View>
+          <Text allowFontScaling={false} style={styles.missao}>
+            {horarios}
+          </Text>
+        </View>
       </View>
     );
   };
@@ -152,14 +155,22 @@ export const Contato = () => {
   };
 
   const contatoItems = (CONTATO: Contato) => {
-    const {endereco, telefone, email, localizacao, missao, pastor} = CONTATO;
+    const {
+      endereco,
+      telefone,
+      email,
+      localizacao,
+      missao,
+      horarios,
+      pastor,
+    } = CONTATO;
 
     return (
       <FlatList
         style={styles.container}
         ListHeaderComponent={
           <>
-            {containerMissao(missao)}
+            {containerMissao(missao, horarios)}
             {containerInfo(pastor, email, telefone, endereco, localizacao)}
             {containerMosaicoOnline()}
           </>
@@ -227,7 +238,7 @@ const getStyles = () => {
     containerMissao: {
       display: 'flex',
       flexDirection: 'row',
-      height: hp('19%'),
+      height: hp('15%'),
       backgroundColor: ALTO,
       justifyContent: 'center',
       alignItems: 'center',

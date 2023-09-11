@@ -142,8 +142,8 @@ android {
         applicationId "com.cappella"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 35
-        versionName "3.6"
+        versionCode 37
+        versionName "3.8"
     }
     splits {
         abi {

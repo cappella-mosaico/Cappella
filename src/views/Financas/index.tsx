@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
@@ -19,7 +19,7 @@ import {
 // import {FINANCEIROS} from './data/Financas';
 import CarouselCardItem from './CarouselCardItem';
 import {BACKEND_URL} from '../../utils/utils';
-import { ITEM_WIDTH, SLIDER_WIDTH } from './common';
+import {Financeiro, ITEM_WIDTH} from './common';
 
 interface Props {
   titulo: string;
@@ -29,8 +29,6 @@ export const Financas = ({titulo}: Props) => {
   const styles = getStyles();
   const [isLoading, setLoading] = useState(true);
   const [financeiroList, setFinanceiroList] = useState<Financeiro[]>();
-  const [index, setIndex] = useState(0);
-  const isCarousel = useRef(null);
 
   // const financeiroList = FINANCEIROS;
   // const isLoading = false;
@@ -86,12 +84,9 @@ export const Financas = ({titulo}: Props) => {
     return (
       <View style={styles.containerCarousel}>
         <Carousel
-            loop
-            width={ITEM_WIDTH}
-            height={hp}
-            data={financasAgrupadas.reverse()}
-            onSnapToItem={(index) => setIndex(index)}
-            renderItem={CarouselCardItem}
+          width={ITEM_WIDTH}
+          data={financasAgrupadas.reverse()}
+          renderItem={CarouselCardItem}
         />
       </View>
     );
