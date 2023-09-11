@@ -52,10 +52,10 @@ export const ChartFinanceiro = ({meses}: Props) => {
         xDomain={{min: 1, max: meses.length}}
         yDomain={{
           min: 0,
-          max: orcado * (1 + 0.5),
+          max: orcado * 2,
         }}>
         <VerticalAxis
-          tickValues={[orcado * (1 + 0.5), orcado, orcado / 2]}
+          tickValues={[orcado * 2, orcado * 1.5, orcado, orcado / 2]}
           theme={{
             labels: {
               label: {

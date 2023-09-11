@@ -1,6 +1,8 @@
 # Cappella
 
-npm install
+yarn
+
+npx react-native link
 
 ## OSX only
 npx pod-install (or cd ios && pod install)

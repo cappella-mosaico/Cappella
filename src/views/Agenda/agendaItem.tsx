@@ -57,12 +57,12 @@ const getStyles = (size: string) => {
     container: {
       flexDirection: 'row',
       justifyContent: 'space-evenly',
-      width: wp('80%'),
+      width: wp('90%'),
       alignSelf: 'center',
     },
     containerAtividade: {
       justifyContent: 'center',
-      width: wp('53%'),
+      width: wp('68%'),
       height: getHeight(size),
       marginBottom: hp('1.2%'),
       backgroundColor: DARKBEIGE,
@@ -88,12 +88,12 @@ const getStyles = (size: string) => {
     },
     horario: {
       color: BLUE,
-      fontSize: wp('6.3%'),
+      fontSize: wp('5.3%'),
       fontFamily: FONT_AVENIR_BLACK,
     },
     atividade: {
       color: BLUE,
-      fontSize: wp('4.7%'),
+      fontSize: wp('3.7%'),
       textAlign: 'center',
       fontFamily: FONT_AVENIR_ROMAN,
     },
