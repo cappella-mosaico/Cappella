@@ -12,7 +12,7 @@ import {COR_DE_FUNDO, TITLE} from './src/styles/styles';
 import {Evento} from './src/views/Eventos';
 import {EventoDesc} from './src/views/Eventos/eventoDesc';
 import {EventoForm} from './src/views/Eventos/eventoForm';
-import { LogBox  } from 'react-native';
+import {LogBox} from 'react-native';
 
 LogBox.ignoreLogs(['new NativeEventEmitter']);
 
