@@ -1,8 +1,8 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
-import Carousel, {Pagination} from 'react-native-snap-carousel';
+import Carousel from 'react-native-reanimated-carousel';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -19,7 +19,7 @@ import {
 // import {FINANCEIROS} from './data/Financas';
 import CarouselCardItem from './CarouselCardItem';
 import {BACKEND_URL} from '../../utils/utils';
-import { ITEM_WIDTH, SLIDER_WIDTH } from './common';
+import {Financeiro, ITEM_WIDTH} from './common';
 
 interface Props {
   titulo: string;
@@ -29,8 +29,6 @@ export const Financas = ({titulo}: Props) => {
   const styles = getStyles();
   const [isLoading, setLoading] = useState(true);
   const [financeiroList, setFinanceiroList] = useState<Financeiro[]>();
-  const [index, setIndex] = useState(0);
-  const isCarousel = useRef(null);
 
   // const financeiroList = FINANCEIROS;
   // const isLoading = false;
@@ -86,24 +84,9 @@ export const Financas = ({titulo}: Props) => {
     return (
       <View style={styles.containerCarousel}>
         <Carousel
-          layout="default"
-          layoutCardOffset={9}
-          ref={isCarousel}
+          width={ITEM_WIDTH}
           data={financasAgrupadas.reverse()}
           renderItem={CarouselCardItem}
-          sliderWidth={SLIDER_WIDTH}
-          itemWidth={ITEM_WIDTH}
-          onSnapToItem={(index) => setIndex(index)}
-          useScrollView={true}
-        />
-        <Pagination
-          dotsLength={financasAgrupadas.length}
-          activeDotIndex={index}
-          carouselRef={isCarousel}
-          dotStyle={styles.dotStyle}
-          inactiveDotOpacity={0.4}
-          inactiveDotScale={0.6}
-          tappableDots={true}
         />
       </View>
     );

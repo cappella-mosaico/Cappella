@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   TouchableOpacity,
@@ -7,7 +7,7 @@ import {
   Dimensions,
   useWindowDimensions,
 } from 'react-native';
-import Carousel, {Pagination} from 'react-native-snap-carousel';
+import Carousel from 'react-native-reanimated-carousel';
 
 import {MINISTERIO} from './data/Escala';
 import {ContainerPage} from '../../components/ContainerPage';
@@ -56,10 +56,8 @@ export const Escala = () => {
   const {height} = useWindowDimensions();
   const size = getSize(height);
   const styles = getStyles(size);
-  const isCarousel = useRef(null);
   const [isLoading, setLoading] = useState(true);
   const [menuIndex, setMenuIndex] = useState(0);
-  const [cardIndex, setCardIndex] = useState(0);
   const [escalaList, setEscalaList] = useState<Escala[]>([]);
   const [activeMinisterio, setActiveMinisterio] = useState<string>();
 
@@ -147,6 +145,7 @@ export const Escala = () => {
       escalas,
     }),
   );
+  const width = Dimensions.get('window').width;
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -160,35 +159,23 @@ export const Escala = () => {
             {escalaList?.length ? (
               <>
                 <Carousel
-                  firstItem={menuIndex}
-                  layout="default"
-                  layoutCardOffset={9}
-                  data={menuData}
-                  renderItem={escalaMenuItem}
-                  sliderWidth={400}
-                  itemWidth={160}
-                  useScrollView={true}
+                  loop
+                  width={ITEM_WIDTH / 2}
+                  height={width / 4}
+                  autoPlay={false}
+                  data={[...menuData]}
+                  scrollAnimationDuration={1000}
                   onSnapToItem={(index) => setMenuIndex(index)}
+                  renderItem={escalaMenuItem}
                 />
                 <Carousel
-                  layout="default"
-                  layoutCardOffset={9}
-                  ref={isCarousel}
-                  data={escalasByDay}
+                  loop
+                  width={ITEM_WIDTH}
+                  autoPlay={false}
+                  data={[...escalasByDay]}
+                  scrollAnimationDuration={1000}
+                  onSnapToItem={(index) => console.log('current index:', index)}
                   renderItem={CarouselCardItem}
-                  sliderWidth={SLIDER_WIDTH}
-                  itemWidth={ITEM_WIDTH}
-                  onSnapToItem={(i) => setCardIndex(i)}
-                  useScrollView={true}
-                />
-                <Pagination
-                  dotsLength={escalasByDay.length}
-                  activeDotIndex={cardIndex}
-                  carouselRef={isCarousel}
-                  dotStyle={styles.dotStyle}
-                  inactiveDotOpacity={0.4}
-                  inactiveDotScale={0.6}
-                  tappableDots={true}
                 />
               </>
             ) : (

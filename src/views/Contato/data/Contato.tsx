@@ -5,5 +5,7 @@ export const FALLBACK = {
   email: 'ipmosaico@gmail.com',
   missao:
     'A Igreja Presbiteriana Mosaico existe para acolher pessoas e formar discípulos de Cristo através de relacionamentos saudáveis e uma pregação bíblica contemporânea no bairro Setor Bueno, na cidade de Goiânia e no mundo.',
+  horarios:
+    'Venha nos visitar aos domingos as 10 da manha para a Escola Biblica e a noite, as 19 horas para o Culto noturno.',
   pastor: 'Rev. Felipe Lobo Andrade',
 };

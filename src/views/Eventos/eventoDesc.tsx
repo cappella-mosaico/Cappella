@@ -30,7 +30,26 @@ interface Props {
 
 export const EventoDesc = ({route}: Props) => {
   const {evento} = route.params;
-  const {dataInicial, sobre, valor, local, endereco} = evento;
+  const {
+    dataInicial,
+    dataFinal,
+    titulo,
+    sobre,
+    valor,
+    local,
+    endereco,
+  } = evento;
+  const isCamping = titulo.toLowerCase().includes('acampamento');
+  const dataInicio = new Date(dataInicial).toLocaleDateString('pt-br', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+  const dataFim = new Date(dataFinal).toLocaleDateString('pt-br', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
   const styles = getStyles();
   const navigation = useNavigation<ProfileScreenNavigationProp>();
 
@@ -56,20 +75,18 @@ export const EventoDesc = ({route}: Props) => {
               )}
           </Text>
           <Text allowFontScaling={false} style={styles.text}>
-            {new Date(dataInicial).toLocaleDateString('pt-br', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
+            {!isCamping ? dataInicio : `${dataInicio} a ${dataFim}`}
           </Text>
-          <Text allowFontScaling={false} style={styles.text}>
-            {new Date(dataInicial).toLocaleTimeString('pt-br', {
-              hour: '2-digit',
-              minute: '2-digit',
-              hour12: false,
-            })}{' '}
-            horas
-          </Text>
+          {!isCamping && (
+            <Text allowFontScaling={false} style={styles.text}>
+              {new Date(dataInicial).toLocaleTimeString('pt-br', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false,
+              })}{' '}
+              horas
+            </Text>
+          )}
           <Text allowFontScaling={false} style={styles.title}>
             Valor
           </Text>

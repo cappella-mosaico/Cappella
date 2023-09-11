@@ -80,6 +80,13 @@ const DATA = [
     url: '',
   },
   {
+    id: 'escala',
+    textoCard: 'escala',
+    titulo: 'ESCALA',
+    imagem: IconEscala,
+    url: '',
+  },
+  {
     id: 'contato',
     textoCard: 'conheça a mosaico',
     titulo: 'MOSAICO',
