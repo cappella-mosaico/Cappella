@@ -117,11 +117,69 @@ export const EventoForm = ({route}: Props) => {
     list.splice(index, 1);
     setDependentes(list);
   };
+/*
+  return (
+    <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={100}
+        style={styles.container}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.inner}>
+            <ScrollView>
+              <Text style={styles.header}>Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+              <Text style={styles.header}>Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+              <Text style={styles.header}>Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+              <Text style={styles.header}>Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+              <Text style={styles.header}>Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+              <Text style={styles.header}>Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+              <Text style={styles.header}>Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+              <Text style={styles.header}>Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+              <Text style={styles.header}>Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+              <Text style={styles.header}>Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+              <Text style={styles.header}>Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+              <Text style={styles.header}>Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+              <Text style={styles.header}>Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+              <Text style={styles.header}>Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+              <Text style={styles.header}>Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+              <Text style={styles.header}>Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+              <Text style={styles.header}>Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+              <Text style={styles.header}>Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+              <Text style={styles.header}>Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+              <Text style={styles.header}>Ultimo Header</Text>
+              <TextInput placeholder="Username" style={styles.textInput} />
+            </ScrollView>
+            <View style={styles.btnContainer}>
+              <Button title="Submit" onPress={() => null} />
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
+  );*/
 
   return (
     <ContainerPage titulo={'EVENTOS'}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={100}
         style={styles.container}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <ScrollView style={styles.containerScrollView}>
@@ -240,14 +298,7 @@ export const EventoForm = ({route}: Props) => {
               />
               {errors.idade && <Text>O campo Idade é obrigatório.</Text>}
               <View style={styles.toggleDependentes}>
-                <CheckBox
-                  disabled={false}
-                  value={Boolean(dependentes.length)}
-                  onValueChange={(newValue) => {
-                    newValue ? handleAddClick() : setDependentes([]);
-                  }}
-                />
-                <Text style={styles.textDependente}>Tem Dependente?</Text>
+                <Button title="+ Adicionar Dependente" onPress={() => handleAddClick()} />
               </View>
 
               {dependentes?.length > 0 &&
@@ -274,9 +325,8 @@ export const EventoForm = ({route}: Props) => {
                       placeholder="Idade"
                       placeholderTextColor={IRON}
                     />
-                    <Button title="+ " onPress={() => handleAddClick()} />
                     <Button
-                      title=" -"
+                      title="  -  "
                       onPress={() => handleRemoveClick(index)}
                     />
                   </View>
@@ -328,6 +378,7 @@ const getStyles = (size: string) => {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'flex-start',
+      height: 50,
     },
     dependente: {
       display: 'flex',
