@@ -27,7 +27,6 @@ import {TextInputMask} from 'react-native-masked-text';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import CheckBox from 'expo-checkbox';
 import {isValidCPF, isValidEmail} from './formValidators';
-// import {ScrollView} from 'react-native-gesture-handler';
 import {BACKEND_URL, getSize} from '../../utils/utils';
 import {IRON} from '../../styles/styles';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -117,63 +116,6 @@ export const EventoForm = ({route}: Props) => {
     list.splice(index, 1);
     setDependentes(list);
   };
-/*
-  return (
-    <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={100}
-        style={styles.container}>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={styles.inner}>
-            <ScrollView>
-              <Text style={styles.header}>Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-              <Text style={styles.header}>Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-              <Text style={styles.header}>Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-              <Text style={styles.header}>Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-              <Text style={styles.header}>Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-              <Text style={styles.header}>Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-              <Text style={styles.header}>Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-              <Text style={styles.header}>Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-              <Text style={styles.header}>Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-              <Text style={styles.header}>Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-              <Text style={styles.header}>Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-              <Text style={styles.header}>Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-              <Text style={styles.header}>Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-              <Text style={styles.header}>Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-              <Text style={styles.header}>Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-              <Text style={styles.header}>Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-              <Text style={styles.header}>Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-              <Text style={styles.header}>Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-              <Text style={styles.header}>Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-              <Text style={styles.header}>Ultimo Header</Text>
-              <TextInput placeholder="Username" style={styles.textInput} />
-            </ScrollView>
-            <View style={styles.btnContainer}>
-              <Button title="Submit" onPress={() => null} />
-            </View>
-          </View>
-        </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
-  );*/
 
   return (
     <ContainerPage titulo={'EVENTOS'}>
@@ -182,7 +124,8 @@ export const EventoForm = ({route}: Props) => {
         keyboardVerticalOffset={100}
         style={styles.container}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <ScrollView style={styles.containerScrollView}>
+          <ScrollView style={styles.containerScrollView}
+                      persistentScrollbar={true}>
             <EventoDescPadrao evento={evento} />
             <View style={styles.container}>
               <Controller
@@ -297,12 +240,14 @@ export const EventoForm = ({route}: Props) => {
                 name="idade"
               />
               {errors.idade && <Text>O campo Idade é obrigatório.</Text>}
-              <View style={styles.toggleDependentes}>
-                <Button title="+ Adicionar Dependente" onPress={() => handleAddClick()} />
+              <View style={styles.numberDependentesFlag}>
+                <Button title="Adicionar Dependente" onPress={() => handleAddClick()} />
               </View>
 
               {dependentes?.length > 0 &&
-                dependentes.map((dependente, index) => (
+                <View>
+                {dependentes?.length > 0 && <Text>{dependentes?.length} dependente{dependentes?.length < 2 ? '' : 's'}</Text>}
+                {dependentes.map((dependente, index) => (
                   <View style={styles.dependente} key={index}>
                     <TextInput
                       style={styles.inputDependente}
@@ -331,6 +276,9 @@ export const EventoForm = ({route}: Props) => {
                     />
                   </View>
                 ))}
+               </View>
+
+}
 
               <Button title="Enviar" onPress={handleSubmit(onSubmit)} />
             </View>
@@ -359,7 +307,7 @@ const getHeight = (size: string) => {
 const getStyles = (size: string) => {
   return StyleSheet.create({
     container: {
-      margin: wp('6%'),
+      margin: wp('1%'),
     },
     containerScrollView: {
       height: getHeight(size),
@@ -372,13 +320,7 @@ const getStyles = (size: string) => {
       borderRadius: 4,
       margin: wp('2%'),
       marginLeft: 0,
-    },
-    toggleDependentes: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      height: 50,
+      marginRight: wp('10%'),
     },
     dependente: {
       display: 'flex',
@@ -386,27 +328,37 @@ const getStyles = (size: string) => {
       alignItems: 'center',
     },
     textDependente: {
-      margin: wp('3%'),
+      margin: wp('3%')
     },
+
     inputDependente: {
+      flex: 2,
       backgroundColor: 'white',
       fontSize: wp('3.5%'),
       height: hp('5.75%'),
-      width: wp('40%'),
       padding: wp('3%'),
       borderRadius: 4,
       margin: wp('3%'),
       marginLeft: 0,
     },
+
     inputIdade: {
+      flex: 1,
       backgroundColor: 'white',
       fontSize: wp('3.5%'),
       height: hp('5.75%'),
-      width: wp('15%'),
       padding: wp('3%'),
       borderRadius: 4,
       margin: wp('3%'),
       marginLeft: 0,
     },
+
+    numberDependentesFlag: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 5
+    }
   });
 };
