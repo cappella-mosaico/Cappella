@@ -96,7 +96,7 @@ export const EventoForm = ({route}: Props) => {
       const json = await response.json();
       console.log(json);
       if (response.ok && response.status === 200) {
-        Alert.alert('Sucesso', 'Você foi cadastrado com sucesso!', [
+        Alert.alert('Sucesso', 'Você foi cadastrado com sucesso.', [
           {text: 'OK', onPress: () => navigation.popToTop()},
         ]);
       } else {
@@ -124,8 +124,7 @@ export const EventoForm = ({route}: Props) => {
         keyboardVerticalOffset={100}
         style={styles.container}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <ScrollView style={styles.containerScrollView}
-                      persistentScrollbar={true}>
+          <ScrollView style={styles.containerScrollView}>
             <EventoDescPadrao evento={evento} />
             <View style={styles.container}>
               <Controller
@@ -196,7 +195,7 @@ export const EventoForm = ({route}: Props) => {
                 )}
                 name="email"
               />
-              {errors.email && <Text>Email Inválido!</Text>}
+              {errors.email && <Text>Email Inválido.</Text>}
               <Controller
                 control={control}
                 rules={{
@@ -218,7 +217,7 @@ export const EventoForm = ({route}: Props) => {
                 )}
                 name="cpf"
               />
-              {errors.cpf && <Text>CPF Inválido!</Text>}
+              {errors.cpf && <Text>CPF Inválido.</Text>}
               <Controller
                 control={control}
                 rules={{
@@ -271,16 +270,17 @@ export const EventoForm = ({route}: Props) => {
                       placeholderTextColor={IRON}
                     />
                     <Button
-                      title="  -  "
+                      title="🗑"
+                      color="whitesmoke"
                       onPress={() => handleRemoveClick(index)}
                     />
                   </View>
                 ))}
                </View>
-
 }
 
-              <Button title="Enviar" onPress={handleSubmit(onSubmit)} />
+              <Button title={dependentes?.length ? 'Inscrever Família' : 'Inscrever'}
+                      onPress={handleSubmit(onSubmit)} />
             </View>
           </ScrollView>
         </TouchableWithoutFeedback>
