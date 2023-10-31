@@ -26,7 +26,8 @@ export const ContainerPage = ({titulo, children}: Props) => {
   return (
     <>
       <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity onPress={() => navigation.goBack()}
+                          style={styles.setaContainer}>
           <FontAwesomeIcon
             icon={faArrowLeft}
             color={ORANGEBUTTON}
@@ -34,12 +35,12 @@ export const ContainerPage = ({titulo, children}: Props) => {
             style={styles.imagemSeta}
           />
         </TouchableOpacity>
-      </View>
-      {titulo && (
+              {titulo && (
         <Text allowFontScaling={false} style={styles.titulo}>
           {titulo}
         </Text>
       )}
+      </View>
       {children}
     </>
   );
@@ -48,17 +49,21 @@ export const ContainerPage = ({titulo, children}: Props) => {
 const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   titulo: {
     color: IRON,
     fontSize: wp('5%'),
     fontFamily: FONT_AVENIR_BLACK,
-    alignSelf: 'center',
-    marginTop: SIZE_XXX_LARGE,
+    marginTop: SIZE_XX_SMALL,
+    marginLeft: SIZE_X_LARGE,
   },
   imagemSeta: {
     marginLeft: SIZE_X_LARGE,
     marginTop: SIZE_XX_SMALL,
   },
+  setaContainer: {
+
+  }
 });
