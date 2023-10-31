@@ -16,7 +16,7 @@ interface Props {
   evento: Evento;
 }
 
-export const EventoDescPadrao = ({evento}: Props) => {
+export const EventoDescPadrao = ({evento, soImagem}: Props) => {
   const {dataInicial, titulo, imagem} = evento;
   const styles = getStyles();
 
@@ -24,10 +24,10 @@ export const EventoDescPadrao = ({evento}: Props) => {
     <View style={styles.container}>
       <Image
         source={{uri: imagem}}
-        style={styles.imagem}
+        style={[styles.imagem, ...soImagem ? [styles.fullSize] : []]}
         resizeMode="contain"
       />
-      <View style={styles.containerText}>
+      {!soImagem && <View style={styles.containerText}>
         <Text allowFontScaling={false} style={styles.data}>
           {new Date(dataInicial).toLocaleDateString('pt-br', {
             year: 'numeric',
@@ -38,7 +38,8 @@ export const EventoDescPadrao = ({evento}: Props) => {
         <Text allowFontScaling={false} style={styles.evento}>
           {titulo.toUpperCase()}
         </Text>
-      </View>
+      </View>}
+
     </View>
   );
 };
@@ -46,15 +47,18 @@ export const EventoDescPadrao = ({evento}: Props) => {
 const getStyles = () => {
   return StyleSheet.create({
     container: {
-      marginTop: hp('4.5%'),
       display: 'flex',
       flexDirection: 'row',
+      justifyContent: 'center',
     },
     imagem: {
-      marginLeft: wp('6%'),
-      height: hp('15%'),
-      width: wp('31%'),
-      borderRadius: 18,
+      height: wp('40%'),
+      width: wp('40%'),
+      borderRadius: 10,
+    },
+    fullSize: {
+      height: wp('80%'),
+      width: wp('80%'),
     },
     data: {
       fontSize: wp('2.6%'),
@@ -74,6 +78,7 @@ const getStyles = () => {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
+      alignItems: 'center',
       width: wp('50%'),
       color: WOODSMOKE,
     },

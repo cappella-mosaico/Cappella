@@ -34,18 +34,18 @@ export const BotaoLaranja = ({titulo, onPress}: Props) => {
 const getStyles = () => {
   return StyleSheet.create({
     botaoContainer: {
-      backgroundColor: ORANGE,
+      backgroundColor: '#ffdec7',
       padding: wp('4%'),
       width: 175,
       height: 45,
-      borderRadius: 50,
+      borderRadius: 10,
       opacity: 0.56,
       justifyContent: 'center',
     },
     botaoTexto: {
       fontFamily: FONT_AVENIR_BLACK,
-      fontSize: 12,
-      color: WHITE,
+      fontSize: 14,
+      color: '#5c1b05',
       textAlign: 'center',
     },
   });
