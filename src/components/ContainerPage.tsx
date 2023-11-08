@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     fontFamily: FONT_AVENIR_BLACK,
     alignSelf: 'center',
     marginTop: SIZE_XXX_SMALL,
+    marginBottom: SIZE_XX_SMALL,
     marginLeft: SIZE_X_LARGE,
   },
   imagemSeta: {
