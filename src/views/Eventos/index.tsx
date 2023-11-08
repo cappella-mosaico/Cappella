@@ -56,7 +56,7 @@ export const Eventos = () => {
 
   return (
     <SafeAreaView>
-      <ContainerPage titulo={'EVENTOS'}>
+      <ContainerPage>
         {isLoading ? (
           <View style={styles.aguarde}>
             <Aguarde />

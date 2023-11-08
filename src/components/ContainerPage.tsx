@@ -17,11 +17,10 @@ import {
 } from '../styles/styles';
 
 interface Props {
-  titulo?: string;
   children: JSX.Element | JSX.Element[];
 }
 
-export const ContainerPage = ({titulo, children}: Props) => {
+export const ContainerPage = ({children}: Props) => {
   const navigation = useNavigation();
 
   return (
@@ -36,11 +35,6 @@ export const ContainerPage = ({titulo, children}: Props) => {
           />
         </TouchableOpacity>
       </View>
-      {titulo && (
-        <Text allowFontScaling={false} style={styles.titulo}>
-          {titulo}
-        </Text>
-      )}
       {children}
     </>
   );
@@ -50,15 +44,6 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-  },
-  titulo: {
-    color: IRON,
-    fontSize: wp('5%'),
-    fontFamily: FONT_AVENIR_BLACK,
-    alignSelf: 'center',
-    marginTop: SIZE_XXX_SMALL,
-    marginBottom: SIZE_XX_SMALL,
-    marginLeft: SIZE_X_LARGE,
   },
   imagemSeta: {
     marginLeft: SIZE_X_LARGE,

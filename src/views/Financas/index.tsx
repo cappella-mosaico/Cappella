@@ -93,7 +93,7 @@ export const Financas = ({titulo}: Props) => {
   };
 
   return (
-    <ContainerPage titulo={titulo}>
+    <ContainerPage>
       {isLoading ? (
         <View style={styles.aguarde}>
           <Aguarde />

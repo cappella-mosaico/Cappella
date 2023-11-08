@@ -61,6 +61,7 @@ const getStyles = () => {
     fullSize: {
       height: wp('80%'),
       width: wp('80%'),
+      marginTop: hp('2.4%'),
     },
     data: {
       fontSize: wp('2.6%'),

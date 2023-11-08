@@ -34,7 +34,7 @@ export const Agenda = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <ContainerPage titulo={'AGENDA'}>
+      <ContainerPage>
         <View style={styles.container}>{agendaList(FALLBACK)}</View>
       </ContainerPage>
     </SafeAreaView>

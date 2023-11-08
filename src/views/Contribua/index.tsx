@@ -133,9 +133,7 @@ export const Contribua = () => {
 
   return (
     <SafeAreaView style={styles.droidSafeArea}>
-      <ContainerPage titulo={'CONTRIBUA'}>
-        {contribuaItems(FALLBACK)}
-      </ContainerPage>
+      <ContainerPage>{contribuaItems(FALLBACK)}</ContainerPage>
     </SafeAreaView>
   );
 };

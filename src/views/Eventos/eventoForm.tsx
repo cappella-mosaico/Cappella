@@ -117,7 +117,7 @@ export const EventoForm = ({route}: Props) => {
   };
 
   return (
-    <ContainerPage titulo={'EVENTOS'}>
+    <ContainerPage>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={100}
@@ -316,7 +316,8 @@ const getHeight = (size: string) => {
 const getStyles = (size: string) => {
   return StyleSheet.create({
     container: {
-      margin: wp('1%'),
+      margin: wp('1.5%'),
+      marginTop: hp('2.4%'),
     },
     containerScrollView: {
       height: getHeight(size),
@@ -327,9 +328,7 @@ const getStyles = (size: string) => {
       fontSize: wp('3.5%'),
       padding: wp('3%'),
       borderRadius: 4,
-      margin: wp('2%'),
-      marginLeft: 0,
-      marginRight: wp('10%'),
+      margin: wp('1.5%'),
     },
     dependente: {
       display: 'flex',

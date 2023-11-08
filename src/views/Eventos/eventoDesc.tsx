@@ -48,7 +48,7 @@ export const EventoDesc = ({route}: Props) => {
 
   return (
     <SafeAreaView>
-      <ContainerPage titulo={'EVENTOS'}>
+      <ContainerPage>
         <EventoDescPadrao evento={evento} soImagem={true} />
         <View style={styles.containerInfo}>
           <Text allowFontScaling={false} style={styles.title}>
