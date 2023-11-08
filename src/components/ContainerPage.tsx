@@ -13,6 +13,7 @@ import {
   SIZE_XX_SMALL,
   SIZE_X_LARGE,
   SIZE_XXX_LARGE,
+  SIZE_XXX_SMALL,
 } from '../styles/styles';
 
 interface Props {
@@ -26,8 +27,7 @@ export const ContainerPage = ({titulo, children}: Props) => {
   return (
     <>
       <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={() => navigation.goBack()}
-                          style={styles.setaContainer}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <FontAwesomeIcon
             icon={faArrowLeft}
             color={ORANGEBUTTON}
@@ -35,12 +35,12 @@ export const ContainerPage = ({titulo, children}: Props) => {
             style={styles.imagemSeta}
           />
         </TouchableOpacity>
-              {titulo && (
+      </View>
+      {titulo && (
         <Text allowFontScaling={false} style={styles.titulo}>
           {titulo}
         </Text>
       )}
-      </View>
       {children}
     </>
   );
@@ -49,21 +49,18 @@ export const ContainerPage = ({titulo, children}: Props) => {
 const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   titulo: {
     color: IRON,
     fontSize: wp('5%'),
     fontFamily: FONT_AVENIR_BLACK,
-    marginTop: SIZE_XX_SMALL,
+    alignSelf: 'center',
+    marginTop: SIZE_XXX_SMALL,
     marginLeft: SIZE_X_LARGE,
   },
   imagemSeta: {
     marginLeft: SIZE_X_LARGE,
-    marginTop: SIZE_XX_SMALL,
+    marginTop: SIZE_XXX_SMALL,
   },
-  setaContainer: {
-
-  }
 });

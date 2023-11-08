@@ -1,16 +1,13 @@
 import React from 'react';
 import {TouchableOpacity, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
+import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import {Evento} from '.';
 
-import {INDIGO, LIGHTERGRAY} from '../../styles/styles';
 import {EventoDescPadrao} from './eventoDescPadrao';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../App';
+import {WHITE} from '../../styles/styles';
 
 type ProfileScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -43,9 +40,9 @@ const getStyles = () => {
       display: 'flex',
       justifyContent: 'flex-start',
       margin: wp('5%'),
-      backgroundColor: '#ffffff',
+      backgroundColor: WHITE,
       alignItems: 'center',
       borderRadius: 10,
-    }
+    },
   });
 };

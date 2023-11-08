@@ -30,15 +30,8 @@ interface Props {
 
 export const EventoDesc = ({route}: Props) => {
   const {evento} = route.params;
-  const {
-    dataInicial,
-    dataFinal,
-    titulo,
-    sobre,
-    valor,
-    local,
-    endereco,
-  } = evento;
+  const {dataInicial, dataFinal, titulo, sobre, valor, local, endereco} =
+    evento;
   const isCamping = titulo.toLowerCase().includes('acampamento');
   const dataInicio = new Date(dataInicial).toLocaleDateString('pt-br', {
     year: 'numeric',

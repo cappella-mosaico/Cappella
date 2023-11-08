@@ -25,7 +25,6 @@ import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {EventoDescPadrao} from './eventoDescPadrao';
 import {TextInputMask} from 'react-native-masked-text';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import CheckBox from 'expo-checkbox';
 import {isValidCPF, isValidEmail} from './formValidators';
 import {BACKEND_URL, getSize} from '../../utils/utils';
 import {IRON} from '../../styles/styles';
@@ -240,47 +239,57 @@ export const EventoForm = ({route}: Props) => {
               />
               {errors.idade && <Text>O campo Idade é obrigatório.</Text>}
               <View style={styles.numberDependentesFlag}>
-                <Button title="Adicionar Dependente" onPress={() => handleAddClick()} />
+                <Button
+                  title="Adicionar Dependente"
+                  onPress={() => handleAddClick()}
+                />
               </View>
 
-              {dependentes?.length > 0 &&
+              {dependentes?.length > 0 && (
                 <View>
-                {dependentes?.length > 0 && <Text>{dependentes?.length} dependente{dependentes?.length < 2 ? '' : 's'}</Text>}
-                {dependentes.map((dependente, index) => (
-                  <View style={styles.dependente} key={index}>
-                    <TextInput
-                      style={styles.inputDependente}
-                      onChangeText={(e) => {
-                        dependente.nome = e;
-                        setDependentes([...dependentes]);
-                      }}
-                      value={dependente.nome}
-                      placeholder="Nome"
-                      placeholderTextColor={IRON}
-                    />
-                    <TextInputMask
-                      type={'only-numbers'}
-                      style={styles.inputIdade}
-                      onChangeText={(e) => {
-                        dependente.idade = e;
-                        setDependentes([...dependentes]);
-                      }}
-                      value={dependente.idade}
-                      placeholder="Idade"
-                      placeholderTextColor={IRON}
-                    />
-                    <Button
-                      title="🗑"
-                      color="whitesmoke"
-                      onPress={() => handleRemoveClick(index)}
-                    />
-                  </View>
-                ))}
-               </View>
-}
+                  {dependentes?.length > 0 && (
+                    <Text>
+                      {dependentes?.length} dependente
+                      {dependentes?.length < 2 ? '' : 's'}
+                    </Text>
+                  )}
+                  {dependentes.map((dependente, index) => (
+                    <View style={styles.dependente} key={index}>
+                      <TextInput
+                        style={styles.inputDependente}
+                        onChangeText={(e) => {
+                          dependente.nome = e;
+                          setDependentes([...dependentes]);
+                        }}
+                        value={dependente.nome}
+                        placeholder="Nome"
+                        placeholderTextColor={IRON}
+                      />
+                      <TextInputMask
+                        type={'only-numbers'}
+                        style={styles.inputIdade}
+                        onChangeText={(e) => {
+                          dependente.idade = e;
+                          setDependentes([...dependentes]);
+                        }}
+                        value={dependente.idade}
+                        placeholder="Idade"
+                        placeholderTextColor={IRON}
+                      />
+                      <Button
+                        title="🗑"
+                        color="whitesmoke"
+                        onPress={() => handleRemoveClick(index)}
+                      />
+                    </View>
+                  ))}
+                </View>
+              )}
 
-              <Button title={dependentes?.length ? 'Inscrever Família' : 'Inscrever'}
-                      onPress={handleSubmit(onSubmit)} />
+              <Button
+                title={dependentes?.length ? 'Inscrever Família' : 'Inscrever'}
+                onPress={handleSubmit(onSubmit)}
+              />
             </View>
           </ScrollView>
         </TouchableWithoutFeedback>
@@ -328,9 +337,8 @@ const getStyles = (size: string) => {
       alignItems: 'center',
     },
     textDependente: {
-      margin: wp('3%')
+      margin: wp('3%'),
     },
-
     inputDependente: {
       flex: 2,
       backgroundColor: 'white',
@@ -341,7 +349,6 @@ const getStyles = (size: string) => {
       margin: wp('3%'),
       marginLeft: 0,
     },
-
     inputIdade: {
       flex: 1,
       backgroundColor: 'white',
@@ -352,13 +359,12 @@ const getStyles = (size: string) => {
       margin: wp('3%'),
       marginLeft: 0,
     },
-
     numberDependentesFlag: {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: 5
-    }
+      padding: 5,
+    },
   });
 };

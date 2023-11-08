@@ -14,6 +14,7 @@ import {Evento} from '.';
 
 interface Props {
   evento: Evento;
+  soImagem?: Boolean;
 }
 
 export const EventoDescPadrao = ({evento, soImagem}: Props) => {
@@ -24,22 +25,23 @@ export const EventoDescPadrao = ({evento, soImagem}: Props) => {
     <View style={styles.container}>
       <Image
         source={{uri: imagem}}
-        style={[styles.imagem, ...soImagem ? [styles.fullSize] : []]}
+        style={[styles.imagem, ...(soImagem ? [styles.fullSize] : [])]}
         resizeMode="contain"
       />
-      {!soImagem && <View style={styles.containerText}>
-        <Text allowFontScaling={false} style={styles.data}>
-          {new Date(dataInicial).toLocaleDateString('pt-br', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
-        </Text>
-        <Text allowFontScaling={false} style={styles.evento}>
-          {titulo.toUpperCase()}
-        </Text>
-      </View>}
-
+      {!soImagem && (
+        <View style={styles.containerText}>
+          <Text allowFontScaling={false} style={styles.data}>
+            {new Date(dataInicial).toLocaleDateString('pt-br', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </Text>
+          <Text allowFontScaling={false} style={styles.evento}>
+            {titulo.toUpperCase()}
+          </Text>
+        </View>
+      )}
     </View>
   );
 };
