@@ -25,9 +25,7 @@ import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {EventoDescPadrao} from './eventoDescPadrao';
 import {TextInputMask} from 'react-native-masked-text';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import CheckBox from 'expo-checkbox';
 import {isValidCPF, isValidEmail} from './formValidators';
-// import {ScrollView} from 'react-native-gesture-handler';
 import {BACKEND_URL, getSize} from '../../utils/utils';
 import {IRON} from '../../styles/styles';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -97,7 +95,7 @@ export const EventoForm = ({route}: Props) => {
       const json = await response.json();
       console.log(json);
       if (response.ok && response.status === 200) {
-        Alert.alert('Sucesso', 'Você foi cadastrado com sucesso!', [
+        Alert.alert('Sucesso', 'Você foi cadastrado com sucesso.', [
           {text: 'OK', onPress: () => navigation.popToTop()},
         ]);
       } else {
@@ -119,9 +117,10 @@ export const EventoForm = ({route}: Props) => {
   };
 
   return (
-    <ContainerPage titulo={'EVENTOS'}>
+    <ContainerPage>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={100}
         style={styles.container}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <ScrollView style={styles.containerScrollView}>
@@ -195,7 +194,7 @@ export const EventoForm = ({route}: Props) => {
                 )}
                 name="email"
               />
-              {errors.email && <Text>Email Inválido!</Text>}
+              {errors.email && <Text>Email Inválido.</Text>}
               <Controller
                 control={control}
                 rules={{
@@ -217,7 +216,7 @@ export const EventoForm = ({route}: Props) => {
                 )}
                 name="cpf"
               />
-              {errors.cpf && <Text>CPF Inválido!</Text>}
+              {errors.cpf && <Text>CPF Inválido.</Text>}
               <Controller
                 control={control}
                 rules={{
@@ -239,50 +238,58 @@ export const EventoForm = ({route}: Props) => {
                 name="idade"
               />
               {errors.idade && <Text>O campo Idade é obrigatório.</Text>}
-              <View style={styles.toggleDependentes}>
-                <CheckBox
-                  disabled={false}
-                  value={Boolean(dependentes.length)}
-                  onValueChange={(newValue) => {
-                    newValue ? handleAddClick() : setDependentes([]);
-                  }}
+              <View style={styles.numberDependentesFlag}>
+                <Button
+                  title="Adicionar Dependente"
+                  onPress={() => handleAddClick()}
                 />
-                <Text style={styles.textDependente}>Tem Dependente?</Text>
               </View>
 
-              {dependentes?.length > 0 &&
-                dependentes.map((dependente, index) => (
-                  <View style={styles.dependente} key={index}>
-                    <TextInput
-                      style={styles.inputDependente}
-                      onChangeText={(e) => {
-                        dependente.nome = e;
-                        setDependentes([...dependentes]);
-                      }}
-                      value={dependente.nome}
-                      placeholder="Nome"
-                      placeholderTextColor={IRON}
-                    />
-                    <TextInputMask
-                      type={'only-numbers'}
-                      style={styles.inputIdade}
-                      onChangeText={(e) => {
-                        dependente.idade = e;
-                        setDependentes([...dependentes]);
-                      }}
-                      value={dependente.idade}
-                      placeholder="Idade"
-                      placeholderTextColor={IRON}
-                    />
-                    <Button title="+ " onPress={() => handleAddClick()} />
-                    <Button
-                      title=" -"
-                      onPress={() => handleRemoveClick(index)}
-                    />
-                  </View>
-                ))}
+              {dependentes?.length > 0 && (
+                <View>
+                  {dependentes?.length > 0 && (
+                    <Text>
+                      {dependentes?.length} dependente
+                      {dependentes?.length < 2 ? '' : 's'}
+                    </Text>
+                  )}
+                  {dependentes.map((dependente, index) => (
+                    <View style={styles.dependente} key={index}>
+                      <TextInput
+                        style={styles.inputDependente}
+                        onChangeText={(e) => {
+                          dependente.nome = e;
+                          setDependentes([...dependentes]);
+                        }}
+                        value={dependente.nome}
+                        placeholder="Nome"
+                        placeholderTextColor={IRON}
+                      />
+                      <TextInputMask
+                        type={'only-numbers'}
+                        style={styles.inputIdade}
+                        onChangeText={(e) => {
+                          dependente.idade = e;
+                          setDependentes([...dependentes]);
+                        }}
+                        value={dependente.idade}
+                        placeholder="Idade"
+                        placeholderTextColor={IRON}
+                      />
+                      <Button
+                        title="🗑"
+                        color="whitesmoke"
+                        onPress={() => handleRemoveClick(index)}
+                      />
+                    </View>
+                  ))}
+                </View>
+              )}
 
-              <Button title="Enviar" onPress={handleSubmit(onSubmit)} />
+              <Button
+                title={dependentes?.length ? 'Inscrever Família' : 'Inscrever'}
+                onPress={handleSubmit(onSubmit)}
+              />
             </View>
           </ScrollView>
         </TouchableWithoutFeedback>
@@ -309,7 +316,8 @@ const getHeight = (size: string) => {
 const getStyles = (size: string) => {
   return StyleSheet.create({
     container: {
-      margin: wp('6%'),
+      margin: wp('1.5%'),
+      marginTop: hp('2.4%'),
     },
     containerScrollView: {
       height: getHeight(size),
@@ -320,14 +328,7 @@ const getStyles = (size: string) => {
       fontSize: wp('3.5%'),
       padding: wp('3%'),
       borderRadius: 4,
-      margin: wp('2%'),
-      marginLeft: 0,
-    },
-    toggleDependentes: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
+      margin: wp('1.5%'),
     },
     dependente: {
       display: 'flex',
@@ -338,24 +339,31 @@ const getStyles = (size: string) => {
       margin: wp('3%'),
     },
     inputDependente: {
+      flex: 2,
       backgroundColor: 'white',
       fontSize: wp('3.5%'),
       height: hp('5.75%'),
-      width: wp('40%'),
       padding: wp('3%'),
       borderRadius: 4,
       margin: wp('3%'),
       marginLeft: 0,
     },
     inputIdade: {
+      flex: 1,
       backgroundColor: 'white',
       fontSize: wp('3.5%'),
       height: hp('5.75%'),
-      width: wp('15%'),
       padding: wp('3%'),
       borderRadius: 4,
       margin: wp('3%'),
       marginLeft: 0,
+    },
+    numberDependentesFlag: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 5,
     },
   });
 };

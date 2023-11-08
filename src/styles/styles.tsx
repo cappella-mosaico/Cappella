@@ -36,6 +36,8 @@ export const COLORCOMUNIDADE = '#F3F5EC';
 export const WOODSMOKE = '#2F3436';
 export const WAIKAWAGREY = '#657188';
 export const CHELSEACUCUMBER = '#92B356';
+export const PEACH = '#FFDEC7';
+export const BLOOD_RED = '#5C1B05';
 
 // TIPOGRAFIA
 export const FONT_AVENIR_BLACK = 'AvenirLTStd-Black';
@@ -54,3 +56,4 @@ export const SIZE_MEDIUM = 16;
 export const SIZE_SMALL = 14;
 export const SIZE_X_SMALL = 12;
 export const SIZE_XX_SMALL = 10;
+export const SIZE_XXX_SMALL = 8;

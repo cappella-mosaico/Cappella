@@ -6,11 +6,8 @@ import {
   StyleSheet,
   GestureResponderEvent,
 } from 'react-native';
-import {WHITE, ORANGE, FONT_AVENIR_BLACK} from '../styles/styles';
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
+import {PEACH, BLOOD_RED, FONT_AVENIR_BLACK} from '../styles/styles';
+import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 
 interface Props {
   titulo: string;
@@ -34,18 +31,18 @@ export const BotaoLaranja = ({titulo, onPress}: Props) => {
 const getStyles = () => {
   return StyleSheet.create({
     botaoContainer: {
-      backgroundColor: ORANGE,
+      backgroundColor: PEACH,
       padding: wp('4%'),
       width: 175,
       height: 45,
-      borderRadius: 50,
+      borderRadius: 10,
       opacity: 0.56,
       justifyContent: 'center',
     },
     botaoTexto: {
       fontFamily: FONT_AVENIR_BLACK,
-      fontSize: 12,
-      color: WHITE,
+      fontSize: 14,
+      color: BLOOD_RED,
       textAlign: 'center',
     },
   });
