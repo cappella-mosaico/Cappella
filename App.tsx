@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import {SafeAreaView, StyleSheet, Platform, StatusBar} from 'react-native';
+import {SafeAreaView, StyleSheet, Platform, StatusBar } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -8,7 +8,7 @@ import {LandingPage} from './src/views/LandingPage';
 import {DetalhesItem} from './src/views/DetalhesItem';
 import {Pastoral} from './src/views/Pastoral';
 
-import {COR_DE_FUNDO, TITLE} from './src/styles/styles';
+import {LIGHTERGRAY, TITLE} from './src/styles/styles';
 import {Evento} from './src/views/Eventos';
 import {EventoDesc} from './src/views/Eventos/eventoDesc';
 import {EventoForm} from './src/views/Eventos/eventoForm';
@@ -78,7 +78,7 @@ export default App;
 const styles = StyleSheet.create({
   droidSafeArea: {
     flex: 1,
-    backgroundColor: COR_DE_FUNDO,
+    backgroundColor: LIGHTERGRAY,
     paddingTop: Platform.OS === 'android' ? 25 : 0,
   },
 });
