@@ -13,7 +13,7 @@ import {LandingPage} from './src/views/LandingPage';
 import {DetalhesItem} from './src/views/DetalhesItem';
 import {Pastoral} from './src/views/Pastoral';
 
-import {WHITE, TITLE, BLACKISH} from './src/styles/styles';
+import {WHITE, TITLE, BLACKISH, BLUE, LIGHTBLUE} from './src/styles/styles';
 import {Evento} from './src/views/Eventos';
 import {EventoDesc} from './src/views/Eventos/eventoDesc';
 import {EventoForm} from './src/views/Eventos/eventoForm';
@@ -82,6 +82,16 @@ const App = () => {
   );
 };
 
+const NavButtom = ({ icon, text, selected, onPress }) => {
+  return (
+    <TouchableOpacity style={{display: 'flex', justifyContent: 'center', alignItems: 'center', ...(selected ? {backgroundColor: LIGHTBLUE, borderRadius: 10, padding: 5} : {})}} 
+          onPress={onPress}>
+          <SvgXml xml={icon} height={hp(selected ? '5%' : '4%')} />
+          <Text style={{fontSize: 10, color: BLACKISH, ...(selected ? {fontWeight: 'bold'} : {})}}>{text}</Text>
+        </TouchableOpacity>
+  );
+}
+
 const BottomBar = () => {
   const navigation = useNavigation();
   const [currentRoute, setCurrentRoute] = useState({name: 'Landpage'});
@@ -106,24 +116,22 @@ const BottomBar = () => {
         justifyContent: 'space-around', 
         alignItems: 'center', 
         backgroundColor: 'whitesmoke',
-        height: hp('8%')}}>
-        <TouchableOpacity style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}} 
-          onPress={() => navigation.navigate('DetalhesItem', { id: 'contribua'})}>
-          <SvgXml xml={IconContribua} height={hp(currentRoute.name == 'DetalhesItem' && currentRoute.params?.id === 'contribua' ? '5%' : '3.5%')} />
-          <Text style={{fontSize: 10, color: BLACKISH, ...(currentRoute.name == 'DetalhesItem' && currentRoute.params?.id === 'contribua' ? {fontWeight: 'bold'} : {})}}>contribua</Text>
-        </TouchableOpacity>
+        height: hp('9%')}}>
 
-        <TouchableOpacity style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}} 
-          onPress={() => navigation.navigate('Landpage')}>
-          <SvgXml xml={IconAoVivo} height={hp(currentRoute.name == 'Landpage' ? '5%' : '3.5%')} />
-          <Text style={{fontSize: 10, color: BLACKISH, ...(currentRoute.name == 'Landpage' ? {fontWeight: 'bold'} : {})}}>início</Text>
-        </TouchableOpacity>
+        <NavButtom icon={IconContribua}
+                    text="contribua"
+                    selected={currentRoute.name == 'DetalhesItem' && currentRoute.params?.id === 'contribua'}
+                    onPress={() => navigation.navigate('DetalhesItem', { id: 'contribua'})} />
 
-        <TouchableOpacity style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}} 
-          onPress={() => navigation.navigate('DetalhesItem', { id: 'contato' })}>
-          <SvgXml xml={IconIgreja} height={hp(currentRoute.name == 'DetalhesItem' && currentRoute.params?.id === 'contato' ? '5%' : '3.5%')} />
-          <Text style={{fontSize: 10, color: BLACKISH, ...(currentRoute.name == 'DetalhesItem' && currentRoute.params?.id === 'contato' ? {fontWeight: 'bold'} : {})}}>informações</Text>
-        </TouchableOpacity>
+        <NavButtom icon={IconAoVivo}
+                    text="início"
+                    selected={currentRoute.name == 'Landpage'}
+                    onPress={() => navigation.navigate('Landpage')} />
+
+        <NavButtom icon={IconIgreja}
+                    text="informações"
+                    selected={currentRoute.name == 'DetalhesItem' && currentRoute.params?.id === 'contato'}
+                    onPress={() => navigation.navigate('DetalhesItem', { id: 'contato'})} />
         
       </View>
   );

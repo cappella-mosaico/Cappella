@@ -6,7 +6,7 @@ import {
   StyleSheet,
   GestureResponderEvent,
 } from 'react-native';
-import {PEACH, BLOOD_RED, FONT_AVENIR_BLACK, WHITE, HIDDEN_GREEN} from '../styles/styles';
+import {PEACH, BLOOD_RED, FONT_AVENIR_BLACK, WHITE, HIDDEN_GREEN, BLUE} from '../styles/styles';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 
 interface Props {
@@ -33,7 +33,7 @@ export const Botao = ({titulo, onPress}: Props) => {
 const getStyles = () => {
   return StyleSheet.create({
     botaoContainer: {
-      backgroundColor: HIDDEN_GREEN,
+      backgroundColor: BLUE,
       width: 175,
       height: 45,
       borderRadius: 10,
