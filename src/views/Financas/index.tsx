@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
@@ -29,9 +29,6 @@ export const Financas = ({titulo}: Props) => {
   const styles = getStyles();
   const [isLoading, setLoading] = useState(true);
   const [financeiroList, setFinanceiroList] = useState<Financeiro[]>();
-
-  // const financeiroList = FINANCEIROS;
-  // const isLoading = false;
 
   useEffect(() => {
     fetch(`${BACKEND_URL}/financeiro?amount=99999`)
@@ -85,8 +82,10 @@ export const Financas = ({titulo}: Props) => {
       <View style={styles.containerCarousel}>
         <Carousel
           width={ITEM_WIDTH}
-          data={financasAgrupadas.reverse()}
+          data={financasAgrupadas}
           renderItem={CarouselCardItem}
+          loop={false}
+          {...(financasAgrupadas ? {defaultIndex: financasAgrupadas.length -1} : {})}
         />
       </View>
     );
@@ -108,33 +107,17 @@ export const Financas = ({titulo}: Props) => {
 const getStyles = () => {
   return StyleSheet.create({
     container: {
-      marginTop: hp('7%'),
       alignItems: 'center',
       backgroundColor: COLORCOMUNIDADE,
       borderColor: CAPER,
       borderWidth: 1,
       borderRadius: 10,
-      shadowOffset: {
-        width: 0.2,
-        height: 0.2,
-      },
-      shadowOpacity: 0.2,
-      elevation: 2,
     },
     containerCarousel: {
-      marginTop: hp('3%'),
       alignItems: 'center',
-      shadowOffset: {
-        width: 0.2,
-        height: 0.2,
-      },
-      shadowOpacity: 0.2,
-      elevation: 2,
     },
     aguarde: {
       alignItems: 'center',
-      marginBottom: hp('4%'),
-      marginTop: hp('15%'),
     },
     imagem: {
       height: hp('40%'),
@@ -147,7 +130,6 @@ const getStyles = () => {
     },
     containerSemOrcamentos: {
       alignItems: 'center',
-      marginBottom: hp('4%'),
     },
     dotStyle: {
       width: 10,

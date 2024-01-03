@@ -1,5 +1,6 @@
 // CORES
 export const BLACK = '#000000';
+export const BLACKISH = '#3d3d3d';
 export const WHITE = '#fff';
 export const OTHERWHITE = '#F2F5EB';
 export const BEIGE = '#FAEEE7';
@@ -37,6 +38,14 @@ export const WAIKAWAGREY = '#657188';
 export const CHELSEACUCUMBER = '#92B356';
 export const PEACH = '#FFDEC7';
 export const BLOOD_RED = '#5C1B05';
+
+export const LOW_ORANGE = '#fdf3ea';
+export const NICE_ORANGE = '#b03004';
+export const BROWN = '#641d00';
+
+export const LOW_GREEN = '#f9ffd5';
+export const HIDDEN_GREEN = '#364f03'
+export const BRIGHT_GREEN = '#adcf06'
 
 // TIPOGRAFIA
 export const FONT_AVENIR_BLACK = 'AvenirLTStd-Black';

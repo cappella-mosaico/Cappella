@@ -15,7 +15,7 @@ import {
 } from '../../styles/styles';
 import {RootStackParamList} from '../../../App';
 import {ContainerPage} from '../../components/ContainerPage';
-import {BotaoLaranja} from '../../components/BotaoLaranja';
+import {BotaoLaranja} from '../../components/Botao';
 import {EventoDescPadrao} from './eventoDescPadrao';
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'EventoDesc'>;

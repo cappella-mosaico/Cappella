@@ -12,6 +12,15 @@ import {
   SHADOW_BEIGE,
   SUBTEXT,
   FONT_AVENIR_BLACK,
+  LIGHTERGRAY,
+  BLACK,
+  GRAY,
+  DARKORANGE,
+  IRON,
+  BLACKISH,
+  ORANGE,
+  BROWN,
+  HIDDEN_GREEN,
 } from '../styles/styles';
 
 interface Props {
@@ -39,7 +48,8 @@ export const GenericItem = ({
       onPress={url ? () => handlePress(url) : onNavigate}>
       {icon}
       {textoCard!! && (
-        <Text allowFontScaling={false} style={styles.texto}>
+        <Text allowFontScaling={false} 
+              style={styles.texto}>
           {textoCard}
         </Text>
       )}
@@ -54,17 +64,12 @@ const getStyles = (width: number, height: number) => {
       height,
       backgroundColor: WHITE,
       borderRadius: 10,
+      borderWidth: 1,
+      borderColor: GRAY,
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      margin: 8,
-      shadowOffset: {
-        width: 4,
-        height: 4,
-      },
-      shadowOpacity: 1,
-      elevation: 5,
-      shadowColor: SHADOW_BEIGE,
+      margin: 4,
     },
     imagem: {
       height: 84,
@@ -73,7 +78,7 @@ const getStyles = (width: number, height: number) => {
       marginTop: 8,
       fontFamily: FONT_AVENIR_BLACK,
       fontSize: wp('3.5%'),
-      color: SUBTEXT,
+      color: HIDDEN_GREEN,
     },
   });
 };

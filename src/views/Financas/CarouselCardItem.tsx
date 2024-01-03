@@ -7,6 +7,7 @@ import {
 
 import {
   BLACK,
+  BLACKISH,
   CAPER,
   COLORCOMUNIDADE,
   COMET,
@@ -70,21 +71,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: ITEM_WIDTH,
     paddingBottom: 40,
-    shadowColor: BLACK,
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
-    elevation: 7,
   },
   ano: {
-    color: COMET,
-    fontSize: wp('4%'),
+    color: BLACKISH,
+    fontSize: wp('10%'),
     fontFamily: FONT_AVENIR_BLACK,
     textAlign: 'center',
     marginTop: hp('2.5%'),
+    
   },
   container: {
     marginTop: hp('7%'),
@@ -93,12 +87,6 @@ const styles = StyleSheet.create({
     borderColor: CAPER,
     borderWidth: 1,
     borderRadius: 10,
-    shadowOffset: {
-      width: 0.2,
-      height: 0.2,
-    },
-    shadowOpacity: 0.2,
-    elevation: 2,
   },
   acumulado: {
     color: COMET,

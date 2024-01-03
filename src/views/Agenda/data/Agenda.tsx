@@ -5,7 +5,7 @@ export const FALLBACK = [
       {
         atividade:
           'GF - Oração e Comunhão - Líderes: Ângela e Walvir - Local: Casa dos Membros (Rodízio)',
-        horario: '19:30',
+        horario: '20:00',
       },
       {
         atividade: 'Ensaio do Coral',
@@ -33,8 +33,8 @@ export const FALLBACK = [
     data: [
       {
         atividade:
-          'GF - Gileade - Líderes: Ruither e Jairo - Local: IP Mosaico',
-        horario: '20:00',
+          'GF - Gileade - Líderes: Ruither e Jairo - Local: Casa do Ruither e da Joyce',
+        horario: '19:30',
       },
     ],
   },

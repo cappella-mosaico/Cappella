@@ -20,6 +20,7 @@ import {
   FONT_GEORGIA,
   IRON,
   SUBTEXT,
+  BLACK,
 } from '../../styles/styles';
 import {BACKEND_URL, getSize} from '../../utils/utils';
 import {FALLBACK} from './data/Pastoral';
@@ -43,7 +44,7 @@ export const Pastoral = () => {
   const [pastoral, setPastoral] = useState<Pastoral>();
   const [isFallback, setFallback] = useState(false);
   const {height} = useWindowDimensions();
-  const styles = getStyles(getSize(height));
+  const styles = getPastoralStyles(getSize(height));
 
   useEffect(() => {
     setFallback(false);
@@ -131,10 +132,11 @@ const getHeight = (size: string) => {
   }
 };
 
-const getStyles = (size: string) => {
+export const getPastoralStyles = (size: string) => {
   return StyleSheet.create({
     containerPagina: {
       alignItems: 'center',
+      backgroundColor: 'white',
     },
     container: {
       marginTop: hp('5%'),
@@ -143,7 +145,8 @@ const getStyles = (size: string) => {
     },
     titulo: {
       fontSize: wp('6%'),
-      fontFamily: FONT_GEORGIA_BOLD,
+      fontFamily: FONT_GEORGIA,
+      fontWeight: 'bold',
       alignSelf: 'center',
       textAlign: 'center',
       color: IRON,

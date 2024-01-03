@@ -38,11 +38,7 @@ export const Item = ({imagem, textoCard, id, url}: Props) => {
       }
       width={wp('100%')}
       height={hp('16.6%')}
-      onNavigate={() =>
-        navigation.push('DetalhesItem', {
-          id,
-        })
-      }
+      onNavigate={ () => navigation.push('DetalhesItem', { id }) }
     />
   );
 };
