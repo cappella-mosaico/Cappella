@@ -1,13 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  Alert,
-  Button,
-  Share,
-  StyleSheet,
-  Text,
-  useWindowDimensions,
-  View,
-} from 'react-native';
+import {Alert, Button, Share, StyleSheet, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {
   widthPercentageToDP as wp,
@@ -16,19 +8,16 @@ import {
 
 import {
   FONT_AVENIR_BOOK,
-  FONT_GEORGIA_BOLD,
   FONT_GEORGIA,
-  IRON,
   SUBTEXT,
-  BLACK,
   BLACKISH,
 } from '../../styles/styles';
-import {BACKEND_URL, getSize} from '../../utils/utils';
+import {BACKEND_URL} from '../../utils/utils';
 import {FALLBACK} from './data/Pastoral';
 import {ContainerPage} from '../../components/ContainerPage';
 import {Aguarde} from '../../components/Aguarde';
 
-interface Pastoral {
+export interface Pastoral {
   titulo: string;
   autor: string;
   descricao: string;
@@ -44,8 +33,7 @@ export const Pastoral = () => {
   const [isLoading, setLoading] = useState(true);
   const [pastoral, setPastoral] = useState<Pastoral>();
   const [isFallback, setFallback] = useState(false);
-  const {height} = useWindowDimensions();
-  const styles = getPastoralStyles(getSize(height));
+  const styles = getPastoralStyles();
 
   useEffect(() => {
     setFallback(false);
@@ -60,26 +48,28 @@ export const Pastoral = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  const onShare = ({message, url, title}: SharedPastoral) => async () => {
-    try {
-      const result = await Share.share({
-        message,
-        url,
-        title,
-      });
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-        } else {
-          // shared
+  const onShare =
+    ({message, url, title}: SharedPastoral) =>
+    async () => {
+      try {
+        const result = await Share.share({
+          message,
+          url,
+          title,
+        });
+        if (result.action === Share.sharedAction) {
+          if (result.activityType) {
+            // shared with activity type of result.activityType
+          } else {
+            // shared
+          }
+        } else if (result.action === Share.dismissedAction) {
+          // dismissed
         }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
+      } catch (error: any) {
+        Alert.alert(error.message);
       }
-    } catch (error: any) {
-      Alert.alert(error.message);
-    }
-  };
+    };
 
   const pastoralItems = (PASTORAL: Pastoral) => {
     const url = `${BACKEND_URL}/pastorais/${PASTORAL.pequenoTitulo}`;
@@ -118,26 +108,11 @@ export const Pastoral = () => {
   );
 };
 
-const getHeight = (size: string) => {
-  switch (size) {
-    case 'small':
-    case 'medium':
-      return hp('69%');
-    case 'large':
-    case 'xlarge':
-    case 'xxlarge':
-    case 'xxxlarge':
-      return hp('80%');
-    default:
-      break;
-  }
-};
-
-export const getPastoralStyles = (size: string) => {
+export const getPastoralStyles = () => {
   return StyleSheet.create({
     containerPagina: {
       alignItems: 'center',
-      backgroundColor: 'white'
+      backgroundColor: 'white',
     },
     container: {
       marginTop: hp('5%'),

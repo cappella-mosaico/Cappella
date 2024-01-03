@@ -7,22 +7,7 @@ import {
 } from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import {handlePress} from '../utils/handlePress';
-import {
-  WHITE,
-  SHADOW_BEIGE,
-  SUBTEXT,
-  FONT_AVENIR_BLACK,
-  LIGHTERGRAY,
-  BLACK,
-  GRAY,
-  DARKORANGE,
-  IRON,
-  BLACKISH,
-  ORANGE,
-  BROWN,
-  HIDDEN_GREEN,
-  NICE_ORANGE,
-} from '../styles/styles';
+import {FONT_AVENIR_BLACK, LIGHTERGRAY, BLACKISH} from '../styles/styles';
 
 interface Props {
   textoCard?: string;
@@ -49,8 +34,7 @@ export const GenericItem = ({
       onPress={url ? () => handlePress(url) : onNavigate}>
       {icon}
       {textoCard!! && (
-        <Text allowFontScaling={false} 
-              style={styles.texto}>
+        <Text allowFontScaling={false} style={styles.texto}>
           {textoCard}
         </Text>
       )}

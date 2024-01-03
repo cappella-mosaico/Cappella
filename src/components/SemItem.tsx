@@ -5,7 +5,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-import {FONT_AVENIR_ROMAN, GRAY, GREEN, HIDDEN_GREEN, LOW_GREEN, OTHERGRAY, PAMPAS, PIPER, WHITE} from '../styles/styles';
+import {FONT_AVENIR_ROMAN, OTHERGRAY} from '../styles/styles';
 
 interface Props {
   texto: string;

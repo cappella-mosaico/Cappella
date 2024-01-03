@@ -2,11 +2,9 @@ import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {Item} from './components/Item';
 import {PastoralItem} from './components/PastoralItem';
-import {BLUE, LIGHTBLUE, LIGHTERGRAY, LIGHTGRAY, SIZE_X_LARGE, WHITE} from '../../styles/styles';
+import {WHITE} from '../../styles/styles';
 import {
-  IconContribua,
   IconAgenda,
-  IconIgreja,
   IconFinancas,
   IconComunidade,
   IconEscala,
@@ -22,7 +20,6 @@ export const LandingPage = () => {
         renderItem={({item}) => (
           <Item
             id={item.id}
-            titulo={item.titulo}
             imagem={item.imagem}
             textoCard={item.textoCard}
             url={item.url}
@@ -38,36 +35,32 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: WHITE
-  }
+    backgroundColor: WHITE,
+  },
 });
 
 const DATA = [
   {
     id: 'financas',
     textoCard: 'finanças',
-    titulo: 'FINANÇAS',
     imagem: IconFinancas,
     url: '',
   },
   {
     id: 'eventos',
     textoCard: 'eventos',
-    titulo: 'eventos',
     imagem: IconComunidade,
     url: '',
   },
   {
     id: 'escala',
     textoCard: 'escala',
-    titulo: 'ESCALA',
     imagem: IconEscala,
     url: '',
   },
   {
     id: 'agenda',
     textoCard: 'pequenos grupos',
-    titulo: 'AGENDA',
     imagem: IconAgenda,
     url: '',
   },

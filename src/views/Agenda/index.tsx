@@ -6,7 +6,7 @@ import {
 } from 'react-native-responsive-screen';
 
 import {AgendaItem} from './agendaItem';
-import {FONT_AVENIR_BLACK, BLUE, NICE_ORANGE} from '../../styles/styles';
+import {FONT_AVENIR_BLACK, NICE_ORANGE} from '../../styles/styles';
 import {FALLBACK} from './data/Agenda';
 import {ContainerPage} from '../../components/ContainerPage';
 

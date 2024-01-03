@@ -7,14 +7,6 @@ import {
 import {
   FONT_AVENIR_BLACK,
   FONT_AVENIR_ROMAN,
-  DARKBEIGE,
-  IRON,
-  BLUE,
-  BEIGE,
-  ORANGE,
-  WHITE,
-  EXTRAORANGE,
-  DARKORANGE,
   LOW_ORANGE,
   BROWN,
 } from '../../styles/styles';

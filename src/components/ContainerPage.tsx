@@ -1,24 +1,11 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 
-import {
-  FONT_AVENIR_BLACK,
-  IRON,
-  ORANGEBUTTON,
-  SIZE_XX_SMALL,
-  SIZE_X_LARGE,
-  SIZE_XXX_LARGE,
-  SIZE_XXX_SMALL,
-  WHITE,
-  GRAY,
-  HIDDEN_GREEN,
-  ORANGE,
-} from '../styles/styles';
+import {SIZE_X_LARGE, SIZE_XXX_SMALL, WHITE, ORANGE} from '../styles/styles';
 
 interface Props {
   children: JSX.Element | JSX.Element[];
@@ -56,5 +43,5 @@ const styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
     backgroundColor: WHITE,
-  }
+  },
 });

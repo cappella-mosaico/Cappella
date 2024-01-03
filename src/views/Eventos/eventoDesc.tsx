@@ -15,8 +15,8 @@ import {
 } from '../../styles/styles';
 import {RootStackParamList} from '../../../App';
 import {ContainerPage} from '../../components/ContainerPage';
-import {BotaoLaranja} from '../../components/Botao';
 import {EventoDescPadrao} from './eventoDescPadrao';
+import {Botao} from '../../components/Botao';
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'EventoDesc'>;
 type ProfileScreenNavigationProp = NativeStackNavigationProp<
@@ -97,7 +97,7 @@ export const EventoDesc = ({route}: Props) => {
           </Text>
         </View>
         <View style={styles.containerInfo}>
-          <BotaoLaranja
+          <Botao
             titulo="se inscreva!"
             onPress={() =>
               navigation.push('EventoForm', {

@@ -14,16 +14,17 @@ import {
   VerticalAxis,
 } from 'react-native-responsive-linechart';
 
-import {BLACKISH, GREEN, HIDDEN_GREEN, LOW_GREEN, ORANGE, ORANGEBUTTON, OTHERGRAY, PIPER} from '../../styles/styles';
-import {FinancasPorAno, Financeiro, months} from './common';
+import {
+  BLACKISH,
+  GREEN,
+  HIDDEN_GREEN,
+  LOW_GREEN,
+  ORANGE,
+} from '../../styles/styles';
+import {Financeiro, months} from './common';
 
 interface Props {
   meses: Financeiro[];
-}
-
-export interface FinanceiroItem {
-  item: FinancasPorAno;
-  index: number;
 }
 
 export const ChartFinanceiro = ({meses}: Props) => {

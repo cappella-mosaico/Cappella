@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
@@ -21,11 +21,7 @@ import CarouselCardItem from './CarouselCardItem';
 import {BACKEND_URL} from '../../utils/utils';
 import {Financeiro, ITEM_WIDTH} from './common';
 
-interface Props {
-  titulo: string;
-}
-
-export const Financas = ({titulo}: Props) => {
+export const Financas = () => {
   const styles = getStyles();
   const [isLoading, setLoading] = useState(true);
   const [financeiroList, setFinanceiroList] = useState<Financeiro[]>();
@@ -85,7 +81,9 @@ export const Financas = ({titulo}: Props) => {
           data={financasAgrupadas}
           renderItem={CarouselCardItem}
           loop={false}
-          {...(financasAgrupadas ? {defaultIndex: financasAgrupadas.length -1} : {})}
+          {...(financasAgrupadas
+            ? {defaultIndex: financasAgrupadas.length - 1}
+            : {})}
         />
       </View>
     );

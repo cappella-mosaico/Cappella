@@ -1,12 +1,11 @@
 import React from 'react';
-import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
 import {
-  BLACK,
   BLACKISH,
   CAPER,
   COLORCOMUNIDADE,
@@ -18,7 +17,7 @@ import {
 } from '../../styles/styles';
 import {ChartFinanceiro} from './ChartFinanceiro';
 import FinanceiroProgressBar from './FinanceiroProgressBar';
-import { ITEM_WIDTH } from './common';
+import {FinanceiroItem, ITEM_WIDTH} from './common';
 
 const CarouselCardItem = ({item, index}: FinanceiroItem) => {
   const {ano, meses} = item;
@@ -78,7 +77,6 @@ const styles = StyleSheet.create({
     fontFamily: FONT_AVENIR_BLACK,
     textAlign: 'center',
     marginTop: hp('2.5%'),
-    
   },
   container: {
     marginTop: hp('7%'),

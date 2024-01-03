@@ -44,8 +44,8 @@ export const NICE_ORANGE = '#b03004';
 export const BROWN = '#641d00';
 
 export const LOW_GREEN = '#f9ffd5';
-export const HIDDEN_GREEN = '#364f03'
-export const BRIGHT_GREEN = '#adcf06'
+export const HIDDEN_GREEN = '#364f03';
+export const BRIGHT_GREEN = '#adcf06';
 
 // TIPOGRAFIA
 export const FONT_AVENIR_BLACK = 'AvenirLTStd-Black';

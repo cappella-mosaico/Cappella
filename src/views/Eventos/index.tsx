@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet, View, FlatList, Text} from 'react-native';
+import {SafeAreaView, StyleSheet, View, FlatList} from 'react-native';
 import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {Aguarde} from '../../components/Aguarde';
 import {ContainerPage} from '../../components/ContainerPage';
