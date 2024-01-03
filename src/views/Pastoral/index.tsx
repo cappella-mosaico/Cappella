@@ -136,12 +136,12 @@ export const getPastoralStyles = (size: string) => {
   return StyleSheet.create({
     containerPagina: {
       alignItems: 'center',
-      backgroundColor: 'white',
+      backgroundColor: 'white'
     },
     container: {
       marginTop: hp('5%'),
+      marginBottom: hp('5%'),
       width: wp('90%'),
-      height: getHeight(size),
     },
     titulo: {
       fontSize: wp('6%'),
