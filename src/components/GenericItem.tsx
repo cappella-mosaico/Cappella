@@ -21,6 +21,7 @@ import {
   ORANGE,
   BROWN,
   HIDDEN_GREEN,
+  NICE_ORANGE,
 } from '../styles/styles';
 
 interface Props {
@@ -62,10 +63,8 @@ const getStyles = (width: number, height: number) => {
     containerItem: {
       width,
       height,
-      backgroundColor: WHITE,
+      backgroundColor: LIGHTERGRAY,
       borderRadius: 10,
-      borderWidth: 1,
-      borderColor: GRAY,
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
@@ -78,7 +77,7 @@ const getStyles = (width: number, height: number) => {
       marginTop: 8,
       fontFamily: FONT_AVENIR_BLACK,
       fontSize: wp('3.5%'),
-      color: HIDDEN_GREEN,
+      color: BLACKISH,
     },
   });
 };

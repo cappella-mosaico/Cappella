@@ -14,7 +14,7 @@ interface Props {
   onPress: (event: GestureResponderEvent) => void;
 }
 
-export const BotaoLaranja = ({titulo, onPress}: Props) => {
+export const Botao = ({titulo, onPress}: Props) => {
   const styles = getStyles();
 
   

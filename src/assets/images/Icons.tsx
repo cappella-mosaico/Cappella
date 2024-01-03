@@ -12,7 +12,7 @@ export const IconContribua = `
 
 export const IconComunidade = `
 <svg xmlns="http://www.w3.org/2000/svg" width="68" viewBox="0 0 68 65">
-  <text id="u" transform="translate(34 52)" fill="#3d3d3d" font-size="65" font-family="Liturgica-Medium, Liturgica" font-weight="500"><tspan x="-33.052" y="0">u</tspan></text>
+  <text id="u" transform="translate(34 52)" fill="#b03004" font-size="65" font-family="Liturgica-Medium, Liturgica" font-weight="500"><tspan x="-33.052" y="0">u</tspan></text>
 </svg>`;
 
 export const IconMissao = `
@@ -22,7 +22,7 @@ export const IconMissao = `
 
 export const IconAgenda = `
 <svg xmlns="http://www.w3.org/2000/svg" width="68" viewBox="0 0 75 65">
-  <text id="X" transform="translate(25 50)" fill="#3d3d3d" font-size="65" font-family="Liturgica-Medium, Liturgica" font-weight="500"><tspan x="-19.057" y="0">X</tspan></text>
+  <text id="X" transform="translate(25 50)" fill="#b03004" font-size="65" font-family="Liturgica-Medium, Liturgica" font-weight="500"><tspan x="-19.057" y="0">X</tspan></text>
 </svg>`;
 
 export const IconIgreja = `
@@ -32,10 +32,10 @@ export const IconIgreja = `
 
 export const IconFinancas = `
 <svg xmlns="http://www.w3.org/2000/svg" width="68" viewBox="0 0 64 65">
-  <text id="S" transform="translate(0 50)" fill="#3d3d3d" font-size="62" font-family="Liturgica-Medium, Liturgica" font-weight="500"><tspan x="0" y="0">S</tspan></text>
+  <text id="S" transform="translate(0 50)" fill="#b03004" font-size="62" font-family="Liturgica-Medium, Liturgica" font-weight="500"><tspan x="0" y="0">S</tspan></text>
 </svg>`;
 
 export const IconEscala = `
 <svg xmlns="http://www.w3.org/2000/svg" width="68" viewBox="0 0 64 65">
-  <text id="G" transform="translate(0 50)" fill="#3d3d3d" font-size="62" font-family="Liturgica-Medium, Liturgica" font-weight="500"><tspan x="0" y="0">G</tspan></text>
+  <text id="G" transform="translate(0 50)" fill="#b03004" font-size="62" font-family="Liturgica-Medium, Liturgica" font-weight="500"><tspan x="0" y="0">G</tspan></text>
 </svg>`;

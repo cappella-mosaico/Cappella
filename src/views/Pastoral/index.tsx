@@ -21,6 +21,7 @@ import {
   IRON,
   SUBTEXT,
   BLACK,
+  BLACKISH,
 } from '../../styles/styles';
 import {BACKEND_URL, getSize} from '../../utils/utils';
 import {FALLBACK} from './data/Pastoral';
@@ -149,7 +150,7 @@ export const getPastoralStyles = (size: string) => {
       fontWeight: 'bold',
       alignSelf: 'center',
       textAlign: 'center',
-      color: IRON,
+      color: BLACKISH,
     },
     autor: {
       fontSize: wp('3%'),
@@ -161,7 +162,7 @@ export const getPastoralStyles = (size: string) => {
     descricao: {
       fontSize: wp('4.4%'),
       fontFamily: FONT_GEORGIA,
-      color: IRON,
+      color: BLACKISH,
       lineHeight: wp('6.3%'),
       textAlign: 'left',
       marginTop: hp('2%'),
