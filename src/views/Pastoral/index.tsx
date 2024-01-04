@@ -11,6 +11,7 @@ import {
   FONT_GEORGIA,
   SUBTEXT,
   BLACKISH,
+  LIGHTERGRAY,
 } from '../../styles/styles';
 import {BACKEND_URL} from '../../utils/utils';
 import {FALLBACK} from './data/Pastoral';
@@ -141,6 +142,20 @@ export const getPastoralStyles = () => {
       lineHeight: wp('6.3%'),
       textAlign: 'left',
       marginTop: hp('2%'),
+    },
+    mainItemView: {
+      flex: 1,
+      padding: '5%',
+      borderRadius: 10,
+      backgroundColor: LIGHTERGRAY,
+      margin: 4,
+      justifyContent: 'space-between',
+    },
+    keepReading: {
+      width: '100%',
+      display: 'flex',
+      alignItems: 'flex-end',
+      marginTop: 10,
     },
   });
 };

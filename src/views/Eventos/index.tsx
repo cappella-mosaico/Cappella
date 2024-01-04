@@ -55,7 +55,7 @@ export const Eventos = () => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={styles.container}>
       <ContainerPage>
         {isLoading ? (
           <View style={styles.aguarde}>
@@ -78,6 +78,9 @@ export const Eventos = () => {
 };
 
 const styles = StyleSheet.create({
+  safeAreaView: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     display: 'flex',

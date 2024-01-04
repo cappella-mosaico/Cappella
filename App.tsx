@@ -100,28 +100,32 @@ const App = () => {
 };
 
 const NavButtom = ({icon, text, selected, onPress}: NavButtomProps) => {
+  const navButtomStyles = getStyles(selected);
+
   return (
-    <TouchableOpacity
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        ...(selected
-          ? {backgroundColor: LIGHTBLUE, borderRadius: 10, padding: 5}
-          : {}),
-      }}
-      onPress={onPress}>
+    <TouchableOpacity style={navButtomStyles.navButtom} onPress={onPress}>
       <SvgXml xml={icon} height={hp(selected ? '5%' : '4%')} />
-      <Text
-        style={{
-          fontSize: 10,
-          color: BLACKISH,
-          ...(selected ? {fontWeight: 'bold'} : {}),
-        }}>
-        {text}
-      </Text>
+      <Text style={navButtomStyles.navButtomText}>{text}</Text>
     </TouchableOpacity>
   );
+};
+
+const getStyles = (selected: boolean) => {
+  return StyleSheet.create({
+    navButtom: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      ...(selected
+        ? {backgroundColor: LIGHTBLUE, borderRadius: 10, padding: 5}
+        : {}),
+    },
+    navButtomText: {
+      fontSize: 10,
+      color: BLACKISH,
+      ...(selected ? {fontWeight: 'bold'} : {}),
+    },
+  });
 };
 
 const BottomBar = () => {
@@ -145,20 +149,12 @@ const BottomBar = () => {
   }, [navigation]);
 
   return (
-    <View
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        backgroundColor: 'whitesmoke',
-        height: hp('9%'),
-      }}>
+    <View style={styles.bottomBarMainView}>
       <NavButtom
         icon={IconContribua}
         text="contribua"
         selected={
-          currentRoute.name == 'DetalhesItem' &&
+          currentRoute.name === 'DetalhesItem' &&
           currentRoute.params?.id === 'contribua'
         }
         onPress={() => navigation.navigate('DetalhesItem', {id: 'contribua'})}
@@ -167,7 +163,7 @@ const BottomBar = () => {
       <NavButtom
         icon={IconAoVivo}
         text="início"
-        selected={currentRoute.name == 'Landpage'}
+        selected={currentRoute.name === 'Landpage'}
         onPress={() => navigation.navigate('Landpage')}
       />
 
@@ -175,7 +171,7 @@ const BottomBar = () => {
         icon={IconIgreja}
         text="informações"
         selected={
-          currentRoute.name == 'DetalhesItem' &&
+          currentRoute.name === 'DetalhesItem' &&
           currentRoute.params?.id === 'contato'
         }
         onPress={() => navigation.navigate('DetalhesItem', {id: 'contato'})}
@@ -187,6 +183,14 @@ const BottomBar = () => {
 export default App;
 
 const styles = StyleSheet.create({
+  bottomBarMainView: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: 'whitesmoke',
+    height: hp('9%'),
+  },
   droidSafeArea: {
     flex: 1,
     paddingTop: Platform.OS === 'android' ? 25 : 0,
