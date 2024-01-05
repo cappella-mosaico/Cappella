@@ -1,12 +1,12 @@
 import React from 'react';
-import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
 import {
-  BLACK,
+  BLACKISH,
   CAPER,
   COLORCOMUNIDADE,
   COMET,
@@ -17,7 +17,7 @@ import {
 } from '../../styles/styles';
 import {ChartFinanceiro} from './ChartFinanceiro';
 import FinanceiroProgressBar from './FinanceiroProgressBar';
-import { ITEM_WIDTH } from './common';
+import {FinanceiroItem, ITEM_WIDTH} from './common';
 
 const CarouselCardItem = ({item, index}: FinanceiroItem) => {
   const {ano, meses} = item;
@@ -70,18 +70,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: ITEM_WIDTH,
     paddingBottom: 40,
-    shadowColor: BLACK,
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
-    elevation: 7,
   },
   ano: {
-    color: COMET,
-    fontSize: wp('4%'),
+    color: BLACKISH,
+    fontSize: wp('10%'),
     fontFamily: FONT_AVENIR_BLACK,
     textAlign: 'center',
     marginTop: hp('2.5%'),
@@ -93,12 +85,6 @@ const styles = StyleSheet.create({
     borderColor: CAPER,
     borderWidth: 1,
     borderRadius: 10,
-    shadowOffset: {
-      width: 0.2,
-      height: 0.2,
-    },
-    shadowOpacity: 0.2,
-    elevation: 2,
   },
   acumulado: {
     color: COMET,

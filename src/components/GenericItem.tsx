@@ -7,12 +7,7 @@ import {
 } from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import {handlePress} from '../utils/handlePress';
-import {
-  WHITE,
-  SHADOW_BEIGE,
-  SUBTEXT,
-  FONT_AVENIR_BLACK,
-} from '../styles/styles';
+import {FONT_AVENIR_BLACK, LIGHTERGRAY, BLACKISH} from '../styles/styles';
 
 interface Props {
   textoCard?: string;
@@ -52,19 +47,12 @@ const getStyles = (width: number, height: number) => {
     containerItem: {
       width,
       height,
-      backgroundColor: WHITE,
+      backgroundColor: LIGHTERGRAY,
       borderRadius: 10,
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      margin: 8,
-      shadowOffset: {
-        width: 4,
-        height: 4,
-      },
-      shadowOpacity: 1,
-      elevation: 5,
-      shadowColor: SHADOW_BEIGE,
+      margin: 4,
     },
     imagem: {
       height: 84,
@@ -73,7 +61,7 @@ const getStyles = (width: number, height: number) => {
       marginTop: 8,
       fontFamily: FONT_AVENIR_BLACK,
       fontSize: wp('3.5%'),
-      color: SUBTEXT,
+      color: BLACKISH,
     },
   });
 };

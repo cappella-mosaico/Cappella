@@ -2,11 +2,9 @@ import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {Item} from './components/Item';
 import {PastoralItem} from './components/PastoralItem';
-import {SIZE_X_LARGE} from '../../styles/styles';
+import {WHITE} from '../../styles/styles';
 import {
-  IconContribua,
   IconAgenda,
-  IconIgreja,
   IconFinancas,
   IconComunidade,
   IconEscala,
@@ -22,7 +20,6 @@ export const LandingPage = () => {
         renderItem={({item}) => (
           <Item
             id={item.id}
-            titulo={item.titulo}
             imagem={item.imagem}
             textoCard={item.textoCard}
             url={item.url}
@@ -36,54 +33,35 @@ export const LandingPage = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: SIZE_X_LARGE,
-  },
-  imagem: {
-    height: 67,
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: WHITE,
   },
 });
 
 const DATA = [
   {
-    id: 'contribua',
-    textoCard: 'contribua',
-    titulo: 'CONTRIBUA',
-    imagem: IconContribua,
-    url: '',
-  },
-  {
-    id: 'agenda',
-    textoCard: 'agenda',
-    titulo: 'AGENDA',
-    imagem: IconAgenda,
-    url: '',
-  },
-  {
     id: 'financas',
     textoCard: 'finanças',
-    titulo: 'FINANÇAS',
     imagem: IconFinancas,
     url: '',
   },
   {
     id: 'eventos',
     textoCard: 'eventos',
-    titulo: 'eventos',
     imagem: IconComunidade,
     url: '',
   },
   {
     id: 'escala',
     textoCard: 'escala',
-    titulo: 'ESCALA',
     imagem: IconEscala,
     url: '',
   },
   {
-    id: 'contato',
-    textoCard: 'conheça a mosaico',
-    titulo: 'MOSAICO',
-    imagem: IconIgreja,
+    id: 'agenda',
+    textoCard: 'pequenos grupos',
+    imagem: IconAgenda,
     url: '',
   },
 ];

@@ -14,16 +14,17 @@ import {
   VerticalAxis,
 } from 'react-native-responsive-linechart';
 
-import {ORANGEBUTTON, OTHERGRAY, PIPER} from '../../styles/styles';
-import {FinancasPorAno, Financeiro, months} from './common';
+import {
+  BLACKISH,
+  GREEN,
+  HIDDEN_GREEN,
+  LOW_GREEN,
+  ORANGE,
+} from '../../styles/styles';
+import {Financeiro, months} from './common';
 
 interface Props {
   meses: Financeiro[];
-}
-
-export interface FinanceiroItem {
-  item: FinancasPorAno;
-  index: number;
 }
 
 export const ChartFinanceiro = ({meses}: Props) => {
@@ -59,7 +60,7 @@ export const ChartFinanceiro = ({meses}: Props) => {
           theme={{
             labels: {
               label: {
-                color: '#A3A3A3',
+                color: BLACKISH,
                 dy: 0,
               },
               formatter: (v) => `R$${(Math.floor(v) / 1000).toFixed(0)} mil`,
@@ -72,7 +73,7 @@ export const ChartFinanceiro = ({meses}: Props) => {
           theme={{
             labels: {
               label: {
-                color: '#A3A3A3',
+                color: BLACKISH,
                 textAnchor: 'start',
               },
               formatter: (v) => (v ? `${months[v]}` : ''),
@@ -83,8 +84,8 @@ export const ChartFinanceiro = ({meses}: Props) => {
         <Area
           theme={{
             gradient: {
-              from: {color: ORANGEBUTTON},
-              to: {color: ORANGEBUTTON, opacity: 0.2},
+              from: {color: GREEN},
+              to: {color: LOW_GREEN, opacity: 0.5},
             },
           }}
         />
@@ -93,7 +94,7 @@ export const ChartFinanceiro = ({meses}: Props) => {
             <Tooltip
               theme={{
                 shape: {
-                  color: PIPER,
+                  color: ORANGE,
                   width: 60,
                   rx: 10,
                 },
@@ -104,13 +105,13 @@ export const ChartFinanceiro = ({meses}: Props) => {
             />
           }
           theme={{
-            stroke: {color: ORANGEBUTTON, width: 5},
+            stroke: {color: HIDDEN_GREEN, width: 5},
           }}
         />
         <Line
           smoothing="cubic-spline"
           data={mapDataOrcado(meses)}
-          theme={{stroke: {color: OTHERGRAY, width: 2}}}
+          theme={{stroke: {color: ORANGE, width: 2}}}
         />
       </Chart>
     </View>
