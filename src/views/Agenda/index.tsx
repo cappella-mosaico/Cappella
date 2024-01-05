@@ -6,7 +6,7 @@ import {
 } from 'react-native-responsive-screen';
 
 import {AgendaItem} from './agendaItem';
-import {FONT_AVENIR_BLACK, BLUE} from '../../styles/styles';
+import {FONT_AVENIR_BLACK, NICE_ORANGE} from '../../styles/styles';
 import {FALLBACK} from './data/Agenda';
 import {ContainerPage} from '../../components/ContainerPage';
 
@@ -34,7 +34,7 @@ export const Agenda = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <ContainerPage titulo={'AGENDA'}>
+      <ContainerPage>
         <View style={styles.container}>{agendaList(FALLBACK)}</View>
       </ContainerPage>
     </SafeAreaView>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     marginTop: hp('5%'),
   },
   dia: {
-    color: BLUE,
+    color: NICE_ORANGE,
     fontSize: wp('3.8%'),
     fontFamily: FONT_AVENIR_BLACK,
     marginTop: hp('1%'),

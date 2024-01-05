@@ -21,17 +21,10 @@ import CarouselCardItem from './CarouselCardItem';
 import {BACKEND_URL} from '../../utils/utils';
 import {Financeiro, ITEM_WIDTH} from './common';
 
-interface Props {
-  titulo: string;
-}
-
-export const Financas = ({titulo}: Props) => {
+export const Financas = () => {
   const styles = getStyles();
   const [isLoading, setLoading] = useState(true);
   const [financeiroList, setFinanceiroList] = useState<Financeiro[]>();
-
-  // const financeiroList = FINANCEIROS;
-  // const isLoading = false;
 
   useEffect(() => {
     fetch(`${BACKEND_URL}/financeiro?amount=99999`)
@@ -85,15 +78,19 @@ export const Financas = ({titulo}: Props) => {
       <View style={styles.containerCarousel}>
         <Carousel
           width={ITEM_WIDTH}
-          data={financasAgrupadas.reverse()}
+          data={financasAgrupadas}
           renderItem={CarouselCardItem}
+          loop={false}
+          {...(financasAgrupadas
+            ? {defaultIndex: financasAgrupadas.length - 1}
+            : {})}
         />
       </View>
     );
   };
 
   return (
-    <ContainerPage titulo={titulo}>
+    <ContainerPage>
       {isLoading ? (
         <View style={styles.aguarde}>
           <Aguarde />
@@ -108,33 +105,17 @@ export const Financas = ({titulo}: Props) => {
 const getStyles = () => {
   return StyleSheet.create({
     container: {
-      marginTop: hp('7%'),
       alignItems: 'center',
       backgroundColor: COLORCOMUNIDADE,
       borderColor: CAPER,
       borderWidth: 1,
       borderRadius: 10,
-      shadowOffset: {
-        width: 0.2,
-        height: 0.2,
-      },
-      shadowOpacity: 0.2,
-      elevation: 2,
     },
     containerCarousel: {
-      marginTop: hp('3%'),
       alignItems: 'center',
-      shadowOffset: {
-        width: 0.2,
-        height: 0.2,
-      },
-      shadowOpacity: 0.2,
-      elevation: 2,
     },
     aguarde: {
       alignItems: 'center',
-      marginBottom: hp('4%'),
-      marginTop: hp('15%'),
     },
     imagem: {
       height: hp('40%'),
@@ -147,7 +128,6 @@ const getStyles = () => {
     },
     containerSemOrcamentos: {
       alignItems: 'center',
-      marginBottom: hp('4%'),
     },
     dotStyle: {
       width: 10,

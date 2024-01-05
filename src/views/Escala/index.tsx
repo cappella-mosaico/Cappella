@@ -159,7 +159,7 @@ export const Escala = () => {
             {escalaList?.length ? (
               <>
                 <Carousel
-                  loop
+                  loop={false}
                   width={ITEM_WIDTH / 2}
                   height={width / 4}
                   autoPlay={false}
@@ -169,7 +169,7 @@ export const Escala = () => {
                   renderItem={escalaMenuItem}
                 />
                 <Carousel
-                  loop
+                  loop={false}
                   width={ITEM_WIDTH}
                   autoPlay={false}
                   data={[...escalasByDay]}

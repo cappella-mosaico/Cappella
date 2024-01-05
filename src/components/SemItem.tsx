@@ -5,7 +5,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-import {FONT_AVENIR_ROMAN, PAMPAS, PIPER} from '../styles/styles';
+import {FONT_AVENIR_ROMAN, OTHERGRAY} from '../styles/styles';
 
 interface Props {
   texto: string;
@@ -31,10 +31,9 @@ const getStyles = () => {
     container: {
       marginTop: hp('15%'),
       alignItems: 'center',
-      backgroundColor: PAMPAS,
     },
     semItem: {
-      color: PIPER,
+      color: OTHERGRAY,
       fontSize: wp('5%'),
       fontFamily: FONT_AVENIR_ROMAN,
       textAlign: 'center',
