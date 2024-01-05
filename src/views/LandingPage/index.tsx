@@ -4,10 +4,10 @@ import {Item} from './components/Item';
 import {PastoralItem} from './components/PastoralItem';
 import {WHITE} from '../../styles/styles';
 import {
-  IconAgenda,
   IconFinancas,
   IconComunidade,
   IconEscala,
+  IconIgreja,
 } from '../../assets/images/Icons';
 
 export const LandingPage = () => {
@@ -59,9 +59,9 @@ const DATA = [
     url: '',
   },
   {
-    id: 'agenda',
-    textoCard: 'pequenos grupos',
-    imagem: IconAgenda,
-    url: '',
+    id: 'contato',
+    textoCard: 'conheça a mosaico',
+    titulo: 'MOSAICO',
+    imagem: IconIgreja,
   },
 ];
